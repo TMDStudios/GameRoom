@@ -1,0 +1,36 @@
+body {
+	max-width: 1080px;
+	margin: auto;
+	background: #000000; 
+    font-family: 'Lato', helvetica, arial, sans-serif; 
+    font-size: 16px; 
+    color: rgb(228, 228, 228);
+}
+h1 {
+	text-align: center;
+}
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(212, 212, 212, 0.1);
+}
+.nav_item {
+    float: left;
+}
+.nav_login {
+    float: right;
+}
+.nav_link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.nav_link:hover {
+	color: #F4F4F4;
+    background-color: #111;
+}

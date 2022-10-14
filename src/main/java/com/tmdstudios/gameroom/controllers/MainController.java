@@ -21,6 +21,7 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
+		model.addAttribute("rooms", roomService.allRooms());
 	    return "index.jsp";
 	}
 	
@@ -34,7 +35,7 @@ public class MainController {
 		if(result.hasErrors()) {
 			return "new_room.jsp";
 		}else {
-			System.out.println("Add new room");
+			roomService.newRoom(room);
 		}
 		return "redirect:/";
 	}

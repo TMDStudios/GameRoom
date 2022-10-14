@@ -13,6 +13,10 @@ public class RoomService {
 	@Autowired
 	private RoomRepo roomRepo;
 	
+	public Room newRoom(Room room) {
+		return roomRepo.save(room);
+	}
+	
 	public Room findById(Long id) {
 		return roomRepo.findByIdIs(id);
 	}

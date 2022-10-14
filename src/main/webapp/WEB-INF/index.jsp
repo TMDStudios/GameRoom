@@ -14,11 +14,14 @@
 <ul class="navbar">
     <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
     <li class="nav_item"><a class="nav_link" href="#">Join Room</a></li>
-    <li class="nav_item"><a class="nav_link" href="#">Create Room</a></li>  
+    <li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>  
 </ul>
 
 <h1>Welcome to Game Room</h1>
-<p>More content coming soon</p>
+<p>Current Rooms:</p>
+<c:forEach var="room" items="${rooms}">
+    <p><a href="/rooms/${room.id}">${room.name}</a></p>
+</c:forEach>
 
 <script type="text/javascript" src="../js/app.js"></script>
 

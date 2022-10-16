@@ -17,11 +17,8 @@
     <li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>  
 </ul>
 
-<h1>Welcome to Game Room</h1>
-<p>Current Rooms:</p>
-<c:forEach var="room" items="${rooms}">
-    <p><a href="/rooms/${room.link}">${room.name}</a></p>
-</c:forEach>
+<h1>${room.name}</h1>
+<p>Room link: <a class="nav_link" href="/rooms/${room.link}">http://localhost:8080/rooms/${room.link}</a></p>
 
 <script type="text/javascript" src="../js/app.js"></script>
 

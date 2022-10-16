@@ -40,7 +40,7 @@ public class Room {
 	
 	@PostPersist
 	protected void setLink() {
-		this.link = "WEBSITE-LINK/rooms/" + this.getId();
+		this.link = this.getName().replace(" ", "").toLowerCase() + this.getId();
 	}
 	
 	public Room() {}

@@ -21,6 +21,10 @@ public class RoomService {
 		return roomRepo.findByIdIs(id);
 	}
 	
+	public Room findByLink(String link) {
+		return roomRepo.findByLinkIs(link);
+	}
+	
 	public List<Room> allRooms(){
 		return roomRepo.findAll();
 	}

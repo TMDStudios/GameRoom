@@ -43,10 +43,16 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/rooms/{roomId}")
-	public String viewRoom(HttpSession session, Model model, @PathVariable("roomId") String roomId) {
-		model.addAttribute("room", roomService.findByLink(roomId));
-		return "view_room.jsp";
+	@GetMapping("/rooms/{roomLink}")
+	public String viewRoom(HttpSession session, Model model, @PathVariable("roomLink") String roomLink, RedirectAttributes redirectAttributes) {
+		Room room = roomService.findByLink(roomLink);
+		if(room!=null) {
+			model.addAttribute("room", room);
+			return "view_room.jsp";
+		}else {
+			redirectAttributes.addFlashAttribute("error", "Room not found!");
+			return "redirect:/rooms/join";
+		}
 	}
 	
 	@GetMapping("/rooms/join")
@@ -55,9 +61,11 @@ public class MainController {
 	}
 	
 	@PostMapping("/rooms/join")
-	public String joinRoom(@RequestParam(value="roomLink", required=false) String roomLink, RedirectAttributes redirectAttributes) {
-		if(roomService.findByLink(roomLink)!=null) {
-			return "redirect:/";
+	public String joinRoom(@RequestParam(value="roomLink", required=false) String roomLink, RedirectAttributes redirectAttributes, Model model) {
+		Room room = roomService.findByLink(roomLink);
+		if(room!=null) {
+			model.addAttribute("room", room);
+			return "redirect:/rooms/"+roomLink;
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");
 			return "redirect:/rooms/join";

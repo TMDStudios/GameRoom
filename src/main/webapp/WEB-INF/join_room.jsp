@@ -7,7 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<title>Game Room</title>
+<title>Join Game Room</title>
 </head>
 <body>
 
@@ -17,11 +17,24 @@
     <li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>  
 </ul>
 
-<h1>Welcome to Game Room</h1>
-<p>Current Rooms:</p>
-<c:forEach var="room" items="${rooms}">
-    <p><a href="/rooms/${room.link}">${room.name}</a></p>
-</c:forEach>
+<h3>Join Game Room</h3>
+<p>${error}</p>
+
+<form action="/rooms/join" method="post">
+	<table>
+	    <thead>
+	    	<tr>
+	            <td class="float-left">Room Link:</td>
+	            <td class="float-left">
+					<input class="input" name="roomLink" id="roomLink"/>
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td colspan=2><input class="input" class="button" type="submit" value="Submit"/></td>
+	        </tr>
+	    </thead>
+	</table>
+</form>
 
 <script type="text/javascript" src="../js/app.js"></script>
 

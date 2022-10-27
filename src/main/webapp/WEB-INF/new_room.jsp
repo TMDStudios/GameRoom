@@ -12,9 +12,9 @@
 <body>
 
 <ul class="navbar">
-    <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
-    <li class="nav_item"><a class="nav_link" href="#">Join Room</a></li>
-    <li class="nav_item"><a class="nav_link" href="#">Create Room</a></li>  
+    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
+    <li class="nav_item"><a class="nav_link" href="/rooms/join">Join Room</a></li>
+    <li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>  
 </ul>
 
 <h3>New Game Room</h3>

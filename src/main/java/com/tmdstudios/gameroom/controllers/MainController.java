@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmdstudios.gameroom.models.Room;
 import com.tmdstudios.gameroom.services.RoomService;
@@ -45,5 +47,20 @@ public class MainController {
 	public String viewRoom(HttpSession session, Model model, @PathVariable("roomId") String roomId) {
 		model.addAttribute("room", roomService.findByLink(roomId));
 		return "view_room.jsp";
+	}
+	
+	@GetMapping("/rooms/join")
+	public String joinRoom() {
+		return "join_room.jsp";
+	}
+	
+	@PostMapping("/rooms/join")
+	public String joinRoom(@RequestParam(value="roomLink", required=false) String roomLink, RedirectAttributes redirectAttributes) {
+		if(roomService.findByLink(roomLink)!=null) {
+			return "redirect:/";
+		}else {
+			redirectAttributes.addFlashAttribute("error", "Room not found!");
+			return "redirect:/rooms/join";
+		}
 	}
 }

@@ -1,13 +1,15 @@
 package com.tmdstudios.gameroom.models;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -15,6 +17,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="rooms")
@@ -28,7 +32,13 @@ public class Room {
 	@Size(max=64, message="The message cannot be longer than 64 characters")
 	private String message;
 	private String link;
-	private ArrayList<String> players = new ArrayList<String>();
+	private Boolean privateRoom = false;
+	private String password;
+	
+	@OneToMany(mappedBy="room", fetch=FetchType.LAZY)
+	@JsonManagedReference
+	private List<Player> players;
+	
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
@@ -73,15 +83,31 @@ public class Room {
 		return link;
 	}
 
-	public void setLink(String host) {
-		this.link = host;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
-	public ArrayList<String> getPlayers() {
+	public Boolean getPrivateRoom() {
+		return privateRoom;
+	}
+
+	public void setPrivateRoom(Boolean privateRoom) {
+		this.privateRoom = privateRoom;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(ArrayList<String> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 

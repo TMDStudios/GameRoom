@@ -1,5 +1,6 @@
 package com.tmdstudios.gameroom.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -44,10 +45,16 @@ public class MainController {
 	}
 	
 	@GetMapping("/rooms/{roomLink}")
-	public String viewRoom(HttpSession session, Model model, @PathVariable("roomLink") String roomLink, RedirectAttributes redirectAttributes) {
+	public String viewRoom(
+			HttpSession session, 
+			Model model, 
+			@PathVariable("roomLink") String roomLink, 
+			RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
 		Room room = roomService.findByLink(roomLink);
 		if(room!=null) {
 			model.addAttribute("room", room);
+			model.addAttribute("link", request.getRequestURL().toString());
 			return "view_room.jsp";
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");

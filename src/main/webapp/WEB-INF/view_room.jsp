@@ -18,7 +18,7 @@
 </ul>
 
 <h1>${room.name}</h1>
-<p>Room link: <a class="nav_link" href="/rooms/${room.link}">http://localhost:8080/rooms/${room.link}</a></p>
+<p>Room link: <a class="nav_link" href="/rooms/${room.link}">${link}</a></p>
 
 <script type="text/javascript" src="../js/app.js"></script>
 

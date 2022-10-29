@@ -30,6 +30,12 @@
 	            </td>
 	        </tr>
 	        <tr>
+	            <td class="float-left">Player Name:</td>
+	            <td class="float-left">
+					<input class="input" name="playerName" id="playerName"/>
+	            </td>
+	        </tr>
+	        <tr>
 	        	<td colspan=2><input class="input" class="button" type="submit" value="Submit"/></td>
 	        </tr>
 	    </thead>

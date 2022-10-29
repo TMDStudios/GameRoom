@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
 import com.tmdstudios.gameroom.repositories.RoomRepo;
 
@@ -14,6 +15,10 @@ public class RoomService {
 	private RoomRepo roomRepo;
 	
 	public Room newRoom(Room room) {
+		return roomRepo.save(room);
+	}
+	
+	public Room updateRoom(Room room) {
 		return roomRepo.save(room);
 	}
 	
@@ -27,5 +32,9 @@ public class RoomService {
 	
 	public List<Room> allRooms(){
 		return roomRepo.findAll();
+	}
+	
+	public Player findByName(String name) {
+		return roomRepo.findByName(name);
 	}
 }

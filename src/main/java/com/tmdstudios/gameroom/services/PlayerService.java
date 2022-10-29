@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tmdstudios.gameroom.models.Player;
+import com.tmdstudios.gameroom.models.Room;
 import com.tmdstudios.gameroom.repositories.PlayerRepo;
 
 @Service
@@ -23,5 +24,9 @@ public class PlayerService {
 	
 	public List<Player> allPlayers(){
 		return playerRepo.findAll();
+	}
+	
+	public Player findByName(String name, Room room) {
+		return playerRepo.findByNameIsAndRoomIs(name, room);
 	}
 }

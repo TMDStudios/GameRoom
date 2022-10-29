@@ -30,6 +30,11 @@ public class Player {
 	private Room room;
 	
 	public Player() {}
+	
+	public Player(String name, Room room) {
+		this.name = name;
+		this.room = room;
+	}
 
 	public Long getId() {
 		return id;

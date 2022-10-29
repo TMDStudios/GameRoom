@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
+import com.tmdstudios.gameroom.services.PlayerService;
 import com.tmdstudios.gameroom.services.RoomService;
 
 @Controller
@@ -23,9 +25,13 @@ public class MainController {
 	@Autowired
 	private RoomService roomService;
 	
+	@Autowired
+	private PlayerService playerService;
+	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 		model.addAttribute("rooms", roomService.allRooms());
+		model.addAttribute("players", playerService.allPlayers());
 	    return "index.jsp";
 	}
 	
@@ -68,9 +74,28 @@ public class MainController {
 	}
 	
 	@PostMapping("/rooms/join")
-	public String joinRoom(@RequestParam(value="roomLink", required=false) String roomLink, RedirectAttributes redirectAttributes, Model model) {
+	public String joinRoom(
+			@RequestParam(value="roomLink", required=false) String roomLink, 
+			RedirectAttributes redirectAttributes, 
+			@RequestParam(value="playerName") String playerName, 
+			Model model) {
+		if(playerName.length()<3||playerName.length()>24) {
+			redirectAttributes.addFlashAttribute("error", "Player Name must be between 3 and 24 characters long.");
+			return "redirect:/rooms/join";
+		}
+		
 		Room room = roomService.findByLink(roomLink);
 		if(room!=null) {
+			Player player = playerService.findByName(playerName, room);
+			if(player!=null) {
+				if(room.getPlayers().contains(player)) {
+					redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
+					return "redirect:/rooms/join";
+				}else {
+					playerService.newPlayer(new Player(playerName, room));
+				}
+			}
+			playerService.newPlayer(new Player(playerName, room));
 			model.addAttribute("room", room);
 			return "redirect:/rooms/"+roomLink;
 		}else {

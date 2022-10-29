@@ -78,7 +78,8 @@ public class MainController {
 			@RequestParam(value="roomLink", required=false) String roomLink, 
 			RedirectAttributes redirectAttributes, 
 			@RequestParam(value="playerName") String playerName, 
-			Model model) {
+			Model model,
+			HttpSession session) {
 		if(playerName.length()<3||playerName.length()>24) {
 			redirectAttributes.addFlashAttribute("error", "Player Name must be between 3 and 24 characters long.");
 			return "redirect:/rooms/join";
@@ -91,11 +92,11 @@ public class MainController {
 				if(room.getPlayers().contains(player)) {
 					redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
 					return "redirect:/rooms/join";
-				}else {
-					playerService.newPlayer(new Player(playerName, room));
 				}
 			}
-			playerService.newPlayer(new Player(playerName, room));
+			player = new Player(playerName, room);
+			playerService.newPlayer(player);
+			session.setAttribute("playerName", player.getName());
 			model.addAttribute("room", room);
 			return "redirect:/rooms/"+roomLink;
 		}else {

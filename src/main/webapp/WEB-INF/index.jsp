@@ -18,6 +18,7 @@
 </ul>
 
 <h1>Welcome to Game Room</h1>
+<p>Logged in as: ${playerName}</p>
 <p>Current Rooms:</p>
 <c:forEach var="room" items="${rooms}">
     <p><a href="/rooms/${room.link}">${room.name}</a></p>

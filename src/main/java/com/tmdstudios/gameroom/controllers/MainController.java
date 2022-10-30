@@ -124,6 +124,12 @@ public class MainController {
 		
 		Room room = roomService.findByLink(roomLink);
 		if(room!=null) {
+			if(room.getPrivateRoom()) {
+//				model.addAttribute("roomId", room.getId());
+				session.setAttribute("roomId", room.getId());
+				session.setAttribute("playerName", playerName);
+				return "join_private_room.jsp";
+			}
 			Player player = playerService.findByName(playerName, room);
 			if(player!=null) {
 				if(room.getPlayers().contains(player)) {
@@ -140,6 +146,42 @@ public class MainController {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");
 			return "redirect:/rooms/join";
 		}
+	}
+	
+	@GetMapping("/rooms/join-private")
+	public String joinPrivateRoom() {
+		return "join_private_room";
+	}
+	
+	@PostMapping("/rooms/join-private")
+	public String joinPrivateRoom(
+			@RequestParam(value="roomPassword") String roomPassword, 
+			RedirectAttributes redirectAttributes, 
+			Model model,
+			HttpSession session) {
+		if(roomPassword.length()>0) {
+			Long roomId = (Long) session.getAttribute("roomId");
+			if(roomPassword.equals(roomService.findById(roomId).getPassword())) {
+				Room room = roomService.findById(roomId);
+				String playerName = (String) session.getAttribute("playerName");
+				Player player = playerService.findByName(playerName, room);
+				if(player!=null) {
+					if(room.getPlayers().contains(player)) {
+						redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
+						return "redirect:/rooms/join";
+					}
+				}
+				player = new Player(playerName, room);
+				playerService.newPlayer(player);
+				session.setAttribute("playerName", player.getName());
+				model.addAttribute("room", room);
+				return "redirect:/rooms/"+room.getLink();
+			}
+			redirectAttributes.addFlashAttribute("error", "Wrong password");
+			return "redirect:/rooms/join";
+		}
+		redirectAttributes.addFlashAttribute("error", "Password must be 6 to 12 characters");
+		return "redirect:/rooms/join";
 	}
 	
 	public void deleteRoom(Room room) {

@@ -19,6 +19,8 @@
 
 <h3>New Game Room</h3>
 
+<p>${error}</p>
+
 <form:form action="/rooms/new" method="post" modelAttribute="room">
 	<table>
 	    <thead>
@@ -34,6 +36,19 @@
 	             <td class="float-left">
 	            	<form:errors path="message" class="text-danger"/>
 					<form:textarea rows="4" class="input" path="message"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class="float-left">Private Room:</td>
+	             <td class="float-left">
+	            	<form:checkbox path="privateRoom"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class="float-left">Room Password:</td>
+	             <td class="float-left">
+	            	<form:errors path="password" class="text-danger"/>
+					<form:input class="input" path="password"/>
 	            </td>
 	        </tr>
 	        <tr>

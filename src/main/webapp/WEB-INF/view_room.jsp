@@ -18,6 +18,9 @@
 </ul>
 
 <h1>${room.name}</h1>
+<c:if test="${room.privateRoom}">
+	<p>Room password: ${room.password}</p>
+</c:if>
 <p>Room link: <a class="nav_link" href="/rooms/${room.link}">${link}</a></p>
 <h3>Players:</h3>
 <c:forEach var="player" items="${room.players}">

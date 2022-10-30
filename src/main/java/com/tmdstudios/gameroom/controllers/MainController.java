@@ -62,11 +62,27 @@ public class MainController {
 	}
 	
 	@PostMapping("/rooms/new")
-	public String createRoom(@Valid @ModelAttribute("room") Room room, BindingResult result, HttpSession session, Model model) {
+	public String createRoom(
+			@Valid @ModelAttribute("room") Room room, 
+			BindingResult result, 
+			HttpSession session, 
+			Model model,
+			RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()) {
 			return "new_room.jsp";
 		}else {
-			roomService.newRoom(room);
+			System.out.println("ROOM CREATED - ");
+			System.out.println("ROOM private? - "+room.getPrivateRoom());
+			if(room.getPrivateRoom()) {
+				if(room.getPassword().length()<6||room.getPassword().length()>12) {
+					redirectAttributes.addFlashAttribute("error", "Private rooms must have a password of 6 to 12 characters.");
+					return "redirect:/rooms/new";
+				}else {
+					roomService.newRoom(room);
+				}
+			}else {
+				roomService.newRoom(room);
+			}
 		}
 		return "redirect:/";
 	}

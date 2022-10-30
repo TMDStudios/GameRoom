@@ -1,5 +1,9 @@
 package com.tmdstudios.gameroom.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -30,6 +34,23 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
+		// Rooms are automatically deleted after 24 hours
+		for(Room room:roomService.allRooms()) {
+			try {
+				String startDate = room.getCreatedAt().toString();
+				long today = new Date().getTime();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date roomDate = sdf.parse(startDate);
+				long roomMillis = roomDate.getTime();
+				System.out.println(room.getName()+" - ALIVE FOR - "+(today-roomMillis));
+				if(today-roomMillis>86400000) {
+					deleteRoom(room);
+				}
+			}catch(ParseException e) {
+				System.out.println("ISSUE: "+e);
+			}
+		}
+		
 		model.addAttribute("rooms", roomService.allRooms());
 		model.addAttribute("players", playerService.allPlayers());
 	    return "index.jsp";
@@ -103,5 +124,10 @@ public class MainController {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");
 			return "redirect:/rooms/join";
 		}
+	}
+	
+	public void deleteRoom(Room room) {
+		System.out.println("DELETING ROOM: "+room.getName());
+		roomService.deleteRoom(room);
 	}
 }

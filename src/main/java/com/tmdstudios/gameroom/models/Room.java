@@ -3,6 +3,7 @@ package com.tmdstudios.gameroom.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Room {
 	private Boolean privateRoom = false;
 	private String password;
 	
-	@OneToMany(mappedBy="room", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="room", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JsonManagedReference
 	private List<Player> players;
 	

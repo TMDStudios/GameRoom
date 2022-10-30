@@ -37,4 +37,8 @@ public class RoomService {
 	public Player findByName(String name) {
 		return roomRepo.findByName(name);
 	}
+	
+	public void deleteRoom(Room room) {
+		roomRepo.delete(room);
+	}
 }

@@ -32,6 +32,16 @@
 	            </td>
 	        </tr>
 	        <tr>
+	            <td class="float-left">Game Type:</td>
+	            <td class="float-left">
+	            	<form:select path="gameType">
+		                <c:forEach var="gameType" items="${gameTypes}">
+		                    <option value="${gameType}">${gameType}</option>
+		                </c:forEach>
+		            </form:select>
+	            </td>
+	        </tr>
+	        <tr>
 	            <td class="float-left">Room Message:</td>
 	             <td class="float-left">
 	            	<form:errors path="message" class="text-danger"/>

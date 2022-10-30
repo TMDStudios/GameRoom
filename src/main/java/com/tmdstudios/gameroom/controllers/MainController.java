@@ -57,7 +57,9 @@ public class MainController {
 	}
 	
 	@GetMapping("/rooms/new")
-	public String newRoom(@ModelAttribute("room") Room room) {
+	public String newRoom(@ModelAttribute("room") Room room, Model model) {
+		String[] gameTypes = {"Emoji Game", "Game Type 2", "Game Type 3", "Game Type 4"};
+		model.addAttribute("gameTypes", gameTypes);
 		return "new_room.jsp";
 	}
 	
@@ -71,8 +73,6 @@ public class MainController {
 		if(result.hasErrors()) {
 			return "new_room.jsp";
 		}else {
-			System.out.println("ROOM CREATED - ");
-			System.out.println("ROOM private? - "+room.getPrivateRoom());
 			if(room.getPrivateRoom()) {
 				if(room.getPassword().length()<6||room.getPassword().length()>12) {
 					redirectAttributes.addFlashAttribute("error", "Private rooms must have a password of 6 to 12 characters.");

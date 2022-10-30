@@ -35,6 +35,7 @@ public class Room {
 	private String link;
 	private Boolean privateRoom = false;
 	private String password;
+	private String gameType;
 	
 	@OneToMany(mappedBy="room", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JsonManagedReference
@@ -118,5 +119,13 @@ public class Room {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
 	}
 }

@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tmdstudios.gameroom.models.LoginUser;
 import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
+import com.tmdstudios.gameroom.models.User;
 import com.tmdstudios.gameroom.services.PlayerService;
 import com.tmdstudios.gameroom.services.RoomService;
+import com.tmdstudios.gameroom.services.UserService;
 
 @Controller
 public class MainController {
@@ -31,6 +34,9 @@ public class MainController {
 	
 	@Autowired
 	private PlayerService playerService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
@@ -56,8 +62,61 @@ public class MainController {
 	    return "index.jsp";
 	}
 	
+	@GetMapping("/login")
+	public String authLogin(HttpSession session, Model model) {
+	    model.addAttribute("newUser", new User());
+	    model.addAttribute("newLogin", new LoginUser());
+		
+	    return "login.jsp";
+	}
+	
+	@PostMapping("/login")
+	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
+			BindingResult result, Model model, HttpSession session) {
+	     
+		User user = userService.login(newLogin, result);
+	 
+	    if(result.hasErrors() || user==null) {
+	        model.addAttribute("newUser", new User());
+	        return "login.jsp";
+	    }
+	     
+	    session.setAttribute("userId", user.getId());
+	 
+	    return "redirect:/";
+	}
+	
+	@GetMapping("/register")
+	public String authRegister(HttpSession session, Model model) {
+	    model.addAttribute("newUser", new User());
+	    model.addAttribute("newLogin", new LoginUser());
+	    
+	    return "register.jsp";
+	}
+	
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute("newUser") User newUser, 
+			BindingResult result, Model model, HttpSession session) {
+
+	    User user = userService.register(newUser, result);
+	     
+	    if(result.hasErrors()) {
+	        model.addAttribute("newLogin", new LoginUser());
+	        return "register.jsp";
+	    }
+
+	    session.setAttribute("userId", user.getId());
+	 
+	    return "redirect:/";
+	}
+	
 	@GetMapping("/rooms/new")
-	public String newRoom(@ModelAttribute("room") Room room, Model model) {
+	public String newRoom(@ModelAttribute("room") Room room, Model model, HttpSession session) {
+		
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
+		
 		String[] gameTypes = {"Emoji Game", "Game Type 2", "Game Type 3", "Game Type 4"};
 		model.addAttribute("gameTypes", gameTypes);
 		return "new_room.jsp";
@@ -70,6 +129,14 @@ public class MainController {
 			HttpSession session, 
 			Model model,
 			RedirectAttributes redirectAttributes) {
+		
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
+		
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		
 		if(result.hasErrors()) {
 			return "new_room.jsp";
 		}else {

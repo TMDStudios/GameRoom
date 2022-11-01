@@ -57,6 +57,12 @@ public class MainController {
 			}
 		}
 		
+		if(session.getAttribute("userId") != null) {
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			model.addAttribute("host", user);
+		}
+		
 		model.addAttribute("rooms", roomService.allRooms());
 		model.addAttribute("players", playerService.allPlayers());
 	    return "index.jsp";
@@ -83,6 +89,13 @@ public class MainController {
 	     
 	    session.setAttribute("userId", user.getId());
 	 
+	    return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("userId", null);
+		session.setAttribute("playerName", null);
 	    return "redirect:/";
 	}
 	

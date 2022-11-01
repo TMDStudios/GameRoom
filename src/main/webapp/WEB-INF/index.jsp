@@ -13,12 +13,23 @@
 
 <ul class="navbar">
     <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
-    <li class="nav_item"><a class="nav_link" href="/rooms/join">Join Room</a></li>
+    <c:if test="${empty userId && empty playerName}">
+		<li class="nav_item"><a class="nav_link" href="/rooms/join">Join Room</a></li>
+	</c:if>
     <li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>  
+    <c:if test="${not empty userId || not empty playerName}">
+		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
+	</c:if>
 </ul>
 
 <h1>Welcome to Game Room</h1>
-<p>Logged in as: ${playerName}</p>
+<c:if test="${not empty userId}">
+	<p>Logged in as: ${host.username} (Host)</p>
+</c:if>
+<c:if test="${empty userId}">
+	<p>Logged in as: ${playerName}</p>
+</c:if>
+
 <p>Current Rooms:</p>
 <c:forEach var="room" items="${rooms}">
     <p><a href="/rooms/${room.link}">${room.name}</a></p>

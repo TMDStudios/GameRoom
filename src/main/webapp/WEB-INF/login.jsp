@@ -53,16 +53,23 @@
 		
 		<br>
 		
+		<div>
+			<p><a class="nav_link" href="#" onclick="resetPassword()">Reset Password</a></p>
+			<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
+		</div>
+		
 		<br>
 
 	</div>
 </form:form>
+
 
 <hr>
 <p>Don't have an account?</p>
 <p><a href="/register">Sign up</a></p>
 
 <script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="../js/passwordReset.js"></script>
 
 </body>
 </html>

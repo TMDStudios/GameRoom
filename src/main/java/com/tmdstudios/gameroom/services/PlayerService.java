@@ -29,4 +29,8 @@ public class PlayerService {
 	public Player findByName(String name, Room room) {
 		return playerRepo.findByNameIsAndRoomIs(name, room);
 	}
+	
+	public void deletePlayer(Player player) {
+		playerRepo.delete(player);
+	}
 }

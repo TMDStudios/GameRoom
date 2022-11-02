@@ -64,6 +64,10 @@ public class Room {
 	}
 	
 	public Room() {}
+	
+	public Room(User user) {
+		this.host = user;
+	}
 
 	public Long getId() {
 		return id;

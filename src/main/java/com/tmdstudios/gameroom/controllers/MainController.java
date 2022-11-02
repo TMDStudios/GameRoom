@@ -41,31 +41,16 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 		// Rooms are automatically deleted after 24 hours
-		long today = new Date().getTime();
 		for(Room room:roomService.allRooms()) {
 			try {
 				String startDate = room.getCreatedAt().toString();
+				long today = new Date().getTime();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date roomDate = sdf.parse(startDate);
 				long roomMillis = roomDate.getTime();
 				System.out.println(room.getName()+" - ALIVE FOR - "+(today-roomMillis));
 				if(today-roomMillis>86400000) {
 					deleteRoom(room);
-				}
-			}catch(ParseException e) {
-				System.out.println("ISSUE: "+e);
-			}
-		}
-		// Players are automatically deleted after 24 hours
-		for(Player player:playerService.allPlayers()) {
-			try {
-				String startDate = player.getCreatedAt().toString();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date playerDate = sdf.parse(startDate);
-				long playerMillis = playerDate.getTime();
-				System.out.println(player.getName()+" - ALIVE FOR - "+(today-playerMillis));
-				if(today-playerMillis>86400000) {
-					deletePlayer(player);
 				}
 			}catch(ParseException e) {
 				System.out.println("ISSUE: "+e);
@@ -185,6 +170,7 @@ public class MainController {
 		if(result.hasErrors()) {
 			return "new_room.jsp";
 		}else {
+			room.setHost(user);
 			if(room.getPrivateRoom()) {
 				if(room.getPassword().length()<6||room.getPassword().length()>12) {
 					redirectAttributes.addFlashAttribute("error", "Private rooms must have a password of 6 to 12 characters.");
@@ -299,10 +285,5 @@ public class MainController {
 	public void deleteRoom(Room room) {
 		System.out.println("DELETING ROOM: "+room.getName());
 		roomService.deleteRoom(room);
-	}
-	
-	public void deletePlayer(Player player) {
-		System.out.println("DELETING PLAYER: "+player.getName());
-		playerService.deletePlayer(player);
 	}
 }

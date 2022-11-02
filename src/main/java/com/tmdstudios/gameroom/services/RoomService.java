@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
+import com.tmdstudios.gameroom.models.User;
 import com.tmdstudios.gameroom.repositories.RoomRepo;
 
 @Service

@@ -39,24 +39,7 @@ public class MainController {
 	private UserService userService;
 	
 	@GetMapping("/")
-	public String index(Model model, HttpSession session) {
-		// Rooms are automatically deleted after 24 hours
-		for(Room room:roomService.allRooms()) {
-			try {
-				String startDate = room.getCreatedAt().toString();
-				long today = new Date().getTime();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date roomDate = sdf.parse(startDate);
-				long roomMillis = roomDate.getTime();
-				System.out.println(room.getName()+" - ALIVE FOR - "+(today-roomMillis));
-				if(today-roomMillis>86400000) {
-					deleteRoom(room);
-				}
-			}catch(ParseException e) {
-				System.out.println("ISSUE: "+e);
-			}
-		}
-		
+	public String index(Model model, HttpSession session) {	
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
@@ -280,10 +263,5 @@ public class MainController {
 		}
 		redirectAttributes.addFlashAttribute("error", "Password must be 6 to 12 characters");
 		return "redirect:/rooms/join";
-	}
-	
-	public void deleteRoom(Room room) {
-		System.out.println("DELETING ROOM: "+room.getName());
-		roomService.deleteRoom(room);
 	}
 }

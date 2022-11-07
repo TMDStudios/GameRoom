@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
+import com.tmdstudios.gameroom.models.RoomLog;
 import com.tmdstudios.gameroom.repositories.RoomRepo;
 
 @Service
@@ -20,10 +21,13 @@ public class RoomService {
 	@Autowired
 	private RoomRepo roomRepo;
 	
+	@Autowired
+	private RoomLogService roomLogService;
+	
 	@PostConstruct
-	@Scheduled(cron = "0 0 * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	// Each day at midnight, all rooms older than 24 hours are deleted
-	public void deleteOldRooms() {
+	private void deleteOldRooms() {
 		for(Room room:allRooms()) {
 			try {
 				String startDate = room.getCreatedAt().toString();
@@ -66,6 +70,13 @@ public class RoomService {
 	}
 	
 	public void deleteRoom(Room room) {
+		roomLogService.addRoomLog(new RoomLog(
+				room.getName(), 
+				room.getHost().getUsername(), 
+				room.getGameType(), 
+				room.getPlayers().size(), 
+				room.getCreatedAt(), 
+				new Date()));
 		System.out.println("DELETING ROOM: "+room.getName());
 		roomRepo.delete(room);
 	}

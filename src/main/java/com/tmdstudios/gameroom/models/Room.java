@@ -40,11 +40,11 @@ public class Room {
 	private String password;
 	private String gameType;
 	
-	@OneToMany(mappedBy="room", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="room", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JsonManagedReference
 	private List<Player> players;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinColumn(name="user_id")
 	private User host;

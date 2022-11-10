@@ -44,18 +44,17 @@
     <div>
         <label for="message">Message</label>
         <input type="text" id="message" placeholder="Enter your message here...">
-    </div>
-    <c:if test="${empty playerName}">
+        <c:if test="${empty playerName}">
 		<button onclick="sendMessage('${host}')" type="button" id="send">Send</button>
-	</c:if>
-	<c:if test="${not empty playerName}">
-		<button onclick="sendMessage('${playerName}')" type="button" id="send">Send</button>
-	</c:if>
+		</c:if>
+		<c:if test="${not empty playerName}">
+			<button onclick="sendMessage('${playerName}')" type="button" id="send">Send</button>
+		</c:if>
+    </div>
 </form>
 
-<div id="messages">
-</div>
-
+<hr>
+<iframe id="messagesFrame" src="/room-messages/" title="Room Messages Iframe"></iframe>
 
 <script type="text/javascript" src="../js/websocket.js"></script>
 

@@ -19,6 +19,7 @@ function connect() {
 
 function showMessage(message) {
     $("#messages").append("<p>" + message + "</p>");
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function sendMessage(sender) {

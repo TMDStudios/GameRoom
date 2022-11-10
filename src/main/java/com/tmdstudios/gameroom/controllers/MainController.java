@@ -186,6 +186,11 @@ public class MainController {
 		}
 	}
 	
+	@GetMapping("/room-messages/")
+	public String roomMessages() {	
+		return "room_messages.jsp";
+	}
+	
 	@GetMapping("/rooms/join")
 	public String joinRoom() {
 		return "join_room.jsp";

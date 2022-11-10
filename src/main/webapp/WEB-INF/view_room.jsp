@@ -6,6 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Game Room</title>
 </head>
@@ -35,7 +39,21 @@
   		<p>${player.name} - ${player.id}</p>
 </c:forEach>
 
-<script type="text/javascript" src="../js/app.js"></script>
+<hr>
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="message">Message</label>
+        <input type="text" id="message" class="form-control" placeholder="Enter your message here...">
+    </div>
+    <button id="send" class="btn btn-default" type="button">Send</button>
+</form>
+
+<div id="messages">
+</div>
+
+
+<script type="text/javascript" src="../js/websocket.js"></script>
 
 </body>
 </html>

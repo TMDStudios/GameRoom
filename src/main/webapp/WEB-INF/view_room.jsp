@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -41,12 +40,17 @@
 
 <hr>
 
-<form class="form-inline">
-    <div class="form-group">
+<form>
+    <div>
         <label for="message">Message</label>
-        <input type="text" id="message" class="form-control" placeholder="Enter your message here...">
+        <input type="text" id="message" placeholder="Enter your message here...">
     </div>
-    <button id="send" class="btn btn-default" type="button">Send</button>
+    <c:if test="${empty playerName}">
+		<button onclick="sendMessage('${host}')" type="button" id="send">Send</button>
+	</c:if>
+	<c:if test="${not empty playerName}">
+		<button onclick="sendMessage('${playerName}')" type="button" id="send">Send</button>
+	</c:if>
 </form>
 
 <div id="messages">

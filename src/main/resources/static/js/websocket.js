@@ -1,13 +1,9 @@
 var stompClient = null;
+var ready = false;
 
 $(document).ready(function() {
     console.log("Messages are live");
     connect();
-
-    $("#send").click(function() {
-        sendMessage();
-    });
-
 });
 
 function connect() {
@@ -25,8 +21,8 @@ function showMessage(message) {
     $("#messages").append("<p>" + message + "</p>");
 }
 
-function sendMessage() {
+function sendMessage(sender) {
     console.log("sending message");
-    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': $("#message").val()}));
-    document.getElementById("message").value = "Enter your message here...";
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
+    document.getElementById("message").value = "";
 }

@@ -175,6 +175,10 @@ public class MainController {
 		if(room!=null) {
 			model.addAttribute("room", room);
 			model.addAttribute("link", request.getRequestURL().toString());
+			if(session.getAttribute("userId") != null) {
+				Long userId = (Long) session.getAttribute("userId");		
+				model.addAttribute("host", userService.findById(userId).getUsername());
+			}
 			return "view_room.jsp";
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");

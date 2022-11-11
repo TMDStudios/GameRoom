@@ -27,3 +27,13 @@ function sendMessage(sender) {
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
     document.getElementById("message").value = "";
 }
+
+function addEmoji(emoji){
+	$("#currentEmojis").append(emoji);
+}
+
+function sendEmojis(){
+	console.log("sending emojis");
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML}));
+    document.getElementById("currentEmojis").innerHTML = '';
+}

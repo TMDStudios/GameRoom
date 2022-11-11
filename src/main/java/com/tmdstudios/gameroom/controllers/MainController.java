@@ -179,6 +179,16 @@ public class MainController {
 				Long userId = (Long) session.getAttribute("userId");		
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
+			String[][] preset = {{"", "Select Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},{"👽☎️🏠", "ET"}};
+			String[] faces = {"😀","😁","😂","🤣","😃","😄","😅","😆","😉","😊","😋","😎","😍","😑","😶","🙄","😏","😣","😥","😮","🤐","😯","😪","😫","😴"};
+			String[] body = {"💪","🤳","👈","👉","☝️","👆","👇","👍","👎"};
+			String[] clothes = {"👓","🕶️","👔","👕","👖"};
+			String[] animals = {"🐱","🐈","🐵","🐒","🐼"};
+			model.addAttribute("preset", preset);
+			model.addAttribute("faces", faces);
+			model.addAttribute("body", body);
+			model.addAttribute("clothes", clothes);
+			model.addAttribute("animals", animals);
 			return "view_room.jsp";
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");

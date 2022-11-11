@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -38,8 +38,64 @@
   		<p>${player.name} - ${player.id}</p>
 </c:forEach>
 
-<hr>
+<c:if test="${not empty userId}">
+	<hr>
+	<table>
+		<thead>
+	    	<tr>
+	            <th>Preset</th>
+	            <th>Faces</th>
+	            <th>Body</th>
+	            <th>Clothes</th>
+	            <th>Animals</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	<tr>
+	            <td>
+	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+						<c:forEach var="set" items="${preset}">
+							<option value="${set[0]}">${set[1]}</option>
+						</c:forEach>
+					</select>
+	            </td>
+	            <td>
+	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+						<c:forEach var="face" items="${faces}">
+							<option value="${face}">${face}</option>
+						</c:forEach>
+					</select>
+	            </td>
+	            <td>
+	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+						<c:forEach var="bodyPart" items="${body}">
+							<option value="${bodyPart}">${bodyPart}</option>
+						</c:forEach>
+					</select>
+	            </td>
+	            <td>
+	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+						<c:forEach var="clothesItem" items="${clothes}">
+							<option value="${clothesItem}">${clothesItem}</option>
+						</c:forEach>
+					</select>
+	            </td>
+	            <td>
+	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+						<c:forEach var="animal" items="${animals}">
+							<option value="${animal}">${animal}</option>
+						</c:forEach>
+					</select>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<p id="currentEmojis">
+	</p>
+	<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
+</c:if>
 
+<hr>
 <form>
     <div>
         <label for="message">Message</label>
@@ -52,8 +108,6 @@
 		</c:if>
     </div>
 </form>
-
-<hr>
 <iframe id="messagesFrame" src="/room-messages/" title="Room Messages Iframe"></iframe>
 
 <script type="text/javascript" src="../js/websocket.js"></script>

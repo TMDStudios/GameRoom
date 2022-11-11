@@ -41,6 +41,19 @@ iframe {
 	width: 100%;
 	background-color: rgba(212, 212, 212, 0.1);
 }
+table {
+	width: 100%;
+}
+th, td {
+	display: table-cell;
+	text-align: center;
+}
 #messages {
 	padding: 24px 8px;
+}
+#currentEmojis {
+	font-size: 32px;
+}
+#emojiBtn {
+	width: 100%;
 }

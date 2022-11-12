@@ -30,8 +30,15 @@ $("#messageForm").submit(function() {
     return false;
 });
 
-function addEmoji(emoji){
-	$("#currentEmojis").append(emoji);
+function addEmoji(emojis){
+	document.getElementById("testing").innerHTML = "";
+	emojiList = emojis.split(",");
+	emojiList.forEach(e => $("#testing").append('<button onclick="moreTesting(\''+e+'\')" type="button">'+e+'</button>'));
+	onclick="sell(document.getElementById('${coin.id}').value, ${coin.totalAmount})"
+}
+
+function moreTesting(emoji){
+	console.log(emoji);
 }
 
 function sendEmojis(){

@@ -36,11 +36,12 @@ h1 {
 }
 .messageInput {
 	width: 100%;
+	box-sizing:border-box;
+	border: solid 1px rgba(212, 212, 212, 0.1);
 }
 iframe {
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	box-sizing:border-box;
 	width: 100%;
 	background-color: rgba(212, 212, 212, 0.1);
 }

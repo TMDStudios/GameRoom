@@ -1,5 +1,7 @@
 package com.tmdstudios.gameroom.controllers;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tmdstudios.gameroom.models.EmojiSet;
 import com.tmdstudios.gameroom.models.LoginUser;
 import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
 import com.tmdstudios.gameroom.models.User;
+import com.tmdstudios.gameroom.services.EmojiService;
 import com.tmdstudios.gameroom.services.PlayerService;
 import com.tmdstudios.gameroom.services.RoomService;
 import com.tmdstudios.gameroom.services.UserService;
@@ -33,6 +37,9 @@ public class MainController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EmojiService emojiService;
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {	
@@ -183,15 +190,33 @@ public class MainController {
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
 			String[][] preset = {{"", "Select Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},{"👽☎️🏠", "ET"}};
-			String[] faces = {"😀","😁","😂","🤣","😃","😄","😅","😆","😉","😊","😋","😎","😍","😑","😶","🙄","😏","😣","😥","😮","🤐","😯","😪","😫","😴"};
-			String[] body = {"💪","🤳","👈","👉","☝️","👆","👇","👍","👎"};
-			String[] clothes = {"👓","🕶️","👔","👕","👖"};
-			String[] animals = {"🐱","🐈","🐵","🐒","🐼"};
 			model.addAttribute("preset", preset);
-			model.addAttribute("faces", faces);
-			model.addAttribute("body", body);
-			model.addAttribute("clothes", clothes);
-			model.addAttribute("animals", animals);
+
+			EmojiSet smileys = emojiService.smileys();
+			EmojiSet gestures = emojiService.gestures();
+			EmojiSet people = emojiService.people();
+			EmojiSet clothing = emojiService.clothing();
+			EmojiSet general = emojiService.general();
+			EmojiSet animals = emojiService.animals();
+			EmojiSet food = emojiService.food();
+			EmojiSet activities = emojiService.activities();
+			EmojiSet travel = emojiService.travel();
+			EmojiSet objects = emojiService.objects();
+			EmojiSet symbols = emojiService.symbols();
+			HashMap<String, String> custom = new HashMap<String, String>();
+			custom.put(smileys.getName(), smileys.getEmojis());
+			custom.put(gestures.getName(), gestures.getEmojis());
+			custom.put(people.getName(), people.getEmojis());
+			custom.put(clothing.getName(), clothing.getEmojis());
+			custom.put(general.getName(), general.getEmojis());
+			custom.put(animals.getName(), animals.getEmojis());
+			custom.put(food.getName(), food.getEmojis());
+			custom.put(activities.getName(), activities.getEmojis());
+			custom.put(travel.getName(), travel.getEmojis());
+			custom.put(objects.getName(), objects.getEmojis());
+			custom.put(symbols.getName(), symbols.getEmojis());
+			model.addAttribute("custom", custom);
+			
 			return "view_room.jsp";
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");

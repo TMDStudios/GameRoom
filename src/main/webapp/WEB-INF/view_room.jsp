@@ -50,10 +50,7 @@
 		<thead>
 	    	<tr>
 	            <th>Preset</th>
-	            <th>Faces</th>
-	            <th>Body</th>
-	            <th>Clothes</th>
-	            <th>Animals</th>
+	            <th>Custom</th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -67,29 +64,8 @@
 	            </td>
 	            <td>
 	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-						<c:forEach var="face" items="${faces}">
-							<option value="${face}">${face}</option>
-						</c:forEach>
-					</select>
-	            </td>
-	            <td>
-	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-						<c:forEach var="bodyPart" items="${body}">
-							<option value="${bodyPart}">${bodyPart}</option>
-						</c:forEach>
-					</select>
-	            </td>
-	            <td>
-	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-						<c:forEach var="clothesItem" items="${clothes}">
-							<option value="${clothesItem}">${clothesItem}</option>
-						</c:forEach>
-					</select>
-	            </td>
-	            <td>
-	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-						<c:forEach var="animal" items="${animals}">
-							<option value="${animal}">${animal}</option>
+						<c:forEach var="customItem" items="${custom}">
+							<option value="${customItem.value}">${customItem.key}</option>
 						</c:forEach>
 					</select>
 	            </td>
@@ -102,6 +78,8 @@
 </c:if>
 
 <hr>
+<p id="testing">
+	</p>
 <form id="messageForm">
     <div>
         <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">

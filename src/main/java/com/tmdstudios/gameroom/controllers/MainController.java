@@ -172,6 +172,9 @@ public class MainController {
 			RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
 		Room room = roomService.findByLink(roomLink);
+		if(session.getAttribute("userId")==null&&session.getAttribute("playerName")==null) {
+			return "redirect:/rooms/join";
+		}
 		if(room!=null) {
 			model.addAttribute("room", room);
 			model.addAttribute("link", request.getRequestURL().toString());

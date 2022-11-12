@@ -22,11 +22,13 @@ function showMessage(message) {
     window.scrollTo(0,document.body.scrollHeight);
 }
 
-function sendMessage(sender) {
-    console.log("sending message");
+$("#messageForm").submit(function() {
+	console.log("sending message");
+	sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
     document.getElementById("message").value = "";
-}
+    return false;
+});
 
 function addEmoji(emoji){
 	$("#currentEmojis").append(emoji);

@@ -28,6 +28,12 @@
 </ul>
 
 <h1>${room.name}</h1>
+<c:if test="${empty playerName}">
+	<p>Logged in as: <span id="sender">${host} (Host)</span></p>
+</c:if>
+<c:if test="${not empty playerName}">
+	<p>Logged in as:  <span id="sender">${playerName}</span></p>
+</c:if>
 <c:if test="${room.privateRoom}">
 	<p>Room password: ${room.password}</p>
 </c:if>
@@ -96,16 +102,9 @@
 </c:if>
 
 <hr>
-<form>
+<form id="messageForm">
     <div>
-        <label for="message">Message</label>
-        <input type="text" id="message" placeholder="Enter your message here...">
-        <c:if test="${empty playerName}">
-		<button onclick="sendMessage('${host}')" type="button" id="send">Send</button>
-		</c:if>
-		<c:if test="${not empty playerName}">
-			<button onclick="sendMessage('${playerName}')" type="button" id="send">Send</button>
-		</c:if>
+        <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">
     </div>
 </form>
 <iframe id="messagesFrame" src="/room-messages/" title="Room Messages Iframe"></iframe>

@@ -71,14 +71,12 @@
 	        </tr>
 	    </tbody>
 	</table>
-	<p id="emojiGroup">
-	</p>
+	<p id="emojiGroup"></p>
+	<hr>
+	<p id="currentEmojis"></p>
+	<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
 </c:if>
 
-<hr>
-<p id="currentEmojis">
-	</p>
-<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
 <hr>
 <form id="messageForm">
     <div>

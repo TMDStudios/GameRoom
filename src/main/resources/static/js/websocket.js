@@ -49,8 +49,15 @@ function showEmojis(emojis) {
 }
 
 function showGuess(guess) {
-    $("#guesses").append("<p>" + guess + "</p>");
+	end = guess.indexOf(":");
+	player = guess.substring(0,end);
+    $("#guesses").append("<p><input type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
     window.scrollTo(0,document.body.scrollHeight);
+}
+
+function handleCheck(player) {
+	var checkBox = document.getElementById(player);
+	if(checkBox.checked){console.log("+1 point for "+player);}else{console.log("-1 point for "+player);}	
 }
 
 $("#messageForm").submit(function() {

@@ -22,5 +22,11 @@ public class MessageController {
     public ResponseMessage getEmojis(final Message message) throws InterruptedException {
         return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
     }
+	
+	@MessageMapping("/guess")
+    @SendTo("/topic/guesses")
+    public ResponseMessage getGuesses(final Message message) throws InterruptedException {
+        return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
+    }
 
 }

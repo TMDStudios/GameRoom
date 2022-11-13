@@ -25,6 +25,9 @@ function connect() {
         stompClient.subscribe('/topic/emojis', function (emojiMessage) {
             showEmojis(JSON.parse(emojiMessage.body).content);
         });
+        stompClient.subscribe('/topic/guesses', function (guess) {
+            showGuess(JSON.parse(guess.body).content);
+        });
     });
 }
 
@@ -34,8 +37,20 @@ function showMessage(message) {
 }
 
 function showEmojis(emojis) {
+	try {
+  		document.getElementById("guess").disabled = false;
+  		document.getElementById("guess").style.color = "black";
+  		document.getElementById("guess").value = "";
+	}catch(error) {
+	  	console.log("TypeError Warning");
+	}
 	$("#currentEmojiGroup").empty();
     $("#currentEmojiGroup").append(emojis);
+}
+
+function showGuess(guess) {
+    $("#guesses").append("<p>" + guess + "</p>");
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 $("#messageForm").submit(function() {
@@ -43,6 +58,17 @@ $("#messageForm").submit(function() {
 	sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
     document.getElementById("message").value = "";
+    return false;
+});
+
+$("#guessForm").submit(function() {
+	console.log("sending guess");
+	sender = document.getElementById("sender").innerHTML;
+	guess = document.getElementById("guess").value;
+    stompClient.send("/ws/guess", {}, JSON.stringify({'messageContent': ""+sender+": "+guess}));
+    document.getElementById("guess").value = "Your guess was: "+guess;
+    document.getElementById("guess").disabled = true;
+    document.getElementById("guess").style.color = "lightblue";
     return false;
 });
 

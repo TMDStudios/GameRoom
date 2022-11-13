@@ -49,12 +49,19 @@
 	<p id="currentEmojiGroup">Waiting for host...</p>
 </div>
 
-<h3>Players:</h3>
-<c:forEach var="player" items="${room.players}">
-  		<p>${player.name} - ${player.id}</p>
-</c:forEach>
+<c:if test="${not empty playerName}">
+	<hr>
+	<form id="guessForm">
+	    <div>
+	        <input class="messageInput" type="text" id="guess" placeholder="Enter your guess here...">
+	    </div>
+	</form>
+	<hr>
+</c:if>
 
 <c:if test="${not empty userId}">
+	<hr>
+	<iframe id="hostFrame" src="/guesses/" title="Host Iframe"></iframe>
 	<hr>
 	<table class="emojiTable">
 	    <tbody>

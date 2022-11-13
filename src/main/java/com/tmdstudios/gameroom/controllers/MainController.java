@@ -224,6 +224,11 @@ public class MainController {
 		}
 	}
 	
+	@GetMapping("/guesses/")
+	public String guessMessages() {	
+		return "host_frame.jsp";
+	}
+	
 	@GetMapping("/room-messages/")
 	public String roomMessages() {	
 		return "room_messages.jsp";

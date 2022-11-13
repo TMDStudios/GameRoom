@@ -26,19 +26,29 @@
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 	</c:if>
 </ul>
+<div class="roomInfo">
+	<span>Room Name: ${room.name}</span>
+	<span>Game Type: ${room.gameType}</span>
+	<span>
+		<c:if test="${empty playerName}">
+			<span>Logged in as: <span id="sender">${host} (Host)</span></span>
+		</c:if>
+		<c:if test="${not empty playerName}">
+			<span>Logged in as:  <span id="sender">${playerName}</span></span>
+		</c:if>
+	</span>
+</div>
+<div class="roomInfo">
+	<span>Room link: <a href="/rooms/${room.link}">${link}</a></span>
+	<c:if test="${room.privateRoom}">
+		<span>Room password: ${room.password}</span>
+	</c:if>
+</div>
+<div class="emojiDiv">
+	<p class="emojiTitle">Current Emoji Group</p>
+	<p id="currentEmojiGroup">Waiting for host...</p>
+</div>
 
-<h1>${room.name}</h1>
-<c:if test="${empty playerName}">
-	<p>Logged in as: <span id="sender">${host} (Host)</span></p>
-</c:if>
-<c:if test="${not empty playerName}">
-	<p>Logged in as:  <span id="sender">${playerName}</span></p>
-</c:if>
-<c:if test="${room.privateRoom}">
-	<p>Room password: ${room.password}</p>
-</c:if>
-<p>Game Type: ${room.gameType}</p>
-<p>Room link: <a class="nav_link" href="/rooms/${room.link}">${link}</a></p>
 <h3>Players:</h3>
 <c:forEach var="player" items="${room.players}">
   		<p>${player.name} - ${player.id}</p>

@@ -16,5 +16,11 @@ public class MessageController {
     public ResponseMessage getMessage(final Message message) throws InterruptedException {
         return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
     }
+	
+	@MessageMapping("/emoji")
+    @SendTo("/topic/emojis")
+    public ResponseMessage getEmojis(final Message message) throws InterruptedException {
+        return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
+    }
 
 }

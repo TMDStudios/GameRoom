@@ -46,40 +46,40 @@
 
 <c:if test="${not empty userId}">
 	<hr>
-	<table>
-		<thead>
-	    	<tr>
-	            <th>Preset</th>
-	            <th>Custom</th>
-	        </tr>
-	    </thead>
+	<table class="emojiTable">
 	    <tbody>
 	    	<tr>
-	            <td>
+	            <td class="emojiControls">
+	            	Preset
 	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
 						<c:forEach var="set" items="${preset}">
 							<option value="${set[0]}">${set[1]}</option>
 						</c:forEach>
 					</select>
 	            </td>
-	            <td>
-	            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+	            <td class="emojiControls">
+	            	Custom
+	            	<select id="emojiPicker" onchange="showGroup(this.value)">
 						<c:forEach var="customItem" items="${custom}">
 							<option value="${customItem.value}">${customItem.key}</option>
 						</c:forEach>
 					</select>
 	            </td>
+	            <td class="emojiControls">
+	            	<button onclick="clearEmojis()" type="button" id="send">Clear Emojis</button>
+	            </td>
 	        </tr>
 	    </tbody>
 	</table>
-	<p id="currentEmojis">
+	<p id="emojiGroup">
 	</p>
-	<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
 </c:if>
 
 <hr>
-<p id="testing">
+<p id="currentEmojis">
 	</p>
+<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
+<hr>
 <form id="messageForm">
     <div>
         <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">

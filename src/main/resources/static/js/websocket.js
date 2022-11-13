@@ -30,19 +30,23 @@ $("#messageForm").submit(function() {
     return false;
 });
 
-function addEmoji(emojis){
-	document.getElementById("testing").innerHTML = "";
+function showGroup(emojis){
+	document.getElementById("emojiGroup").innerHTML = "";
 	emojiList = emojis.split(",");
-	emojiList.forEach(e => $("#testing").append('<button onclick="moreTesting(\''+e+'\')" type="button">'+e+'</button>'));
+	emojiList.forEach(e => $("#emojiGroup").append('<button onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
 	onclick="sell(document.getElementById('${coin.id}').value, ${coin.totalAmount})"
 }
 
-function moreTesting(emoji){
-	console.log(emoji);
+function addEmoji(emoji){
+	$("#currentEmojis").append(emoji);
 }
 
 function sendEmojis(){
 	console.log("sending emojis");
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML}));
+    document.getElementById("currentEmojis").innerHTML = '';
+}
+
+function clearEmojis(){
     document.getElementById("currentEmojis").innerHTML = '';
 }

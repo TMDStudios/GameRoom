@@ -39,18 +39,19 @@ h1 {
 	box-sizing:border-box;
 	border: solid 1px rgba(212, 212, 212, 0.1);
 }
+.emojiTable {
+	width: 100%;
+}
+.emojiControls {
+	display: table-cell;
+	text-align: center;
+	width: 33%;
+}
 iframe {
 	display: block;
 	box-sizing:border-box;
 	width: 100%;
 	background-color: rgba(212, 212, 212, 0.1);
-}
-table {
-	width: 100%;
-}
-th, td {
-	display: table-cell;
-	text-align: center;
 }
 #messages {
 	padding: 24px 8px;

@@ -28,5 +28,11 @@ public class MessageController {
     public ResponseMessage getGuesses(final Message message) throws InterruptedException {
         return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
     }
+	
+	@MessageMapping("/players")
+    @SendTo("/topic/players")
+    public ResponseMessage getPlayers(final Message message) throws InterruptedException {
+        return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
+    }
 
 }

@@ -1,5 +1,6 @@
 var stompClient = null;
 var ready = false;
+const playerMap = new Map();
 
 $(document).ready(function() {
     console.log("Messages are live");
@@ -7,10 +8,6 @@ $(document).ready(function() {
     
     $("#send").click(function() {
         sendMessage();
-    });
-
-    $("#sendEmojis").click(function() {
-        sendEmojis();
     });
 });
 
@@ -27,6 +24,9 @@ function connect() {
         });
         stompClient.subscribe('/topic/guesses', function (guess) {
             showGuess(JSON.parse(guess.body).content);
+        });
+        stompClient.subscribe('/topic/players', function (playerChange) {
+            updatePlayers(JSON.parse(playerChange.body).content);
         });
     });
 }
@@ -55,9 +55,39 @@ function showGuess(guess) {
     window.scrollTo(0,document.body.scrollHeight);
 }
 
+/*REMOVE THIS??*/ 
+function nextRound() {
+	showPlayers();
+}
+
+function showPlayers() {
+	$("#playerDiv").empty();
+	playerMap.forEach(function(value, key) {
+		$("#playerDiv").append("<p>" + key + ":" + value + "</p>");
+	});
+}
+
+function updatePlayers(message) {
+	end = message.indexOf(":");
+	playerName = message.substring(0,end);
+	playerScore = message.substring(end+1,message.length);
+	playerMap.set(playerName, playerScore);
+	showPlayers();
+}
+
 function handleCheck(player) {
 	var checkBox = document.getElementById(player);
-	if(checkBox.checked){console.log("+1 point for "+player);}else{console.log("-1 point for "+player);}	
+	playerScore = playerMap.get(player);
+	if(playerScore===undefined){playerScore=0;}
+	convertedScore = parseInt(playerScore);
+	console.log("score ====== "+convertedScore);
+	if(checkBox.checked){
+		playerMap.set(player, convertedScore+1);
+	}else{
+		playerMap.set(player, convertedScore-1);
+	}
+	console.log(player+":"+playerMap.get(player));
+	stompClient.send("/ws/players", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player)}))	
 }
 
 $("#messageForm").submit(function() {
@@ -93,8 +123,10 @@ function sendEmojis(){
 	console.log("sending emojis");
     stompClient.send("/ws/emoji", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML}));
     document.getElementById("currentEmojis").innerHTML = '';
+    
+    $('#hostFrame').contents().find('div').empty();
 }
 
 function clearEmojis(){
-    document.getElementById("currentEmojis").innerHTML = '';
+    document.getElementById("currentEmojiGroup").innerHTML = 'Waiting for host...';
 }

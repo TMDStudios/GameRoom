@@ -62,7 +62,12 @@ h1 {
 .emojiControls {
 	display: table-cell;
 	text-align: center;
-	width: 33%;
+	width: 30%;
+}
+.emojiButtons {
+	display: table-cell;
+	text-align: center;
+	width: 20%;
 }
 iframe {
 	display: block;
@@ -78,4 +83,19 @@ iframe {
 }
 #emojiBtn {
 	width: 100%;
+}
+
+.container {
+	width: 1080px;
+    margin: 0 auto;
+}
+.row { 
+    display: flex; 
+}
+.flex-1 { 
+    flex: 1; 
+    background-color: rgba(212, 212, 212, 0.15);
+}
+.flex-3 { 
+    flex: 3; 
 }

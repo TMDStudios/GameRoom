@@ -62,9 +62,12 @@ function nextRound() {
 
 function showPlayers() {
 	$("#playerDiv").empty();
+	sortedPlayers = [];
 	playerMap.forEach(function(value, key) {
-		$("#playerDiv").append("<p>" + key + ":" + value + "</p>");
+		sortedPlayers.push([key,value]);
 	});
+	sortedPlayers.sort((a, b) => b[1].localeCompare(a[1]));
+	sortedPlayers.forEach((player) => $("#playerDiv").append("<p>" + player[0] + ":" + player[1] + "</p>"));
 }
 
 function updatePlayers(message) {

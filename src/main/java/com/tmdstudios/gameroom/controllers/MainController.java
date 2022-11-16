@@ -266,6 +266,12 @@ public class MainController {
 					return "redirect:/rooms/join";
 				}
 			}
+			for(int i = 0; i<playerName.length(); i++) {
+				if(!Character.isLetter(playerName.charAt(i))) {
+					redirectAttributes.addFlashAttribute("error", "Player Name can only contain letters.");
+					return "redirect:/rooms/join";
+				}
+			}
 			player = new Player(playerName, room);
 			playerService.newPlayer(player);
 			session.setAttribute("playerName", player.getName());

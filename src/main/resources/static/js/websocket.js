@@ -1,6 +1,8 @@
 var stompClient = null;
 var ready = false;
 const playerMap = new Map();
+var round = 0;
+var link = "";
 
 $(document).ready(function() {
     console.log("Messages are live");
@@ -55,9 +57,13 @@ function showGuess(guess) {
     window.scrollTo(0,document.body.scrollHeight);
 }
 
-/*REMOVE THIS??*/ 
-function nextRound() {
-	showPlayers();
+function nextRound(roomLink) {
+	link = roomLink;
+	round++;
+	let xhttp = new XMLHttpRequest();
+  	xhttp.open("POST", "/rooms/"+roomLink+"/update-scores");
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("scores=Bob:"+round);
 }
 
 function showPlayers() {
@@ -131,5 +137,11 @@ function sendEmojis(){
 }
 
 function clearEmojis(){
+	let req = new XMLHttpRequest();
+	req.open('GET', "/rooms/"+link+"/get-scores");
+  	req.onload = function() {
+    	alert(this.responseText);
+  	}
+  	req.send();
     document.getElementById("currentEmojiGroup").innerHTML = 'Waiting for host...';
 }

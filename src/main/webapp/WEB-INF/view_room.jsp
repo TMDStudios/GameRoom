@@ -95,7 +95,7 @@
 			            	<button onclick="clearEmojis()" type="button">Clear Emojis</button>
 			            </td>
 			            <td class="emojiButtons">
-			            	<button onclick="nextRound()" type="button">Next Round</button>
+			            	<button onclick="nextRound('${room.link}')" type="button">Next Round</button>
 			            </td>
 			        </tr>
 			    </tbody>

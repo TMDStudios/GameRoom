@@ -189,7 +189,10 @@ public class MainController {
 				Long userId = (Long) session.getAttribute("userId");		
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
-			String[][] preset = {{"", "Select Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},{"👽☎️🏠", "ET"}};
+			String[][] preset = {{"", "Select Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},
+					{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},
+					{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},
+					{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"}};
 			model.addAttribute("preset", preset);
 
 			EmojiSet smileys = emojiService.smileys();

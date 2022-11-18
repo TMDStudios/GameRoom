@@ -48,6 +48,7 @@ public class MainController {
 			User user = userService.findById(userId);
 			model.addAttribute("host", user);
 		}
+		session.setAttribute("scores", null);
 		
 		model.addAttribute("rooms", roomService.allRooms());
 		model.addAttribute("players", playerService.allPlayers());
@@ -99,6 +100,7 @@ public class MainController {
 	public String logout(HttpSession session) {
 		session.setAttribute("userId", null);
 		session.setAttribute("playerName", null);
+		session.setAttribute("scores", null);
 	    return "redirect:/";
 	}
 	
@@ -257,7 +259,6 @@ public class MainController {
 		Room room = roomService.findByLink(roomLink);
 		if(room!=null) {
 			if(room.getPrivateRoom()) {
-//				model.addAttribute("roomId", room.getId());
 				session.setAttribute("roomId", room.getId());
 				session.setAttribute("playerName", playerName);
 				return "join_private_room.jsp";

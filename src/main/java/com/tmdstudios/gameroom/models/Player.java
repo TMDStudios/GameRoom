@@ -28,8 +28,6 @@ public class Player {
 	@Size(min=3, max=24, message="Username must be between 3 and 24 characters")
 	private String name;
 	
-	private int score;
-	
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
@@ -65,14 +63,6 @@ public class Player {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
 	}
 
 	public Room getRoom() {

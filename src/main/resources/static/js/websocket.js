@@ -29,6 +29,8 @@ function connect() {
         stompClient.subscribe('/topic/players', function (playerChange) {
             updatePlayers(JSON.parse(playerChange.body).content);
         });
+        sender = document.getElementById("sender").innerHTML;
+    	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": has joined"}));
     });
 }
 

@@ -6,9 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Game Room</title>
 </head>
@@ -117,6 +114,9 @@
 	</div>
 </div>
 
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <script type="text/javascript" src="../js/websocket.js"></script>
 
 </body>

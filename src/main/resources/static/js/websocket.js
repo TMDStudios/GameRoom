@@ -58,10 +58,6 @@ function showGuess(guess) {
 
 function nextRound() {
 	round++;
-	let xhttp = new XMLHttpRequest();
-  	xhttp.open("POST", "/update-scores");
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("scores=Bob:4,Tina:9,Samantha:12,Nadia:8");
 }
 
 function showPlayers() {

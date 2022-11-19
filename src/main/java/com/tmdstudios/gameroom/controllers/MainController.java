@@ -41,6 +41,8 @@ public class MainController {
 	@Autowired
 	private EmojiService emojiService;
 	
+	String[] gameTypes = {"Emoji Game", "Game Type 2", "Game Type 3", "Game Type 4"};
+	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {	
 		if(session.getAttribute("userId") != null) {
@@ -135,7 +137,6 @@ public class MainController {
 			return "redirect:/login";
 		}
 		
-		String[] gameTypes = {"Emoji Game", "Game Type 2", "Game Type 3", "Game Type 4"};
 		model.addAttribute("gameTypes", gameTypes);
 		return "new_room.jsp";
 	}
@@ -156,8 +157,15 @@ public class MainController {
 		User user = userService.findById(userId);
 		
 		if(result.hasErrors()) {
+			model.addAttribute("gameTypes", gameTypes);
 			return "new_room.jsp";
 		}else {
+			for(int i = 0; i<room.getName().length(); i++) {
+				if(!Character.isLetter(room.getName().charAt(i))) {
+					redirectAttributes.addFlashAttribute("error", "Room Name can only contain letters.");
+					return "redirect:/rooms/new";
+				}
+			}
 			room.setHost(user);
 			if(room.getPrivateRoom()) {
 				if(room.getPassword().length()<6||room.getPassword().length()>12) {

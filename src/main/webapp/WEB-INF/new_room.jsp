@@ -34,7 +34,7 @@
 	    	<tr>
 	            <td class="float-left">Room Name:</td>
 	            <td class="float-left">
-	            	<form:errors path="name" class="text-danger"/>
+	            	<form:errors path="name" class="text-danger"/><br>
 					<form:input class="input" path="name"/>
 	            </td>
 	        </tr>
@@ -51,7 +51,7 @@
 	        <tr>
 	            <td class="float-left">Room Message:</td>
 	             <td class="float-left">
-	            	<form:errors path="message" class="text-danger"/>
+	            	<form:errors path="message" class="text-danger"/><br>
 					<form:textarea rows="4" class="input" path="message"/>
 	            </td>
 	        </tr>
@@ -64,7 +64,7 @@
 	        <tr>
 	            <td class="float-left">Room Password:</td>
 	             <td class="float-left">
-	            	<form:errors path="password" class="text-danger"/>
+	            	<form:errors path="password" class="text-danger"/><br>
 					<form:input class="input" path="password"/>
 	            </td>
 	        </tr>

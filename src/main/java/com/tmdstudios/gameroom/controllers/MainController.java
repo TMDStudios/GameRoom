@@ -248,7 +248,16 @@ public class MainController {
 	}
 	
 	@GetMapping("/rooms/join")
-	public String joinRoom() {
+	public String joinRoom(HttpSession session) {
+		String playerName = (String) session.getAttribute("playerName");
+		Long roomId = (Long) session.getAttribute("roomId");
+		Room room = roomService.findById(roomId);
+		if(room!=null) {
+			Player player = playerService.findByName(playerName, room);
+			if(player!=null) {
+				return "redirect:/rooms/"+room.getLink();
+			}
+		}
 		return "join_room.jsp";
 	}
 	

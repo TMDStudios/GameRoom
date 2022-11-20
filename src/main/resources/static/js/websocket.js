@@ -1,49 +1,60 @@
 var stompClient = null;
-var ready = false;
 const playerMap = new Map();
 var round = 0;
 
 $(document).ready(function() {
-	var socket = new SockJS('/room-messages');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-		if(document.getElementById("navbar")!=null){
-			console.log("WS is live");
-	        stompClient.subscribe('/topic/emojis', function (emojiMessage) {
-	            showEmojis(JSON.parse(emojiMessage.body).content);
-	        });
-	        stompClient.subscribe('/topic/players', function (playerChange) {
-	            updatePlayers(JSON.parse(playerChange.body).content);
-	        });
-	        sender = document.getElementById("sender").innerHTML;
-	    	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
-		}
-		if(document.getElementById("guesses")!=null){
-			console.log("Guesses are live");
-	        stompClient.subscribe('/topic/guesses', function (guess) {
-	            showGuess(JSON.parse(guess.body).content);
-	        });
-		}
-		if(document.getElementById("messages")!=null){
-			console.log("Messages are live");
-	        stompClient.subscribe('/topic/messages', function (message) {
-	            showMessage(JSON.parse(message.body).content);
-	        });
-		}
-	});
+    console.log("WS is live");
+    connect();
+    
     $("#send").click(function() {
         sendMessage();
     });
 });
 
+function connect() {
+    var socket = new SockJS('/room-messages');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log('Connection: ' + frame);
+        stompClient.subscribe('/topic/messages', function (message) {
+			switch(JSON.parse(message.body).type) {
+			    case "guess":
+			    	showGuess(JSON.parse(message.body).content);
+			        break;
+			    case "emoji":
+			    	showEmojis(JSON.parse(message.body).content);
+			        break;
+			    case "score":
+			    	updatePlayers(JSON.parse(message.body).content);
+			        break;
+			    case "allScores":
+			    	updateScores(JSON.parse(message.body).content);
+			        break;
+			    default:
+			    	showMessage(JSON.parse(message.body).content);
+			}
+        });
+        if(document.getElementById("navbar")!=null){
+			sender = document.getElementById("sender").innerHTML;
+			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
+		}
+    });
+}
+
 function showMessage(message) {
-	if(message.includes(" has joined")){
+    if(message.includes(" has joined")){
 		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
+		if(document.getElementById("hostFrame")!=null){
+			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'}))
+		}
 	}else{
 		$("#messages").append("<p>" + message + "</p>");
 	}
-    
     window.scrollTo(0,document.body.scrollHeight);
+}
+
+function updateScores(allScores){
+	if(allScores.length>3){populateMap(allScores);}	
 }
 
 function showEmojis(emojis) {
@@ -88,7 +99,9 @@ function showPlayers() {
 	  	xhttp.open("POST", "/update-scores");
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("scores="+scoresString);
+		return scoresString;
 	}
+	return scoresString;
 }
 
 function updatePlayers(message) {
@@ -109,7 +122,7 @@ function handleCheck(player) {
 	}else{
 		playerMap.set(player, convertedScore-1);
 	}
-	stompClient.send("/ws/players", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player)}))	
+	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
 }
 
 $("#messageForm").submit(function() {
@@ -124,7 +137,7 @@ $("#guessForm").submit(function() {
 	console.log("sending guess");
 	sender = document.getElementById("sender").innerHTML;
 	guess = document.getElementById("guess").value;
-    stompClient.send("/ws/guess", {}, JSON.stringify({'messageContent': ""+sender+": "+guess}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+guess, 'messageType': 'guess'}));
     document.getElementById("guess").value = "Your guess was: "+guess;
     document.getElementById("guess").disabled = true;
     document.getElementById("guess").style.color = "lightblue";
@@ -151,7 +164,7 @@ function sendEmojis(){
 	  	req.send();
 	}
 	console.log("sending emojis");
-    stompClient.send("/ws/emoji", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));
     document.getElementById("currentEmojis").innerHTML = '';
     
     $('#hostFrame').contents().find('div').empty();

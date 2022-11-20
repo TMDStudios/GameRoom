@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-	<div>
+	<div id="navbar">
 		<ul class="navbar">
 		    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
 		    <c:if test="${empty userId && empty playerName}">

@@ -4,28 +4,46 @@ const playerMap = new Map();
 var round = 0;
 
 $(document).ready(function() {
-    console.log("WS is live");
-    connect();
-    
+	var socket = new SockJS('/room-messages');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+		if(document.getElementById("navbar")!=null){
+			console.log("WS is live");
+	        stompClient.subscribe('/topic/emojis', function (emojiMessage) {
+	            showEmojis(JSON.parse(emojiMessage.body).content);
+	        });
+	        stompClient.subscribe('/topic/players', function (playerChange) {
+	            updatePlayers(JSON.parse(playerChange.body).content);
+	        });
+	        sender = document.getElementById("sender").innerHTML;
+	    	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
+		}
+		if(document.getElementById("guesses")!=null){
+			console.log("Guesses are live");
+	        stompClient.subscribe('/topic/guesses', function (guess) {
+	            showGuess(JSON.parse(guess.body).content);
+	        });
+		}
+		if(document.getElementById("messages")!=null){
+			console.log("Messages are live");
+	        stompClient.subscribe('/topic/messages', function (message) {
+	            showMessage(JSON.parse(message.body).content);
+	        });
+		}
+	});
     $("#send").click(function() {
         sendMessage();
     });
 });
 
-function connect() {
-    var socket = new SockJS('/room-messages');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        console.log('Connection: ' + frame);
-        stompClient.subscribe('/topic/emojis', function (emojiMessage) {
-            showEmojis(JSON.parse(emojiMessage.body).content);
-        });
-        stompClient.subscribe('/topic/players', function (playerChange) {
-            updatePlayers(JSON.parse(playerChange.body).content);
-        });
-        sender = document.getElementById("sender").innerHTML;
-    	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
-    });
+function showMessage(message) {
+	if(message.includes(" has joined")){
+		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
+	}else{
+		$("#messages").append("<p>" + message + "</p>");
+	}
+    
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function showEmojis(emojis) {
@@ -38,6 +56,13 @@ function showEmojis(emojis) {
 	}
 	$("#currentEmojiGroup").empty();
     $("#currentEmojiGroup").append(emojis);
+}
+
+function showGuess(guess) {
+	end = guess.indexOf(":");
+	player = guess.substring(0,end);
+    $("#guesses").append("<p><input type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function nextRound() {

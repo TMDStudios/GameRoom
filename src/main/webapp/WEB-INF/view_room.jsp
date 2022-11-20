@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isErrorPage="true" %>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-	<div>
+	<div id="navbar">
 		<ul class="navbar">
 		    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
 		    <c:if test="${empty userId && empty playerName}">

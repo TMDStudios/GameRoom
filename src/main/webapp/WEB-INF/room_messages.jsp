@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <div id="messages">
 </div>
 </body>
-<script type="text/javascript" src="../js/websocket.js"></script>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script type="text/javascript" src="../js/wsMessageReceiver.js"></script>
 </html>

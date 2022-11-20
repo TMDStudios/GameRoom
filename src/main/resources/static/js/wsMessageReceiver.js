@@ -13,6 +13,10 @@ $(document).ready(function() {
 });
 
 function showMessage(message) {
-    $("#messages").append("<p>" + message + "</p>");
+	if(message.includes(" has joined")){
+		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
+	}else{
+		$("#messages").append("<p>" + message + "</p>");
+	}
     window.scrollTo(0,document.body.scrollHeight);
 }

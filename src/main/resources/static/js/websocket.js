@@ -37,7 +37,9 @@ function connect() {
         if(document.getElementById("navbar")!=null){
 			sender = document.getElementById("sender").innerHTML;
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
-			handleCheck(sender);
+			if(document.getElementById("hostFrame")==null){
+				handleCheck(sender);
+			}
 		}
 		if(document.getElementById("hostFrame")!=null){
 			if(playerMap.size<1){

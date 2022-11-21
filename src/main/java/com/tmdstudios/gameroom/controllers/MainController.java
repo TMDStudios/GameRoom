@@ -50,7 +50,6 @@ public class MainController {
 			User user = userService.findById(userId);
 			model.addAttribute("host", user);
 		}
-		session.setAttribute("scores", null);
 		
 		model.addAttribute("rooms", roomService.allRooms());
 		model.addAttribute("players", playerService.allPlayers());

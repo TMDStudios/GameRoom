@@ -37,6 +37,17 @@ function connect() {
         if(document.getElementById("navbar")!=null){
 			sender = document.getElementById("sender").innerHTML;
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
+			handleCheck(sender);
+		}
+		if(document.getElementById("hostFrame")!=null){
+			if(playerMap.size<1){
+				let req = new XMLHttpRequest();
+				req.open('GET', "/get-scores");
+			  	req.onload = function() {
+			    	if(this.responseText){populateMap(this.responseText);}
+			  	}
+			  	req.send();
+			}
 		}
     });
 }
@@ -113,14 +124,16 @@ function updatePlayers(message) {
 }
 
 function handleCheck(player) {
-	var checkBox = document.getElementById(player);
 	playerScore = playerMap.get(player);
-	if(playerScore===undefined){playerScore=0;}
-	convertedScore = parseInt(playerScore);
-	if(checkBox.checked){
-		playerMap.set(player, convertedScore+1);
-	}else{
-		playerMap.set(player, convertedScore-1);
+	if(playerScore===undefined){playerScore=0; playerMap.set(player, 0);}
+	if(document.getElementById("hostFrame")!=null){
+		var checkBox = document.getElementById(player);
+		convertedScore = parseInt(playerScore);
+		if(checkBox.checked){
+			playerMap.set(player, convertedScore+1);
+		}else{
+			playerMap.set(player, convertedScore-1);
+		}
 	}
 	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
 }
@@ -155,14 +168,6 @@ function addEmoji(emoji){
 }
 
 function sendEmojis(){
-	if(playerMap.size<1){
-		let req = new XMLHttpRequest();
-		req.open('GET', "/get-scores");
-	  	req.onload = function() {
-	    	if(this.responseText){populateMap(this.responseText);}
-	  	}
-	  	req.send();
-	}
 	console.log("sending emojis");
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));
     document.getElementById("currentEmojis").innerHTML = '';

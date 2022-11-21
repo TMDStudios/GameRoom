@@ -161,7 +161,7 @@ public class MainController {
 			return "new_room.jsp";
 		}else {
 			for(int i = 0; i<room.getName().length(); i++) {
-				if(!Character.isLetter(room.getName().charAt(i))) {
+				if(!Character.isLetter(room.getName().charAt(i))&&room.getName().charAt(i)!=' ') {
 					redirectAttributes.addFlashAttribute("error", "Room Name can only contain letters.");
 					return "redirect:/rooms/new";
 				}

@@ -38,7 +38,7 @@ function connect() {
 			sender = document.getElementById("sender").innerHTML;
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
 			if(document.getElementById("hostFrame")==null){
-				handleCheck(sender);
+				addPlayer(sender);
 			}
 		}
 		if(document.getElementById("hostFrame")!=null){
@@ -126,17 +126,21 @@ function updatePlayers(message) {
 }
 
 function handleCheck(player) {
+	var checkBox = document.getElementById(player);
+	playerScore = playerMap.get(player);
+	if(playerScore===undefined){playerScore=0;}
+	convertedScore = parseInt(playerScore);
+	if(checkBox.checked){
+		playerMap.set(player, convertedScore+1);
+	}else{
+		playerMap.set(player, convertedScore-1);
+	}
+	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
+}
+
+function addPlayer(player) {
 	playerScore = playerMap.get(player);
 	if(playerScore===undefined){playerScore=0; playerMap.set(player, 0);}
-	if(document.getElementById("hostFrame")!=null){
-		var checkBox = document.getElementById(player);
-		convertedScore = parseInt(playerScore);
-		if(checkBox.checked){
-			playerMap.set(player, convertedScore+1);
-		}else{
-			playerMap.set(player, convertedScore-1);
-		}
-	}
 	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
 }
 

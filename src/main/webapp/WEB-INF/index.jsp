@@ -24,7 +24,7 @@
 	</c:if>
 </ul>
 
-<h1>Welcome to Game Room</h1>
+<h1 id="welcome"></h1>
 <c:if test="${not empty userId}">
 	<p>Logged in as: ${host.username} (Host)</p>
 </c:if>
@@ -41,6 +41,7 @@
     <p>${player.name} - ${player.id}</p>
 </c:forEach>
 
+<script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>
 
 </body>

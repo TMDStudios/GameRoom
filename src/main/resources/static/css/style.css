@@ -105,13 +105,17 @@ iframe {
 .flex-3 { 
     flex: 3; 
 }
-#messages {
+#messages, #guesses {
 	height: 200px;
 	overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 	display: block;
 	box-sizing:border-box;
 	width: 100%;
 	border: solid 1px rgba(212, 212, 212, 0.1);
 	padding-left: 12px;
+	overflow: -moz-scrollbars-none;
+	-ms-overflow-style: none;
 }
+#messages::-webkit-scrollbar { width: 0 !important }
+#guesses::-webkit-scrollbar { width: 0 !important }

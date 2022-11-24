@@ -67,7 +67,7 @@
 		
 		<c:if test="${not empty userId}">
 			<hr>
-			<iframe id="hostFrame" src="/guesses/" title="Host Iframe"></iframe>
+				<div id="guesses"></div>
 			<hr>
 			<table class="emojiTable">
 			    <tbody>

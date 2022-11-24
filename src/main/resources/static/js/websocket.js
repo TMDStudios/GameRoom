@@ -37,11 +37,11 @@ function connect() {
         if(document.getElementById("navbar")!=null){
 			sender = document.getElementById("sender").innerHTML;
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
-			if(document.getElementById("hostFrame")==null){
+			if(document.getElementById("guesses")==null){
 				addPlayer(sender);
 			}
 		}
-		if(document.getElementById("hostFrame")!=null){
+		if(document.getElementById("guesses")!=null){
 			if(playerMap.size<1){
 				let req = new XMLHttpRequest();
 				req.open('GET', "/get-scores");
@@ -57,16 +57,16 @@ function connect() {
 function showMessage(message) {
     if(message.includes(" has joined")){
 		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
-		if(document.getElementById("hostFrame")!=null){
+		if(document.getElementById("guesses")!=null){
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'}))
 		}
 	}else{
 		$("#messages").append("<p>" + message + "</p>");
 	}
 
-    var divElement = document.getElementById("messages");
-	divElement.scroll({
-		top: divElement.scrollHeight,
+	console.log("MESSAGE ELEMENT -- "+document.getElementById("messages"));
+	document.getElementById("messages").scroll({
+		top: document.getElementById("messages").scrollHeight,
 		behavior: 'smooth'
 	});
 }
@@ -91,7 +91,11 @@ function showGuess(guess) {
 	end = guess.indexOf(":");
 	player = guess.substring(0,end);
     $("#guesses").append("<p><input type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
-    window.scrollTo(0,document.body.scrollHeight);
+
+    document.getElementById("guesses").scroll({
+		top: document.getElementById("guesses").scrollHeight,
+		behavior: 'smooth'
+	});
 }
 
 function nextRound() {
@@ -183,7 +187,7 @@ function sendEmojis(){
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));
     document.getElementById("currentEmojis").innerHTML = '';
     
-    $('#hostFrame').contents().find('div').empty();
+    $('#guesses').empty();
 }
 
 function populateMap(sessionData) {

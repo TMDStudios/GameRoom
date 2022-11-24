@@ -84,9 +84,6 @@ iframe {
 	width: 100%;
 	background-color: rgba(212, 212, 212, 0.1);
 }
-#messages {
-	padding: 24px 8px;
-}
 #currentEmojis {
 	font-size: 32px;
 }
@@ -107,4 +104,14 @@ iframe {
 }
 .flex-3 { 
     flex: 3; 
+}
+#messages {
+	height: 200px;
+	overflow-x: hidden;
+    overflow-y: hidden;
+	display: block;
+	box-sizing:border-box;
+	width: 100%;
+	border: solid 1px rgba(212, 212, 212, 0.1);
+	padding-left: 12px;
 }

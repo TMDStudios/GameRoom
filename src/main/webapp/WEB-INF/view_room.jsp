@@ -109,7 +109,8 @@
 		        <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">
 		    </div>
 		</form>
-		<iframe id="messagesFrame" src="/room-messages/" title="Room Messages Iframe"></iframe>
+		<div id="messages"></div>
+		
 	    </div>
 	</div>
 </div>

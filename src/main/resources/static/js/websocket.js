@@ -63,7 +63,12 @@ function showMessage(message) {
 	}else{
 		$("#messages").append("<p>" + message + "</p>");
 	}
-    window.scrollTo(0,document.body.scrollHeight);
+
+    var divElement = document.getElementById("messages");
+	divElement.scroll({
+		top: divElement.scrollHeight,
+		behavior: 'smooth'
+	});
 }
 
 function updateScores(allScores){

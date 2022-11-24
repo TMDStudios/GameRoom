@@ -166,7 +166,7 @@ $("#guessForm").submit(function() {
 function showGroup(emojis){
 	document.getElementById("emojiGroup").innerHTML = "";
 	emojiList = emojis.split(",");
-	emojiList.forEach(e => $("#emojiGroup").append('<button onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
+	emojiList.forEach(e => $("#emojiGroup").append('<button class="emoji" onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
 }
 
 function addEmoji(emoji){

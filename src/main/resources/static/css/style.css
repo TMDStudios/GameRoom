@@ -42,12 +42,15 @@ h1 {
     padding: 8px 16px;
 }
 .emojiDiv {
-	min-height: 200px;
+	min-height: 100px;
 }
 .emojiTitle {
 	text-align: center;
 }
 #currentEmojiGroup {
+	position: relative;
+  	margin-top:-4px;
+  	margin-bottom:-4px;
 	text-align: center;
 	font-size: 48px;
 }
@@ -68,6 +71,12 @@ h1 {
 	display: table-cell;
 	text-align: center;
 	width: 20%;
+}
+.emoji {
+	height: 2.5em;
+	width: 2.5em;
+	text-align: center;
+	font-size: 16px;
 }
 iframe {
 	display: block;

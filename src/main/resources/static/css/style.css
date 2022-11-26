@@ -1,3 +1,4 @@
+*{margin: 0; padding: 0;}
 body {
 	max-width: 1080px;
 	margin: auto;
@@ -38,8 +39,9 @@ h1 {
 	display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(212, 212, 212, 0.15);
+    background-color: rgba(212, 212, 212, 0.05);
     padding: 8px 16px;
+    height: 16px;
 }
 .emojiDiv {
 	min-height: 100px;
@@ -78,12 +80,6 @@ h1 {
 	text-align: center;
 	font-size: 16px;
 }
-iframe {
-	display: block;
-	box-sizing:border-box;
-	width: 100%;
-	background-color: rgba(212, 212, 212, 0.1);
-}
 #currentEmojis {
 	font-size: 32px;
 }
@@ -100,10 +96,9 @@ iframe {
 }
 .flex-1 { 
     flex: 1; 
-    background-color: rgba(212, 212, 212, 0.15);
 }
 .flex-3 { 
-    flex: 3; 
+    flex: 3;
 }
 #messages, #guesses {
 	height: 200px;
@@ -113,9 +108,33 @@ iframe {
 	box-sizing:border-box;
 	width: 100%;
 	border: solid 1px rgba(212, 212, 212, 0.1);
-	padding-left: 12px;
+	padding: 12px;
 	overflow: -moz-scrollbars-none;
 	-ms-overflow-style: none;
 }
 #messages::-webkit-scrollbar { width: 0 !important }
 #guesses::-webkit-scrollbar { width: 0 !important }
+.playersTitle {
+	text-align: center;
+	background-color: rgba(212, 212, 212, 0.05);
+	padding: 23px;
+}
+.playerCard {
+	box-shadow: 0 4px 6px 0 rgba(212, 212, 212,0.2);
+	border-radius: 2px;
+	border-radius: 8px;
+	padding: 8px;
+	margin: 6px;
+}
+hr {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+.smallHr {
+	height:1px;
+	border-width:0;
+	color:white;
+	background-color:white;
+	margin-top: 0px;
+	margin-bottom: 8px;
+}

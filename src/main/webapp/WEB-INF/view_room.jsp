@@ -27,8 +27,11 @@
 	</div>
 	<div class="row">
 		<div class="flex-1">
+			<div class="playersTitle">
+	            <p>Players</p>
+	        </div>
+	        <hr class="smallHr">
 	        <div class="box">
-	            <h3>Players</h3>
 				<div id="playerDiv"></div>
 	        </div>
 	    </div>
@@ -51,6 +54,7 @@
 					<span>Room password: ${room.password}</span>
 				</c:if>
 			</div>
+			<hr class="smallHr">
 			<div class="emojiDiv">
 				<p class="emojiTitle">Current Emoji Group</p>
 				<p id="currentEmojiGroup">Waiting for host...</p>
@@ -62,7 +66,7 @@
 			        <input class="messageInput" type="text" id="guess" placeholder="Enter your guess here...">
 			    </div>
 			</form>
-			<hr>
+			
 		</c:if>
 		
 		<c:if test="${not empty userId}">

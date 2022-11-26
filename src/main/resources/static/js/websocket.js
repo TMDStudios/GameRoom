@@ -50,6 +50,10 @@ function connect() {
 			  	}
 			  	req.send();
 			}
+		}else{
+			document.getElementById("messages").style = "height: 400px;overflow-x: hidden;overflow-y: auto;display: block;box-sizing:border-box;width: 100%;"+
+				"border: solid 1px rgba(212, 212, 212, 0.1);padding-left: 12px;overflow: -moz-scrollbars-none;-ms-overflow-style: none;";
+			document.getElementById("currentEmojiGroup").style = "text-align: center;font-size: 48px;height: 150px;";
 		}
     });
 }
@@ -64,7 +68,6 @@ function showMessage(message) {
 		$("#messages").append("<p>" + message + "</p>");
 	}
 
-	console.log("MESSAGE ELEMENT -- "+document.getElementById("messages"));
 	document.getElementById("messages").scroll({
 		top: document.getElementById("messages").scrollHeight,
 		behavior: 'smooth'
@@ -92,10 +95,12 @@ function showGuess(guess) {
 	player = guess.substring(0,end);
     $("#guesses").append("<p><input type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
 
-    document.getElementById("guesses").scroll({
-		top: document.getElementById("guesses").scrollHeight,
-		behavior: 'smooth'
-	});
+	if(document.getElementById("guesses")!=null){
+		document.getElementById("guesses").scroll({
+			top: document.getElementById("guesses").scrollHeight,
+			behavior: 'smooth'
+		});
+	}
 }
 
 function nextRound() {
@@ -111,7 +116,7 @@ function showPlayers() {
 	});
 	sortedPlayers.sort((a, b) => b[1].localeCompare(a[1]));
 	sortedPlayers.forEach((player) => {
-		$("#playerDiv").append("<p>" + player[0] + ":" + player[1] + "</p>")
+		$("#playerDiv").append("<p class='playerCard'><span style='color: blue;'>" + player[0] + "</span>:" + player[1] + "</p>")
 		scoresString+=player[0]+":"+player[1]+",";
 	});
 	

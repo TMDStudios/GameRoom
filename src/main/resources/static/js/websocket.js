@@ -116,7 +116,7 @@ function showPlayers() {
 	});
 	sortedPlayers.sort((a, b) => b[1].localeCompare(a[1]));
 	sortedPlayers.forEach((player) => {
-		$("#playerDiv").append("<p class='playerCard'><span style='color: blue;'>" + player[0] + "</span>:" + player[1] + "</p>")
+		$("#playerDiv").append("<p class='playerCard'>" + player[0] + ":" + player[1] + "</p>")
 		scoresString+=player[0]+":"+player[1]+",";
 	});
 	

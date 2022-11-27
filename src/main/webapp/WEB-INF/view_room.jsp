@@ -71,7 +71,7 @@
 		
 		<c:if test="${not empty userId}">
 			<hr>
-				<div id="guesses"></div>
+				<div id="guesses" style="height: 150px;"></div>
 			<hr>
 			<table class="emojiTable">
 			    <tbody>
@@ -101,7 +101,7 @@
 			        </tr>
 			    </tbody>
 			</table>
-			<p id="emojiGroup"></p>
+			<div id="emojiGroup"></div>
 			<hr>
 			<p id="currentEmojis"></p>
 			<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>

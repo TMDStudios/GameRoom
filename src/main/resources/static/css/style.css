@@ -63,6 +63,7 @@ h1 {
 }
 .emojiTable {
 	width: 100%;
+	margin-bottom: 8px;
 }
 .emojiControls {
 	display: table-cell;
@@ -82,6 +83,7 @@ h1 {
 }
 #currentEmojis {
 	font-size: 32px;
+	height: 45px;
 }
 #emojiBtn {
 	width: 100%;
@@ -100,7 +102,7 @@ h1 {
 .flex-3 { 
     flex: 3;
 }
-#messages, #guesses {
+#messages, #guesses, #emojiGroup {
 	height: 200px;
 	overflow-x: hidden;
     overflow-y: auto;
@@ -114,6 +116,7 @@ h1 {
 }
 #messages::-webkit-scrollbar { width: 0 !important }
 #guesses::-webkit-scrollbar { width: 0 !important }
+#emojiGroup::-webkit-scrollbar { width: 0 !important }
 .playersTitle {
 	text-align: center;
 	background-color: rgba(212, 212, 212, 0.05);

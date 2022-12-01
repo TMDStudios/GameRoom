@@ -4,10 +4,15 @@ var scrollRight = false;
 var lastIndex = 0;
 
 $(document).ready(function() {
-	for(var i=0; i<welcome.length; i++){
-		$("#welcome").append("<span id='"+i+"' style='color: rgba(255, 255, 255, 1);'>" + welcome[i] + "</span>");
+	if(document.getElementById("welcome")!=null){
+		for(var i=0; i<welcome.length; i++){
+			$("#welcome").append("<span id='"+i+"' style='color: rgba(255, 255, 255, 1);'>" + welcome[i] + "</span>");
+		}
+		handleColors();
 	}
-	handleColors();
+	if(document.getElementById("isHosting")!=null){
+		setTimeout(showWarning, 500);
+	}
 });
 
 function handleColors(){
@@ -21,4 +26,15 @@ function handleColors(){
 	document.getElementById(welcomeIndex).style = 'color: rgba(' + r + ',' + g + ',' + b + ',' + 1 + '); font-size: 1em';
 	document.getElementById(lastIndex).style = 'color: rgba(255, 255, 255, 1); font-size: 1.1em';
     setTimeout(handleColors, 100);
+}
+
+function showWarning(){
+	if(confirm("WARNING\nCreating a new room will delete all scores from other rooms!\nProceed?")){
+		let xhttp = new XMLHttpRequest();
+	  	xhttp.open("POST", "/reset-scores");
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send();
+	}else{
+		window.location.replace("/");
+	}
 }

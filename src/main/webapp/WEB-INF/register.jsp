@@ -75,7 +75,5 @@
 	</div>
 </form:form>
 
-<script type="text/javascript" src="../js/app.js"></script>
-
 </body>
 </html>

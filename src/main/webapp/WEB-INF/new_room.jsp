@@ -27,6 +27,9 @@
 <h3>New Game Room</h3>
 
 <p>${error}</p>
+<c:if test="${isHosting}">
+	<p id="isHosting"></p>
+</c:if>
 
 <form:form action="/rooms/new" method="post" modelAttribute="room">
 	<table>
@@ -75,6 +78,7 @@
 	</table>
 </form:form>
 
+<script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>
 
 </body>

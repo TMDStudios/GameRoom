@@ -19,4 +19,10 @@ public class GameController {
 		session.setAttribute("scores", scores);
 		return scores;
 	}
+	
+	@RequestMapping("/reset-scores")
+	public String resetScores(HttpSession session) {
+		session.setAttribute("scores", null);
+		return "RESET";
+	}
 }

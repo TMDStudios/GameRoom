@@ -70,7 +70,6 @@
 <p>Don't have an account?</p>
 <p><a href="/register">Sign up</a></p>
 
-<script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/passwordReset.js"></script>
 
 </body>

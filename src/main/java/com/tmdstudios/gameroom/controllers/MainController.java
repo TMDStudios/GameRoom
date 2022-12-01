@@ -136,6 +136,10 @@ public class MainController {
 			return "redirect:/login";
 		}
 		
+		Long userId = (Long) session.getAttribute("userId");
+		User user = userService.findById(userId);
+		Boolean isHosting = user.getRooms().isEmpty() ? false : true;
+		model.addAttribute("isHosting", isHosting);
 		model.addAttribute("gameTypes", gameTypes);
 		return "new_room.jsp";
 	}
@@ -187,6 +191,10 @@ public class MainController {
 			@PathVariable("roomLink") String roomLink, 
 			RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
+		
+//		String scores = (String) session.getAttribute("scores");
+//		System.out.println(scores);
+		
 		Room room = roomService.findByLink(roomLink);
 		if(session.getAttribute("userId")==null&&session.getAttribute("playerName")==null) {
 			return "redirect:/rooms/join";
@@ -195,7 +203,6 @@ public class MainController {
 			if(session.getAttribute("playerName")!=null) {
 				String playerName = (String) session.getAttribute("playerName");
 				Player player = playerService.findByName(playerName, room);
-				System.out.println("PLAYER --"+player);
 				if(player==null) {
 					return "redirect:/rooms/join";
 				}

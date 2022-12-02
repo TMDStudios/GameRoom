@@ -1,6 +1,7 @@
 var stompClient = null;
 const playerMap = new Map();
 var round = 0;
+var emojiCount = 0;
 
 $(document).ready(function() {
     console.log("WS is live");
@@ -184,10 +185,17 @@ function showGroup(emojis){
 }
 
 function addEmoji(emoji){
-	$("#currentEmojis").append(emoji);
+	console.log(emojiCount);
+	if(emojiCount<12){
+		$("#currentEmojis").append(emoji);
+		emojiCount++;
+	}else{
+		alert("Maximum number of emojis reached.");
+	}
 }
 
 function sendEmojis(){
+	emojiCount = 0;
 	console.log("sending emojis");
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));
     document.getElementById("currentEmojis").innerHTML = '';

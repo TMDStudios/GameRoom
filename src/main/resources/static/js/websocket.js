@@ -35,12 +35,10 @@ function connect() {
 			    	showMessage(JSON.parse(message.body).content);
 			}
         });
-        if(document.getElementById("navbar")!=null){
-			sender = document.getElementById("sender").innerHTML;
-			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
-			if(document.getElementById("guesses")==null){
-				addPlayer(sender);
-			}
+        sender = document.getElementById("sender").innerHTML;
+		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
+		if(document.getElementById("guesses")==null){
+			addPlayer(sender);
 		}
 		if(document.getElementById("guesses")!=null){
 			if(playerMap.size<1){
@@ -55,6 +53,9 @@ function connect() {
 			document.getElementById("messages").style = "height: 400px;overflow-x: hidden;overflow-y: auto;display: block;box-sizing:border-box;width: 100%;"+
 				"border: solid 1px rgba(212, 212, 212, 0.1);padding-left: 12px;overflow: -moz-scrollbars-none;-ms-overflow-style: none;";
 			document.getElementById("currentEmojiGroup").style = "text-align: center;font-size: 48px;height: 150px;";
+			document.getElementById("guess").value = "Waiting for game to start...";
+			document.getElementById("guess").disabled = true;
+			document.getElementById("guess").style.color = "lightblue";
 		}
     });
 }

@@ -197,14 +197,16 @@ public class MainController {
 		
 		Room room = roomService.findByLink(roomLink);
 		if(session.getAttribute("userId")==null&&session.getAttribute("playerName")==null) {
-			return "redirect:/rooms/join";
+			model.addAttribute("roomLink", roomLink);
+			return "join_room.jsp";
 		}
 		if(room!=null) {
 			if(session.getAttribute("playerName")!=null) {
 				String playerName = (String) session.getAttribute("playerName");
 				Player player = playerService.findByName(playerName, room);
 				if(player==null) {
-					return "redirect:/rooms/join";
+					model.addAttribute("roomLink", roomLink);
+					return "join_room.jsp";
 				}
 			}
 			model.addAttribute("room", room);

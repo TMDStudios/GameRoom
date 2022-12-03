@@ -33,7 +33,7 @@
 	    	<tr>
 	            <td class="float-left">Room Link:</td>
 	            <td class="float-left">
-					<input class="input" name="roomLink" id="roomLink"/>
+					<input class="input" name="roomLink" id="roomLink" value="${roomLink}"/>
 	            </td>
 	        </tr>
 	        <tr>

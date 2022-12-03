@@ -46,8 +46,11 @@ h1 {
 .emojiDiv {
 	min-height: 100px;
 }
-.emojiTitle {
+#emojiTitle {
 	text-align: center;
+	padding: 8px 16px;
+    height: 16px;
+    color: lime;
 }
 #currentEmojiGroup {
 	position: relative;

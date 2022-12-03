@@ -2,6 +2,7 @@ var stompClient = null;
 const playerMap = new Map();
 var round = 0;
 var emojiCount = 0;
+var multiplier = 1;
 
 $(document).ready(function() {
     console.log("WS is live");
@@ -105,8 +106,14 @@ function showGuess(guess) {
 	}
 }
 
-function nextRound() {
-	round++;
+function handleMultiplier() {
+	if(multiplier==1){
+		multiplier=2;
+		document.getElementById("emojiTitle").innerHTML = 'Score x 2';
+	}else{
+		multiplier=1;
+		document.getElementById("emojiTitle").innerHTML = '';
+	}
 }
 
 function showPlayers() {
@@ -147,9 +154,9 @@ function handleCheck(player) {
 	if(playerScore===undefined){playerScore=0;}
 	convertedScore = parseInt(playerScore);
 	if(checkBox.checked){
-		playerMap.set(player, convertedScore+1);
+		playerMap.set(player, convertedScore+1*multiplier);
 	}else{
-		playerMap.set(player, convertedScore-1);
+		playerMap.set(player, convertedScore-1*multiplier);
 	}
 	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
 }
@@ -196,6 +203,7 @@ function addEmoji(emoji){
 }
 
 function sendEmojis(){
+	round++;
 	emojiCount = 0;
 	console.log("sending emojis");
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));

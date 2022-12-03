@@ -56,7 +56,7 @@
 			</div>
 			<hr class="smallHr">
 			<div class="emojiDiv">
-				<p class="emojiTitle">Current Emoji Group</p>
+				<p id="emojiTitle"></p>
 				<p id="currentEmojiGroup">Waiting for host...</p>
 			</div>
 			<c:if test="${not empty playerName}">
@@ -96,7 +96,7 @@
 			            	<button onclick="clearEmojis()" type="button">Clear Emojis</button>
 			            </td>
 			            <td class="emojiButtons">
-			            	<button onclick="nextRound('${room.link}')" type="button">Next Round</button>
+			            	<button onclick="handleMultiplier()" type="button">Multiplier</button>
 			            </td>
 			        </tr>
 			    </tbody>

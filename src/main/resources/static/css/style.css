@@ -132,6 +132,10 @@ h1 {
 	padding: 8px;
 	margin: 6px;
 }
+.playerCard:hover {
+	color: #F4F4F4;
+    background-color: #111;
+}
 hr {
 	margin-top: 8px;
 	margin-bottom: 8px;

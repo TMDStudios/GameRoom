@@ -125,7 +125,11 @@ function showPlayers() {
 	});
 	sortedPlayers.sort((a, b) => b[1].localeCompare(a[1]));
 	sortedPlayers.forEach((player) => {
-		$("#playerDiv").append("<p class='playerCard'>" + player[0] + ":" + player[1] + "</p>")
+		if(document.getElementById("guesses")!=null){
+			$("#playerDiv").append("<p class='playerCard' onclick='overrideScore(\""+player[0]+"\")'>" + player[0] + ":" + player[1] + "</p>")	
+		}else{
+			$("#playerDiv").append("<p class='playerCard'>" + player[0] + ":" + player[1] + "</p>")	
+		}
 		scoresString+=player[0]+":"+player[1]+",";
 	});
 	
@@ -138,6 +142,18 @@ function showPlayers() {
 		return scoresString;
 	}
 	return scoresString;
+}
+
+function overrideScore(player) {
+	if(confirm("Override player score?")){
+		let score = prompt("Enter new score:");
+		if(score===null){
+			oldScore = playerMap.get(player);
+			score = parseInt(oldScore);
+		}
+		playerMap.set(player, score);
+		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
+	}
 }
 
 function updatePlayers(message) {

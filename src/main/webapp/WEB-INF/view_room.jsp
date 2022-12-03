@@ -60,51 +60,62 @@
 				<p id="currentEmojiGroup">Waiting for host...</p>
 			</div>
 			<c:if test="${not empty playerName}">
-			<hr>
-			<form id="guessForm">
-			    <div>
-			        <input class="messageInput" type="text" id="guess" placeholder="Enter your guess here...">
-			    </div>
-			</form>
-			
-		</c:if>
+				<hr>
+				<form id="guessForm">
+				    <div>
+				        <input class="messageInput" type="text" id="guess" placeholder="Enter your guess here...">
+				    </div>
+				</form>	
+			</c:if>
 		
 		<c:if test="${not empty userId}">
 			<hr>
 				<div id="guesses" style="height: 150px;"></div>
 			<hr>
-			<table class="emojiTable">
-			    <tbody>
-			    	<tr>
-			            <td class="emojiControls">
-			            	Preset
-			            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-								<c:forEach var="set" items="${preset}">
-									<option value="${set[0]}">${set[1]}</option>
-								</c:forEach>
-							</select>
-			            </td>
-			            <td class="emojiControls">
-			            	Custom
-			            	<select id="emojiPicker" onchange="showGroup(this.value)">
-								<c:forEach var="customItem" items="${custom}">
-									<option value="${customItem.value}">${customItem.key}</option>
-								</c:forEach>
-							</select>
-			            </td>
-			            <td class="emojiButtons">
-			            	<button onclick="clearEmojis()" type="button">Clear Emojis</button>
-			            </td>
-			            <td class="emojiButtons">
-			            	<button onclick="handleMultiplier()" type="button">Multiplier</button>
-			            </td>
-			        </tr>
-			    </tbody>
-			</table>
-			<div id="emojiGroup"></div>
-			<hr>
-			<p id="currentEmojis"></p>
-			<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
+			<c:if test="${room.gameType=='Emoji Game'}">
+				<table class="emojiTable">
+				    <tbody>
+				    	<tr>
+				            <td class="emojiControls">
+				            	Preset
+				            	<select id="emojiPicker" onchange="addEmoji(this.value)">
+									<c:forEach var="set" items="${preset}">
+										<option value="${set[0]}">${set[1]}</option>
+									</c:forEach>
+								</select>
+				            </td>
+				            <td class="emojiControls">
+				            	Custom
+				            	<select id="emojiPicker" onchange="showGroup(this.value)">
+									<c:forEach var="customItem" items="${custom}">
+										<option value="${customItem.value}">${customItem.key}</option>
+									</c:forEach>
+								</select>
+				            </td>
+				            <td class="emojiButtons">
+				            	<button onclick="clearEmojis()" type="button">Clear Emojis</button>
+				            </td>
+				            <td class="emojiButtons">
+				            	<button onclick="handleMultiplier()" type="button">Multiplier</button>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+				<div id="emojiGroup"></div>
+				<hr>
+				<p id="currentEmojis"></p>
+				<button id="emojiBtn" onclick="sendEmojis()" type="button" id="send">Send Emojis</button>
+			</c:if>
+			<c:if test="${room.gameType=='Review'}">
+				<form id="reviewQuestionForm">
+				    <div>
+				    	<span>
+				    		<input class="reviewQuestionInput" type="text" id="reviewQuestion" placeholder="Enter Question">
+				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
+				    	</span>
+				    </div>
+				</form>
+			</c:if>
 		</c:if>
 		
 		<hr>

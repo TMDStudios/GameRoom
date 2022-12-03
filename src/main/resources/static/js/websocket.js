@@ -26,6 +26,9 @@ function connect() {
 			    case "emoji":
 			    	showEmojis(JSON.parse(message.body).content);
 			        break;
+			    case "reviewQuestion":
+			    	showEmojis(JSON.parse(message.body).content);
+			        break;
 			    case "score":
 			    	updatePlayers(JSON.parse(message.body).content);
 			        break;
@@ -188,6 +191,16 @@ $("#messageForm").submit(function() {
 	sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
     document.getElementById("message").value = "";
+    return false;
+});
+
+$("#reviewQuestionForm").submit(function() {
+	round++;
+	console.log("sending question");
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("reviewQuestion").value, 'messageType': 'reviewQuestion'}));
+    document.getElementById("reviewQuestion").value = "";
+    
+    $('#guesses').empty();
     return false;
 });
 

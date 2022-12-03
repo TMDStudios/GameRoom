@@ -59,6 +59,14 @@ h1 {
 	text-align: center;
 	font-size: 48px;
 }
+.reviewQuestionInput {
+	width: 728px;
+	box-sizing:border-box;
+	border: solid 1px rgba(212, 212, 212, 0.1);
+}
+.multiplierBtn {
+	width: 76px;
+}
 .messageInput {
 	width: 100%;
 	box-sizing:border-box;

@@ -49,7 +49,7 @@
 				</span>
 			</div>
 			<div class="roomInfo">
-				<span>Room link: <a href="/rooms/${room.link}">${link}</a></span>
+				<span>Room link: <a href="/rooms/${room.link}"><span id="roomLink">${link}</span></a></span>
 				<c:if test="${room.privateRoom}">
 					<span>Room password: ${room.password}</span>
 				</c:if>

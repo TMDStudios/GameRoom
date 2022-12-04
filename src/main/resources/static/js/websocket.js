@@ -3,8 +3,12 @@ const playerMap = new Map();
 var round = 0;
 var emojiCount = 0;
 var multiplier = 1;
+var link = "";
 
 $(document).ready(function() {
+	var fullLink = document.getElementById("roomLink").innerHTML.split("/");
+	link = fullLink[fullLink.length-1];
+	console.log(link);
     console.log("WS is live");
     connect();
     
@@ -20,27 +24,31 @@ function connect() {
         console.log('Connection: ' + frame);
         stompClient.subscribe('/topic/messages', function (message) {
 			switch(JSON.parse(message.body).type) {
-			    case "guess":
+				case "message"+link:
+			    	showMessage(JSON.parse(message.body).content);
+			        break;
+			    case "guess"+link:
 			    	showGuess(JSON.parse(message.body).content);
 			        break;
-			    case "emoji":
+			    case "emoji"+link:
 			    	showEmojis(JSON.parse(message.body).content);
 			        break;
-			    case "reviewQuestion":
+			    case "reviewQuestion"+link:
 			    	showEmojis(JSON.parse(message.body).content);
 			        break;
-			    case "score":
+			    case "score"+link:
 			    	updatePlayers(JSON.parse(message.body).content);
 			        break;
-			    case "allScores":
+			    case "allScores"+link:
 			    	updateScores(JSON.parse(message.body).content);
 			        break;
 			    default:
-			    	showMessage(JSON.parse(message.body).content);
+			    	console.log("Unknown message type: "+JSON.parse(message.body).type)
+			    	break;
 			}
         });
         sender = document.getElementById("sender").innerHTML;
-		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined"}));
+		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined", 'messageType': 'message'+link}));
 		if(document.getElementById("guesses")==null){
 			addPlayer(sender);
 		}
@@ -68,7 +76,7 @@ function showMessage(message) {
     if(message.includes(" has joined")){
 		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
 		if(document.getElementById("guesses")!=null){
-			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'}))
+			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'+link}))
 		}
 	}else{
 		$("#messages").append("<p>" + message + "</p>");
@@ -155,7 +163,7 @@ function overrideScore(player) {
 			score = parseInt(oldScore);
 		}
 		playerMap.set(player, score);
-		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
+		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'+link}))
 	}
 }
 
@@ -177,19 +185,19 @@ function handleCheck(player) {
 	}else{
 		playerMap.set(player, convertedScore-1*multiplier);
 	}
-	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
+	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'+link}))
 }
 
 function addPlayer(player) {
 	playerScore = playerMap.get(player);
 	if(playerScore===undefined){playerScore=0; playerMap.set(player, 0);}
-	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'}))
+	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'+link}))
 }
 
 $("#messageForm").submit(function() {
 	console.log("sending message");
 	sender = document.getElementById("sender").innerHTML;
-    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value, 'messageType': 'message'+link}));
     document.getElementById("message").value = "";
     return false;
 });
@@ -197,7 +205,7 @@ $("#messageForm").submit(function() {
 $("#reviewQuestionForm").submit(function() {
 	round++;
 	console.log("sending question");
-    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("reviewQuestion").value, 'messageType': 'reviewQuestion'}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("reviewQuestion").value, 'messageType': 'reviewQuestion'+link}));
     document.getElementById("reviewQuestion").value = "";
     
     $('#guesses').empty();
@@ -208,7 +216,7 @@ $("#guessForm").submit(function() {
 	console.log("sending guess");
 	sender = document.getElementById("sender").innerHTML;
 	guess = document.getElementById("guess").value;
-    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+guess, 'messageType': 'guess'}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+guess, 'messageType': 'guess'+link}));
     document.getElementById("guess").value = "Your guess was: "+guess;
     document.getElementById("guess").disabled = true;
     document.getElementById("guess").style.color = "lightblue";
@@ -235,7 +243,7 @@ function sendEmojis(){
 	round++;
 	emojiCount = 0;
 	console.log("sending emojis");
-    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'}));
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': document.getElementById("currentEmojis").innerHTML, 'messageType': 'emoji'+link}));
     document.getElementById("currentEmojis").innerHTML = '';
     
     $('#guesses').empty();

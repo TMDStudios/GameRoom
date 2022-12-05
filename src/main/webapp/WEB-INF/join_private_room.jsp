@@ -22,6 +22,7 @@
     <c:if test="${not empty userId || not empty playerName}">
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 	</c:if>
+	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
 <h3>Join Private Game Room</h3>

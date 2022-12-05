@@ -56,6 +56,11 @@ public class MainController {
 	    return "index.jsp";
 	}
 	
+	@GetMapping("/help")
+	public String help() {	
+	    return "help.jsp";
+	}
+	
 	@GetMapping("/login")
 	public String authLogin(HttpSession session, Model model) {
 	    model.addAttribute("newUser", new User());

@@ -156,3 +156,26 @@ hr {
 	margin-top: 0px;
 	margin-bottom: 8px;
 }
+.helpBlock {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+.helpItem {
+	padding-top: 32px;
+	padding-bottom: 32px;
+}
+.helpHeader {
+	padding-bottom: 16px;
+}
+.helpText {
+	padding: 4px;
+}
+.helpLinkContainer {
+	padding: 4px;
+}
+.helpLink {
+	color: #0080ff;
+	text-decoration: none;
+}

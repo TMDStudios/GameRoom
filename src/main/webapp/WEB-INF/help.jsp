@@ -29,7 +29,7 @@
 	</div>
 	<div class="helpBlock">
 		<p>Thank you for trying Game Room. The purpose of this website is to provide 
-		educators with a platform to play games and/or review materials with their students. Use the links on the left side to navigate the helps section:
+		educators with a platform to play games and/or review materials with their students. Use the links on the left side to navigate the helps section.
 		</p>
 	</div>
 	<hr>
@@ -44,7 +44,7 @@
 				<p class="helpLinkContainer"><a class="helpLink" href="#general">General</a></p>
 			</div>
 	    </div>
-	    <div class="flex-3">
+	    <div class="flex-3-help">
 	        <div class="helpItem">
 	        	<h3 id="newRoom" class="helpHeader">Create a new room</h3>
 				<p class="helpText">In order to create a new room, you will have to sign up as a host. Once you have created an account, you can create as many rooms as you wish. 

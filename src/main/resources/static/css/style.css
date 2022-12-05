@@ -112,7 +112,16 @@ h1 {
 }
 .flex-3 { 
     flex: 3;
+    overflow-y: auto;
 }
+.flex-3-help { 
+    flex: 3;
+    overflow-y: auto;
+    height: 800px;
+    overflow: -moz-scrollbars-none;
+	-ms-overflow-style: none;
+}
+.flex-3-help::-webkit-scrollbar { width: 0 !important }
 #messages, #guesses, #emojiGroup {
 	height: 200px;
 	overflow-x: hidden;
@@ -178,4 +187,8 @@ hr {
 .helpLink {
 	color: #0080ff;
 	text-decoration: none;
+}
+.helpLink:hover {
+	color: #D6F5F3;
+    text-decoration: underline;
 }

@@ -64,7 +64,7 @@
 				<hr>
 				<form id="guessForm">
 				    <div>
-				        <input class="messageInput" type="text" id="guess" placeholder="Enter your guess here...">
+				        <input class="guessInput" type="text" id="guess" placeholder="Enter your guess here...">
 				    </div>
 				</form>	
 			</c:if>
@@ -73,35 +73,30 @@
 			<hr>
 				<div id="guesses" style="height: 150px;"></div>
 			<hr>
+			
 			<c:if test="${room.gameType=='Emoji Game'}">
-				<table class="emojiTable">
-				    <tbody>
-				    	<tr>
-				            <td class="emojiControls">
-				            	Preset
-				            	<select id="emojiPicker" onchange="addEmoji(this.value)">
-									<c:forEach var="set" items="${preset}">
-										<option value="${set[0]}">${set[1]}</option>
-									</c:forEach>
-								</select>
-				            </td>
-				            <td class="emojiControls">
-				            	Custom
-				            	<select id="emojiPicker" onchange="showGroup(this.value)">
-									<c:forEach var="customItem" items="${custom}">
-										<option value="${customItem.value}">${customItem.key}</option>
-									</c:forEach>
-								</select>
-				            </td>
-				            <td class="emojiButtons">
-				            	<button onclick="clearEmojis()" type="button">Clear Emojis</button>
-				            </td>
-				            <td class="emojiButtons">
-				            	<button onclick="handleMultiplier()" type="button">Multiplier</button>
-				            </td>
-				        </tr>
-				    </tbody>
-				</table>
+				<div class="emojiControls">
+					<span>
+		            	<select id="emojiPicker" onchange="addPreset(this.value)">
+							<c:forEach var="set" items="${preset}">
+								<option value="${set[0]}">${set[1]}</option>
+							</c:forEach>
+						</select>
+					</span>
+					<span>
+		            	<select id="emojiPicker" onchange="showGroup(this.value)">
+							<c:forEach var="customItem" items="${custom}">
+								<option value="${customItem[0]}">${customItem[1]}</option>
+							</c:forEach>
+						</select>
+					</span>
+					<span>
+						<button onclick="clearEmojis()" type="button">Clear Emojis</button>
+					</span>
+					<span>
+						<button onclick="handleMultiplier()" type="button">Multiplier</button>
+					</span>
+				</div>
 				<div id="emojiGroup"></div>
 				<hr>
 				<p id="currentEmojis"></p>
@@ -120,6 +115,7 @@
 		</c:if>
 		
 		<hr>
+		<h3 class="messagesTitle">${room.name} Chat</h3>
 		<form id="messageForm">
 		    <div>
 		        <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">

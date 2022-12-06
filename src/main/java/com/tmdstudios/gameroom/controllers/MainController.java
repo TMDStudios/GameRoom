@@ -1,7 +1,5 @@
 package com.tmdstudios.gameroom.controllers;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -220,7 +218,7 @@ public class MainController {
 				Long userId = (Long) session.getAttribute("userId");		
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
-			String[][] preset = {{"", "Select Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},
+			String[][] preset = {{"", "Select Preset Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},
 					{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},
 					{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},
 					{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"}};
@@ -237,18 +235,10 @@ public class MainController {
 			EmojiSet travel = emojiService.travel();
 			EmojiSet objects = emojiService.objects();
 			EmojiSet symbols = emojiService.symbols();
-			HashMap<String, String> custom = new HashMap<String, String>();
-			custom.put(smileys.getName(), smileys.getEmojis());
-			custom.put(gestures.getName(), gestures.getEmojis());
-			custom.put(people.getName(), people.getEmojis());
-			custom.put(clothing.getName(), clothing.getEmojis());
-			custom.put(general.getName(), general.getEmojis());
-			custom.put(animals.getName(), animals.getEmojis());
-			custom.put(food.getName(), food.getEmojis());
-			custom.put(activities.getName(), activities.getEmojis());
-			custom.put(travel.getName(), travel.getEmojis());
-			custom.put(objects.getName(), objects.getEmojis());
-			custom.put(symbols.getName(), symbols.getEmojis());
+			String[][] custom = {{"", "Select Custom Emojis"}, {smileys.getEmojis(), smileys.getName()}, {gestures.getEmojis(), gestures.getName()},
+					{people.getEmojis(), people.getName()}, {clothing.getEmojis(), clothing.getName()}, {general.getEmojis(), general.getName()},
+					{animals.getEmojis(), animals.getName()}, {food.getEmojis(), food.getName()}, {activities.getEmojis(), activities.getName()},
+					{travel.getEmojis(), travel.getName()}, {objects.getEmojis(), objects.getName()}, {symbols.getEmojis(), symbols.getName()}};
 			model.addAttribute("custom", custom);
 			
 			return "view_room.jsp";

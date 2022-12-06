@@ -225,8 +225,15 @@ $("#guessForm").submit(function() {
 
 function showGroup(emojis){
 	document.getElementById("emojiGroup").innerHTML = "";
-	emojiList = emojis.split(",");
-	emojiList.forEach(e => $("#emojiGroup").append('<button class="emoji" onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
+	if(emojis.length>0){
+		emojiList = emojis.split(",");
+		emojiList.forEach(e => $("#emojiGroup").append('<button class="emoji" onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
+	}
+}
+
+function addPreset(preset){
+	$("#currentEmojis").empty();
+	addEmoji(preset);
 }
 
 function addEmoji(emoji){
@@ -259,11 +266,6 @@ function populateMap(sessionData) {
 }
 
 function clearEmojis(){
-    document.getElementById("currentEmojiGroup").innerHTML = 'Waiting for host...';
-    let req = new XMLHttpRequest();
-	req.open('GET', "/get-scores");
-  	req.onload = function() {
-    	console.log(this.responseText);
-  	}
-  	req.send();
+	emojiCount = 0;
+    document.getElementById("currentEmojis").innerHTML = '';
 }

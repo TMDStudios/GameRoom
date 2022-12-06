@@ -69,22 +69,41 @@ h1 {
 }
 .messageInput {
 	width: 100%;
+	padding-left: 8px;
 	box-sizing:border-box;
 	border: solid 1px rgba(212, 212, 212, 0.1);
 }
-.emojiTable {
-	width: 100%;
-	margin-bottom: 8px;
+.guessInput {
+	margin: auto;
+	display: block;
+	width: 99%;
+	border-radius: 4px;
+	font-size: 24px;
+	padding: 8px;
+	box-sizing:border-box;
+	border: solid 1px rgba(212, 212, 212, 0.1);
 }
 .emojiControls {
-	display: table-cell;
-	text-align: center;
-	width: 30%;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
-.emojiButtons {
-	display: table-cell;
-	text-align: center;
-	width: 20%;
+.emojiControls span {
+	margin: auto;
+	display: block;
+	width: 25%;
+}
+.emojiControls select {
+	margin: auto;
+	display: block;
+	width: 90%;
+}
+.emojiControls button {
+	margin: auto;
+	display: block;
+	width: 90%;
 }
 .emoji {
 	height: 2.5em;
@@ -99,7 +118,6 @@ h1 {
 #emojiBtn {
 	width: 100%;
 }
-
 .container {
 	width: 1080px;
     margin: 0 auto;
@@ -123,7 +141,7 @@ h1 {
 }
 .flex-3-help::-webkit-scrollbar { width: 0 !important }
 #messages, #guesses, #emojiGroup {
-	height: 200px;
+	height: 175px;
 	overflow-x: hidden;
     overflow-y: auto;
 	display: block;
@@ -137,6 +155,11 @@ h1 {
 #messages::-webkit-scrollbar { width: 0 !important }
 #guesses::-webkit-scrollbar { width: 0 !important }
 #emojiGroup::-webkit-scrollbar { width: 0 !important }
+.messagesTitle {
+	text-align: center;
+	padding: 16px;
+	color: rgba(212, 212, 212, 0.8);
+}
 .playersTitle {
 	text-align: center;
 	background-color: rgba(212, 212, 212, 0.05);

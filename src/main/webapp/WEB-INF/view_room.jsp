@@ -39,7 +39,7 @@
 	    <div class="flex-3">
 	        <div class="roomInfo">
 				<span>Room Name: ${room.name}</span>
-				<span>Game Type: ${room.gameType}</span>
+				<span>Game Type: <span  id="gameType">${room.gameType}</span></span>
 				<span>
 					<c:if test="${empty playerName}">
 						<span>Logged in as: <span id="sender">${host} (Host)</span></span>
@@ -106,10 +106,22 @@
 				<form id="reviewQuestionForm">
 				    <div>
 				    	<span>
-				    		<input class="reviewQuestionInput" type="text" id="reviewQuestion" placeholder="Enter Question">
+				    		<input class="hostInput" type="text" id="reviewQuestion" placeholder="Enter Question">
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>
 				    </div>
+				</form>
+			</c:if>
+			<c:if test="${room.gameType=='Guess the Flag'}">
+				<form id="flagForm">
+				    <div>
+				    	<span>
+				    		<input class="hostInput" type="text" id="flagSearch" placeholder="Search Country">
+				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
+				    	</span>
+				    </div>
+				    <div id="countries"></div>
+					<hr>
 				</form>
 			</c:if>
 		</c:if>

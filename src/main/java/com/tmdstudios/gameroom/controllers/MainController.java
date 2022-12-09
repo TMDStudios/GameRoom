@@ -39,7 +39,7 @@ public class MainController {
 	@Autowired
 	private EmojiService emojiService;
 	
-	String[] gameTypes = {"Emoji Game", "Review", "*Coming Soon*"};
+	String[] gameTypes = {"Emoji Game", "Review", "Guess the Flag"};
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {	

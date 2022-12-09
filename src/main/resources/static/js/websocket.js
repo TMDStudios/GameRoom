@@ -4,6 +4,8 @@ var round = 0;
 var emojiCount = 0;
 var multiplier = 1;
 var link = "";
+var countries = [];
+var states = [];
 
 $(document).ready(function() {
 	var fullLink = document.getElementById("roomLink").innerHTML.split("/");
@@ -15,6 +17,10 @@ $(document).ready(function() {
     $("#send").click(function() {
         sendMessage();
     });
+    
+    if(document.getElementById("gameType").innerHTML=="Guess the Flag"){
+		getFlagsList();
+	}
 });
 
 function connect() {
@@ -35,6 +41,9 @@ function connect() {
 			        break;
 			    case "reviewQuestion"+link:
 			    	showEmojis(JSON.parse(message.body).content);
+			        break;
+			    case "flag"+link:
+			    	showFlag(JSON.parse(message.body).content);
 			        break;
 			    case "score"+link:
 			    	updatePlayers(JSON.parse(message.body).content);
@@ -94,14 +103,28 @@ function updateScores(allScores){
 
 function showEmojis(emojis) {
 	try {
-  		document.getElementById("guess").disabled = false;
-  		document.getElementById("guess").style.color = "black";
-  		document.getElementById("guess").value = "";
+  		disableGuesses()
 	}catch(error) {
 	  	console.log("TypeError Warning");
 	}
 	$("#currentEmojiGroup").empty();
     $("#currentEmojiGroup").append(emojis);
+}
+
+function showFlag(flagCode) {
+	try {
+  		disableGuesses()
+	}catch(error) {
+	  	console.log("TypeError Warning");
+	}
+	$("#currentEmojiGroup").empty();
+    $("#currentEmojiGroup").append(flagCode);
+}
+
+function disableGuesses() {
+	document.getElementById("guess").disabled = false;
+	document.getElementById("guess").style.color = "black";
+	document.getElementById("guess").value = "";
 }
 
 function showGuess(guess) {
@@ -212,6 +235,13 @@ $("#reviewQuestionForm").submit(function() {
     return false;
 });
 
+$("#flagForm").submit(function() {
+    showCountries(document.getElementById("flagSearch").value);
+    
+    $('#guesses').empty();
+    return false;
+});
+
 $("#guessForm").submit(function() {
 	console.log("sending guess");
 	sender = document.getElementById("sender").innerHTML;
@@ -223,12 +253,33 @@ $("#guessForm").submit(function() {
     return false;
 });
 
-function showGroup(emojis){
+function showGroup(emojis) {
 	document.getElementById("emojiGroup").innerHTML = "";
 	if(emojis.length>0){
 		emojiList = emojis.split(",");
 		emojiList.forEach(e => $("#emojiGroup").append('<button class="emoji" onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
 	}
+}
+
+function showCountries(search) {
+	document.getElementById("countries").innerHTML = "";
+	if(search.length>0){
+		var filteredCountries = [];
+		countries.forEach(c => {
+			if(c[1].toLowerCase().includes(search)){
+				filteredCountries.push(c);
+			}
+		});
+		filteredCountries.forEach(c => $("#countries").append('<button class="flag" onclick="sendFlag(\''+c+'\')" type="button">'+c[1]+'</button>'));
+	}else{
+		countries.forEach(c => $("#countries").append('<button class="flag" onclick="sendFlag(\''+c+'\')" type="button">'+c[1]+'</button>'));
+	}
+}
+
+function sendFlag(flagId) {
+	round++;
+	console.log("sending flags");
+    stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': flagId, 'messageType': 'flag'+link}));
 }
 
 function addPreset(preset){
@@ -268,4 +319,24 @@ function populateMap(sessionData) {
 function clearEmojis(){
 	emojiCount = 0;
     document.getElementById("currentEmojis").innerHTML = '';
+}
+
+function getFlagsList() {
+	let req = new XMLHttpRequest();
+	req.open('GET', "https://flagcdn.com/en/codes.json");
+  	req.onload = function() {
+		if (req.status == 200){
+			const jsonData = JSON.parse(this.responseText);
+			for(var countryCode in jsonData){
+				if(countryCode.length==2){
+					countries.push([countryCode, jsonData[countryCode]])
+				}
+				if(countryCode.length>3 && countryCode[0]=='u'){
+					states.push([countryCode, jsonData[countryCode]])
+				}
+			}
+			showCountries("");
+		}
+  	}
+  	req.send();
 }

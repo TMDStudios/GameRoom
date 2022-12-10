@@ -25,29 +25,29 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h3>Join Game Room</h3>
-<p>${error}</p>
+<h3 class="center-text-title">Join Game Room</h3>
+<p class="center-text">${error}</p>
 
 <form action="/rooms/join" method="post">
-	<table>
-	    <thead>
-	    	<tr>
-	            <td class="float-left">Room Link:</td>
-	            <td class="float-left">
-					<input class="input" name="roomLink" id="roomLink" value="${roomLink}"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="float-left">Player Name:</td>
-	            <td class="float-left">
-					<input class="input" name="playerName" id="playerName"/>
-	            </td>
-	        </tr>
-	        <tr>
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Submit"/></td>
-	        </tr>
-	    </thead>
-	</table>
+	<div class="login-block">
+		<div>
+			<label>Room Link:</label>
+		</div>
+		<div>
+			<input class="input" name="roomLink" id="roomLink" value="${roomLink}"/>
+		</div>
+		
+		<div>
+			<label>Player Name:</label>
+		</div>
+		<div>
+			<input class="input" name="playerName" id="playerName"/>
+		</div>
+
+		<div>
+			<input class="btn" type="submit" value="Submit"/>
+		</div>
+	</div>
 </form>
 
 </body>

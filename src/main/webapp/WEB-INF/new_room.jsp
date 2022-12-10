@@ -25,58 +25,62 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h3>New Game Room</h3>
+<h3 class="center-text-title">New Game Room</h3>
 
-<p>${error}</p>
+<p class="center-text">${error}</p>
 <c:if test="${isHosting}">
 	<p id="isHosting"></p>
 </c:if>
 
 <form:form action="/rooms/new" method="post" modelAttribute="room">
-	<table>
-	    <thead>
-	    	<tr>
-	            <td class="float-left">Room Name:</td>
-	            <td class="float-left">
-	            	<form:errors path="name" class="text-danger"/><br>
-					<form:input class="input" path="name"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="float-left">Game Type:</td>
-	            <td class="float-left">
-	            	<form:select path="gameType">
-		                <c:forEach var="gameType" items="${gameTypes}">
-		                    <option value="${gameType}">${gameType}</option>
-		                </c:forEach>
-		            </form:select>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="float-left">Room Message:</td>
-	             <td class="float-left">
-	            	<form:errors path="message" class="text-danger"/><br>
-					<form:textarea rows="4" class="input" path="message"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="float-left">Private Room:</td>
-	             <td class="float-left">
-	            	<form:checkbox path="privateRoom"/>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td class="float-left">Room Password:</td>
-	             <td class="float-left">
-	            	<form:errors path="password" class="text-danger"/><br>
-					<form:input class="input" path="password"/>
-	            </td>
-	        </tr>
-	        <tr>
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Submit"/></td>
-	        </tr>
-	    </thead>
-	</table>
+	<div class="login-block">
+		<div>
+			<label>Room Name:</label>
+		</div>
+		<div>
+			<form:errors path="name" class="text-danger"/>
+		</div>
+		<div>
+			<form:input class="input" path="name"/>
+		</div>
+		
+		<div>
+			<label>Game Type:</label>
+			<form:select path="gameType">
+                <c:forEach var="gameType" items="${gameTypes}">
+                    <option value="${gameType}">${gameType}</option>
+                </c:forEach>
+            </form:select>
+		</div>
+		
+		<div>
+			<label>Room Message:</label>
+		</div>
+		<div>
+			<form:errors path="message" class="text-danger"/>
+		</div>
+		<div>
+			<form:input class="input" path="message"/>
+		</div>
+		
+		<div>
+			<label>Private Room: <form:checkbox path="privateRoom"/></label>
+		</div>
+		
+		<div>
+			<label>Room Password:</label>
+		</div>
+		<div>
+			<form:errors path="password" class="text-danger"/>
+		</div>
+		<div>
+			<form:input class="input" path="password"/>
+		</div>
+
+		<div>
+			<input class="btn" type="submit" value="Submit"/>
+		</div>
+	</div>
 </form:form>
 
 <script src="/webjars/jquery/jquery.min.js"></script>

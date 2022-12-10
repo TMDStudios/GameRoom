@@ -25,23 +25,22 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h3>Join Private Game Room</h3>
-<p>${error}</p>
+<h3 class="center-text-title">Join Private Game Room</h3>
+<p class="center-text">${error}</p>
 
 <form action="/rooms/join-private" method="post">
-	<table>
-	    <thead>
-	    	<tr>
-	            <td class="float-left">Room Password:</td>
-	            <td class="float-left">
-					<input class="input" name="roomPassword" id="roomPassword"/>
-	            </td>
-	        </tr>
-	        <tr>
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Submit"/></td>
-	        </tr>
-	    </thead>
-	</table>
+	<div class="login-block">
+		<div>
+			<label>Room Password:</label>
+		</div>
+		<div>
+			<input class="input" name="roomPassword" id="roomPassword"/>
+		</div>
+
+		<div>
+			<input class="btn" type="submit" value="Submit"/>
+		</div>
+	</div>
 </form>
 
 </body>

@@ -25,7 +25,7 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h1 id="welcome"></h1>
+<h1  class="center-text-title" id="welcome"></h1>
 <c:if test="${not empty userId}">
 	<p>Logged in as: ${host.username} (Host)</p>
 </c:if>

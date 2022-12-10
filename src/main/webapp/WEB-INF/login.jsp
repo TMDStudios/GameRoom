@@ -25,8 +25,9 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h1>Log In</h1>
-<p>You must be logged in to create a room</p>
+<h1 class="center-text-title">Log In</h1>
+
+<p class="center-text">You must be logged in to create a room</p>
 
 <form:form action="/login" method="post" modelAttribute="newLogin">
 	<div class="login-block">
@@ -53,23 +54,20 @@
 		<div>
 			<input class="btn" type="submit" value="Log In"/>
 		</div>
-		
-		<br>
-		
+
 		<div>
-			<p><a class="nav_link" href="#" onclick="resetPassword()">Reset Password</a></p>
-			<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
+			<p><a class="danger-link" href="#" onclick="resetPassword()">Reset Password</a></p>
+			<p class="center-text"><small>You can only reset your password if you entered an email when you created your account.</small></p>
 		</div>
-		
-		<br>
 
 	</div>
 </form:form>
 
 
 <hr>
-<p>Don't have an account?</p>
-<p><a href="/register">Sign up</a></p>
+<br>
+<p class="center-text">Don't have an account?</p>
+<p class="center-text"><a href="/register">Sign up</a></p>
 
 <script type="text/javascript" src="../js/passwordReset.js"></script>
 

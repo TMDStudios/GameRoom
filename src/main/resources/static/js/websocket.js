@@ -118,7 +118,7 @@ function showFlag(flagCode) {
 	  	console.log("TypeError Warning");
 	}
 	$("#currentEmojiGroup").empty();
-    $("#currentEmojiGroup").append(flagCode);
+	$("#currentEmojiGroup").append("<img class='flag' src='https://flagcdn.com/"+flagCode+".svg'/>");
 }
 
 function disableGuesses() {
@@ -270,16 +270,19 @@ function showCountries(search) {
 				filteredCountries.push(c);
 			}
 		});
-		filteredCountries.forEach(c => $("#countries").append('<button class="flag" onclick="sendFlag(\''+c+'\')" type="button">'+c[1]+'</button>'));
+		filteredCountries.forEach(c => $("#countries").append('<button class="flagBtn" onclick="sendFlag(\''+c[0]+'\', \''+c[1]+'\')" type="button">'+c[1].slice(0,32)+'</button>'));
 	}else{
-		countries.forEach(c => $("#countries").append('<button class="flag" onclick="sendFlag(\''+c+'\')" type="button">'+c[1]+'</button>'));
+		countries.forEach(c => $("#countries").append('<button class="flagBtn" onclick="sendFlag(\''+c[0]+'\', \''+c[1]+'\')" type="button">'+c[1].slice(0,32)+'</button>'));
 	}
 }
 
-function sendFlag(flagId) {
+function sendFlag(flagId, country) {
 	round++;
 	console.log("sending flags");
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': flagId, 'messageType': 'flag'+link}));
+    if(document.getElementById("currentFlag")!=null){
+		document.getElementById("currentFlag").innerHTML = country;
+	}
 }
 
 function addPreset(preset){

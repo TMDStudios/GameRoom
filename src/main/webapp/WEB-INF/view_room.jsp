@@ -115,13 +115,13 @@
 			<c:if test="${room.gameType=='Guess the Flag'}">
 				<form id="flagForm">
 				    <div>
+				    	<p class="currentFlag">Current Flag: <span id="currentFlag"></span></p>
 				    	<span>
 				    		<input class="hostInput" type="text" id="flagSearch" placeholder="Search Country">
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>
 				    </div>
 				    <div id="countries"></div>
-					<hr>
 				</form>
 			</c:if>
 		</c:if>
@@ -134,6 +134,9 @@
 		    </div>
 		</form>
 		<div id="messages"></div>
+		<c:if test="${room.gameType=='Guess the Flag'}">
+			<p class="backLink">Flags courtesy of <a href="https://flagpedia.net">flagpedia.net</a></p>
+		</c:if>
 		
 	    </div>
 	</div>

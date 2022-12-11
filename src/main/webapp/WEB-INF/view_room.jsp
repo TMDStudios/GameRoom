@@ -62,11 +62,22 @@
 			</div>
 			<c:if test="${not empty playerName}">
 				<hr>
-				<form id="guessForm">
-				    <div>
-				        <input class="guessInput" type="text" id="guess" placeholder="Enter your guess here...">
+				<c:if test="${room.gameType=='Guess the Flag'}">
+					<div class="countryBtnContainer">
+				    	<p class="center-text" id="countryAnswer">Choose a country</p>
+				    	<span id="countryBtns">
+				    	</span>
+				    	<br>
+				    	<input class="guessInput" type="text" id="guess" placeholder="Enter your guess here...">
 				    </div>
-				</form>	
+				</c:if>
+				<c:if test="${room.gameType!='Guess the Flag'}">
+					<form id="guessForm">
+					    <div>
+					        <input class="guessInput" type="text" id="guess" placeholder="Enter your guess here...">
+					    </div>
+					</form>	
+				</c:if>
 			</c:if>
 		
 		<c:if test="${not empty userId}">

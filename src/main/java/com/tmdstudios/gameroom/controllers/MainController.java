@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tmdstudios.gameroom.models.EmojiSet;
 import com.tmdstudios.gameroom.models.LoginUser;
 import com.tmdstudios.gameroom.models.Player;
 import com.tmdstudios.gameroom.models.Room;
@@ -50,7 +49,6 @@ public class MainController {
 		}
 		
 		model.addAttribute("rooms", roomService.allRooms());
-		model.addAttribute("players", playerService.allPlayers());
 	    return "index.jsp";
 	}
 	
@@ -218,27 +216,22 @@ public class MainController {
 				Long userId = (Long) session.getAttribute("userId");		
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
-			String[][] preset = {{"", "Select Preset Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},
-					{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},
-					{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},
-					{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"}};
-			model.addAttribute("preset", preset);
+			model.addAttribute("preset", emojiService.preset());
 
-			EmojiSet smileys = emojiService.smileys();
-			EmojiSet gestures = emojiService.gestures();
-			EmojiSet people = emojiService.people();
-			EmojiSet clothing = emojiService.clothing();
-			EmojiSet general = emojiService.general();
-			EmojiSet animals = emojiService.animals();
-			EmojiSet food = emojiService.food();
-			EmojiSet activities = emojiService.activities();
-			EmojiSet travel = emojiService.travel();
-			EmojiSet objects = emojiService.objects();
-			EmojiSet symbols = emojiService.symbols();
-			String[][] custom = {{"", "Select Custom Emojis"}, {smileys.getEmojis(), smileys.getName()}, {gestures.getEmojis(), gestures.getName()},
-					{people.getEmojis(), people.getName()}, {clothing.getEmojis(), clothing.getName()}, {general.getEmojis(), general.getName()},
-					{animals.getEmojis(), animals.getName()}, {food.getEmojis(), food.getName()}, {activities.getEmojis(), activities.getName()},
-					{travel.getEmojis(), travel.getName()}, {objects.getEmojis(), objects.getName()}, {symbols.getEmojis(), symbols.getName()}};
+			String[] smileys = emojiService.smileys();
+			String[] gestures = emojiService.gestures();
+			String[] people = emojiService.people();
+			String[] clothing = emojiService.clothing();
+			String[] general = emojiService.general();
+			String[] animals = emojiService.animals();
+			String[] food = emojiService.food();
+			String[] activities = emojiService.activities();
+			String[] travel = emojiService.travel();
+			String[] objects = emojiService.objects();
+			String[] symbols = emojiService.symbols();
+			String[][] custom = {{"", "Select Custom Emojis"}, {smileys[1], smileys[0]}, {gestures[1], gestures[0]}, {people[1], people[0]},
+					{clothing[1], clothing[0]}, {general[1], general[0]}, {animals[1], animals[0]}, {food[1], food[0]}, {activities[1], activities[0]},
+					{travel[1], travel[0]}, {objects[1], objects[0]}, {symbols[1], symbols[0]}};
 			model.addAttribute("custom", custom);
 			
 			return "view_room.jsp";

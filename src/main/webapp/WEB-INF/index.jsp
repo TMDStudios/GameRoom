@@ -37,10 +37,6 @@
 <c:forEach var="room" items="${rooms}">
     <p><a href="/rooms/${room.link}">${room.name}</a></p>
 </c:forEach>
-<p>Players:</p>
-<c:forEach var="player" items="${players}">
-    <p>${player.name} - ${player.id}</p>
-</c:forEach>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>

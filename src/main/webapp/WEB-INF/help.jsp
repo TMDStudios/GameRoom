@@ -41,6 +41,7 @@
 				<p class="helpLinkContainer"><a class="helpLink" href="#gameTypes">Game Types</a></p>
 				<p class="helpLinkContainer"><a class="helpLink" href="#emojiGame">Emoji Game</a></p>
 				<p class="helpLinkContainer"><a class="helpLink" href="#reviewGame">Review</a></p>
+				<p class="helpLinkContainer"><a class="helpLink" href="#flagGame">Guess the Flag</a></p>
 				<p class="helpLinkContainer"><a class="helpLink" href="#general">General</a></p>
 			</div>
 	    </div>
@@ -63,9 +64,10 @@
 	        <div class="helpItem">
 	        	<h3 id="gameTypes" class="helpHeader">Game Types</h3>
 				<p class="helpText">
-					There are currently two game types in Game Room</p>
+					There are currently three game types in Game Room</p>
 					<p class="helpText">&nbsp;&nbsp;1. <a class="helpLink" href="#emojiGame">Emoji Game</a><br>
-					&nbsp;&nbsp;2. <a class="helpLink" href="#reviewGame">Review</a></p>
+					&nbsp;&nbsp;2. <a class="helpLink" href="#reviewGame">Review</a><br>
+					&nbsp;&nbsp;3. <a class="helpLink" href="#flagGame">Guess the Flag</a></p>
 	        </div>
 	        <div class="helpItem">
 	        	<h3 id="emojiGame" class="helpHeader">Emoji Game</h3>
@@ -80,6 +82,12 @@
 				<p class="helpText">The Review 'game' allows hosts to post questions to all players. Each player will then be able to submit one answer.</p>
 				<p class="helpText">The host can control which answers are acceptable by ticking the checkbox provided.</p>
 				<p class="helpText">The host can untick a ticked checkbox to remove any points given by accident.</p>
+	        </div>
+	        <div class="helpItem">
+	        	<h3 id="flagGame" class="helpHeader">Guess the Flag</h3>
+				<p class="helpText">The Guess the Flag game allows hosts to select a country whose flag is then sent to all players.</p>
+				<p class="helpText">Players will be presented with four choices. If the player guesses correctly, the score is automatically calculated.</p>
+				<p class="helpText">The host also has the option to narrow the country selection by searching for a specific country.</p>
 	        </div>
 	        <div class="helpItem">
 	        	<h3 id="general" class="helpHeader">General</h3>

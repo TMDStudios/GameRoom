@@ -6,13 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:if test="${darkMode}">
-	<link rel="stylesheet" type="text/css" href="/css/dark.css">
-</c:if>
-<c:if test="${!darkMode}">
-	<link rel="stylesheet" type="text/css" href="/css/light.css">
-</c:if>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Reset Password</title>
+<link rel="shortcut icon" href="favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 

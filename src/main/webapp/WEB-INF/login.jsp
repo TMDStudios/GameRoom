@@ -8,6 +8,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Log In</title>
+<link rel="shortcut icon" href="favicon.ico?" type="image/x-icon" />
 </head>
 <body>
 

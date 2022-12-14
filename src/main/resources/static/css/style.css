@@ -35,6 +35,70 @@ h1 {
 	color: #F4F4F4;
     background-color: #111;
 }
+.gameOptions {
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.gameCard {
+	width: 25%;
+	height: 300px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(255, 255, 255, .25);
+	transition: 0.2s;
+	font-family: monospace;
+}
+.gameCard:hover {
+	cursor:pointer;
+	color: #007fff;
+	font-weight: bold;
+	font-stretch: expanded;
+	border: 1px solid rgba(0, 127, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
+    transition: background-color .25s, color .25s;
+}
+.gameTitle {
+	font-size: 24px;
+	text-align: center;
+	padding: 32px 16px;
+}
+.gameSymbol {
+	font-size: 64px;
+	text-align: center;
+	padding: 16px;
+}
+.gameStart {
+	font-size: 32px;
+	text-align: center;
+	padding: 16px;
+}
+.joinRoomBtn {
+	font-size: 24px;
+	text-align: center;
+	width: 100%;
+	padding: 8px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(255, 255, 255, .25);
+	transition: 0.2s;
+	font-family: monospace;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.joinRoomBtn:hover {
+	cursor:pointer;
+    color: #007fff;
+	font-weight: bold;
+	font-stretch: expanded;
+	border: 1px solid rgba(0, 127, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
+    transition: background-color .25s, color .25s;
+}
 .roomInfo {
 	display: flex;
     justify-content: space-between;

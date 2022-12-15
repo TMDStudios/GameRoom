@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmojiService {
 	private String[][] preset = {{"", "Select Preset Movie/Show"},{"🚶‍♂️💀", "Walking Dead"},{"👨‍⚕️❓", "Dr. Who"},{"👊🐼", "Kung Fu Panda"},{"🎈🎈🎈🏠", "Up"},
-			{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},
-			{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},
-			{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"}};
+			{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},{"🐉🏀", "Dragon Ball"},
+			{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},{"🦑🎮", "Squid Game"},
+			{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"},{"👊👩🏻‍🦲", "One Punch Man"},{"🏠🃏", "House of Cards"},
+			{"👨‍💼🤖", "Mr. Robot"},{"👨‍👩‍👦👨", "Family Guy"},{"👨‍👩‍👧‍👧👨‍👨‍👧👨‍👩‍👦", "Modern Family"},{"👨‍👩‍👧‍👧👨‍👨‍👧👨‍👩‍👦", "Modern Family"},{"🎲👑", "Game of Thrones"}};
 	
 	public String[][] preset() {
 		return preset;

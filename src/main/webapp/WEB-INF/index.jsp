@@ -31,17 +31,17 @@
 <div class="row">
 	<div class="flex-3">
 		<div class="gameOptions">
-			<div class="gameCard">
+			<div class="gameCard" onclick="openPage('/rooms/new')">
 				<p class="gameTitle">New Emoji Game</p>
 				<p class="gameSymbol">🤩</p>
 				<p class="gameStart">Start</p>
 			</div>
-			<div class="gameCard">
+			<div class="gameCard" onclick="openPage('/rooms/new')">
 				<p class="gameTitle">New Review Game</p>
 				<p class="gameSymbol">📖</p>
 				<p class="gameStart">Start</p>
 			</div>
-			<div class="gameCard">
+			<div class="gameCard" onclick="openPage('/rooms/new')">
 				<p class="gameTitle">New Flag Game</p>
 				<p class="gameSymbol">🏳️</p>
 				<p class="gameStart">Start</p>
@@ -51,7 +51,7 @@
 </div>
 
 <div>
-	<input class="joinRoomBtn" type="button" value="Join Existing Room"/>
+	<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/rooms/join')"/>
 </div>
 
 <c:if test="${not empty userId}">

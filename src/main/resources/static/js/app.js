@@ -31,3 +31,7 @@ function showWarning(){
 		window.location.replace("/");
 	}
 }
+
+function openPage(page){
+	window.location.replace(page);
+}

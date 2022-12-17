@@ -26,7 +26,7 @@
 	<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 </ul>
 
-<h1  class="center-text-title" id="welcome"></h1>
+<div class="welcomeBlock"><h1 class="center-text-title" id="welcome"></h1></div>
 
 <div class="row">
 	<div class="flex-3">

@@ -35,6 +35,9 @@ h1 {
 	color: #F4F4F4;
     background-color: #111;
 }
+.welcomeBlock {
+	height: 100px;
+}
 .gameOptions {
 	display: flex;
     justify-content: space-evenly;

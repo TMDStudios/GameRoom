@@ -31,11 +31,12 @@
 	</div>
 	<div class="helpBlock">
 		<p>Thank you for trying Game Room. The purpose of this website is to provide 
-		educators with a platform to play games and/or review materials with their students. Use the links on the left side to navigate the helps section.
+		educators with a platform to play games and/or review materials with their students. 
+		<span id="helpBlock">Use the links on the left side to navigate the help section.</span>
 		</p>
 	</div>
 	<hr>
-	<div class="row">
+	<div class="helpRow">
 		<div class="flex-1">
 			<div class="helpItem">
 				<p class="helpLinkContainer"><a class="helpLink" href="#newRoom">Create a new room</a></p>

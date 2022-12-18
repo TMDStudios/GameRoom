@@ -199,6 +199,9 @@ h1 {
 .row { 
     display: flex; 
 }
+.helpRow {
+	display: flex; 
+}
 .flex-1 { 
     flex: 1; 
 }
@@ -460,6 +463,13 @@ hr {
 	}
 	.row {
 		flex-direction: column-reverse;
+	}
+	.helpRow {
+		flex-direction: column;
+		margin: 2%;
+	}
+	.helpBlock {
+		margin: 2%;
 	}
 	.emojiDiv {
 		height: 100px;

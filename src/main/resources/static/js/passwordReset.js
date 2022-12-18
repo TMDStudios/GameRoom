@@ -51,3 +51,10 @@ function validatePassword(pw, newPw){
 		return "OK"
 	}
 }
+
+// Help page only
+if(document.getElementById("helpBlock")!=null){
+	if(window.screen.width < 480){
+		document.getElementById("helpBlock").innerHTML = "Use the links below to navigate the help section.";
+	}
+}

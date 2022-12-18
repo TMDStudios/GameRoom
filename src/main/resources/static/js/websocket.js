@@ -73,9 +73,11 @@ function connect() {
 			  	req.send();
 			}
 		}else{
-			document.getElementById("messages").style = "height: 300px;overflow-x: hidden;overflow-y: auto;display: block;box-sizing:border-box;width: 100%;"+
+			if(window.screen.width > 480){
+				document.getElementById("messages").style = "height: 300px;overflow-x: hidden;overflow-y: auto;display: block;box-sizing:border-box;width: 100%;"+
 				"border: solid 1px rgba(212, 212, 212, 0.1);padding-left: 12px;overflow: -moz-scrollbars-none;-ms-overflow-style: none;";
-			document.getElementById("currentEmojiGroup").style = "text-align: center;font-size: 48px;height: 150px;";
+				document.getElementById("currentEmojiGroup").style = "text-align: center;font-size: 48px;height: 150px;";
+			}
 			document.getElementById("guess").value = "Waiting for game to start...";
 			document.getElementById("guess").disabled = true;
 			document.getElementById("guess").style.color = "lightblue";

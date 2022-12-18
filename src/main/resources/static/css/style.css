@@ -420,7 +420,7 @@ hr {
 }
 @media all and (max-width: 480px){
     body {
-		max-width: 480px;
+		max-width: 100%;
 	    font-size: 12px; 
 	}
 	.welcomeBlock {
@@ -451,5 +451,28 @@ hr {
 		width: 80%;
 		padding: 4px;
 		margin: 10%;
+	}
+	.container {
+		width: 100%;
+	}
+	.roomInfo {
+		display: none;
+	}
+	.row {
+		flex-direction: column-reverse;
+	}
+	.emojiDiv {
+		height: 100px;
+	}
+	.countryBtnContainer {
+		height: 200px;
+	}
+	.flagGuessBtn {
+		text-align: center;
+		width: 96%;
+		transition: 0.2s;
+		margin-bottom: 1%;
+		margin-left: 2%;
+		margin-right: 2%;
 	}
 }

@@ -15,9 +15,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/ws");
     }
 
-    @Override
+	@Override
     public void registerStompEndpoints(final StompEndpointRegistry registry) {
         registry.addEndpoint("/room-messages")
+        		.setAllowedOrigins("*")
                 .withSockJS();
     }
 }

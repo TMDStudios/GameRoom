@@ -288,6 +288,8 @@ public class MainController {
 			if(player!=null) {
 				if(room.getPlayers().contains(player)) {
 					redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
+					// Temporary fix
+					redirectAttributes.addFlashAttribute("roomLink", roomLink);
 					return "redirect:/rooms/join";
 				}
 			}

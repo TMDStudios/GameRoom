@@ -46,9 +46,8 @@ public class MainController {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			model.addAttribute("host", user);
+			model.addAttribute("rooms", user.getRooms());
 		}
-		
-		model.addAttribute("rooms", roomService.allRooms());
 	    return "index.jsp";
 	}
 	
@@ -288,7 +287,7 @@ public class MainController {
 			if(player!=null) {
 				if(room.getPlayers().contains(player)) {
 					redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
-					// Temporary fix
+					// Find better solution?
 					redirectAttributes.addFlashAttribute("roomLink", roomLink);
 					return "redirect:/rooms/join";
 				}

@@ -109,6 +109,26 @@ h1 {
     background-color: rgba(255, 255, 255, 1);
     transition: background-color .25s, color .25s;
 }
+.roomCardContainer {
+	margin-top: 16px;
+	text-align: center;
+}
+.roomCard {
+	box-shadow: 0 2px 4px 0 rgba(212, 212, 212,0.2);
+	border-radius: 4px;
+	padding: 5px;
+	margin: 5px;
+}
+.roomCard:hover {
+    background-color: #111;
+}
+.roomCardLink {
+	text-decoration: none;
+	color: #0080ff;
+}
+.roomCardLink:hover {
+    color: white;
+}
 .roomInfo {
 	display: flex;
     justify-content: space-between;
@@ -484,5 +504,8 @@ hr {
 		margin-bottom: 1%;
 		margin-left: 2%;
 		margin-right: 2%;
+	}
+	#currentEmojiGroup {
+		font-size: 32px;
 	}
 }

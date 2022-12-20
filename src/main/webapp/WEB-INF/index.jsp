@@ -56,16 +56,20 @@
 </div>
 
 <c:if test="${not empty userId}">
-	<p>Logged in as: ${host.username} (Host)</p>
+	<p class="center-text">Logged in as: ${host.username} (Host)</p>
 </c:if>
-<c:if test="${empty userId}">
-	<p>Logged in as: ${playerName}</p>
+<c:if test="${not empty playerName}">
+	<p class="center-text">Logged in as: ${playerName}</p>
 </c:if>
 
-<p>Current Rooms:</p>
-<c:forEach var="room" items="${rooms}">
-    <p><a href="/rooms/${room.link}">${room.name}</a></p>
-</c:forEach>
+<c:if test="${not empty userId}">
+	<p class="roomCardContainer">
+		<span>My Rooms:</span>
+		<c:forEach var="room" items="${rooms}">
+		    <span class="roomCard"><a class="roomCardLink" href="/rooms/${room.link}">${room.name}</a></span>
+		</c:forEach>
+	</p>
+</c:if>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>

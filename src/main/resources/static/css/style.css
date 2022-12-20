@@ -441,6 +441,21 @@ hr {
 	color: #F4F4F4;
     background-color: rgba(200, 0, 0, .1);
 }
+.banner-div {
+	width: 60%; 
+	margin: auto; 
+	text-align: center;
+}
+.banner {
+    box-shadow: 0 0 0 0 rgb(87, 114, 187);
+    transition: 0.2s;
+    border-radius: 8px;
+    margin-top: 64px;
+    margin-bottom: 24px;
+}
+.banner:hover {
+    box-shadow: 0 0 12px 0 rgb(137, 181, 248);
+}
 @media all and (max-width: 480px){
     body {
 		max-width: 100%;
@@ -506,6 +521,9 @@ hr {
 		margin-right: 2%;
 	}
 	#currentEmojiGroup {
-		font-size: 32px;
+		font-size: 22px;
+	}
+	#currentEmojis {
+		font-size: 22px;
 	}
 }

@@ -52,5 +52,15 @@
 	</div>
 </form>
 
+<div class="banner-div">
+	<a href="${link}">
+		<img
+		  class="banner"
+		  style="max-width: 100%"
+		  src="${banner}?w=600"
+		/>
+	</a>
+</div>
+
 </body>
 </html>

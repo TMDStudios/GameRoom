@@ -1,5 +1,7 @@
 package com.tmdstudios.gameroom.controllers;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -39,6 +41,28 @@ public class MainController {
 	private EmojiService emojiService;
 	
 	String[] gameTypes = {"Emoji Game", "Review", "Guess the Flag"};
+	
+	private String[] banners = {
+			"https://tmdstudios.files.wordpress.com/2021/02/plclogolight.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2022/03/tmdlogowide.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2022/03/nfts.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2021/04/galagames.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120"
+			};
+	
+	private String[] links = {
+			"https://play.google.com/store/apps/details?id=com.tmdstudios.python",
+			"https://tmdstudios.wordpress.com",
+			"https://tmdstudios.wordpress.com/nfts/",
+			"https://tmdstudios.wordpress.com/2021/04/06/gala-games/",
+			"https://freebitco.in/?r=15749838"
+			};
+	
+	private void setBanner(HttpSession session) {
+		int indexVal = new Random().nextInt(banners.length);
+		session.setAttribute("banner", banners[indexVal]);
+		session.setAttribute("link", links[indexVal]);
+	}
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {	
@@ -141,6 +165,9 @@ public class MainController {
 		Boolean isHosting = user.getRooms().isEmpty() ? false : true;
 		model.addAttribute("isHosting", isHosting);
 		model.addAttribute("gameTypes", gameTypes);
+		
+		setBanner(session);
+		
 		return "new_room.jsp";
 	}
 	
@@ -261,6 +288,9 @@ public class MainController {
 				return "redirect:/rooms/"+room.getLink();
 			}
 		}
+		
+		setBanner(session);
+		
 		return "join_room.jsp";
 	}
 	

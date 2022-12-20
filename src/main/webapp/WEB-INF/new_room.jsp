@@ -85,6 +85,16 @@
 	</div>
 </form:form>
 
+<div class="banner-div">
+	<a href="${link}">
+		<img
+		  class="banner"
+		  style="max-width: 100%"
+		  src="${banner}?w=600"
+		/>
+	</a>
+</div>
+
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>
 

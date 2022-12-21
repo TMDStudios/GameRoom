@@ -10,6 +10,14 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Game Room</title>
 <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="description" content="A platform for educators to play games and/or review materials with their students."/>
+<meta name="robots" content="index,follow" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@TMD__Studios" />
+<meta name="twitter:title" content="Game Room" />
+<meta name="twitter:description" content="A platform for educators to play games and/or review materials with their students." />
+<meta name="twitter:image" content="https://html.sammy-codes.com/images/large-profile.jpg" />
 </head>
 <body>
 

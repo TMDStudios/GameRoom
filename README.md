@@ -2,6 +2,8 @@
 
 ![Railway Badge](https://img.shields.io/badge/deployment-railway-purple)
 
+![Game Room Logo](/src/main/resources/static/images/GameRoom.png)
+
 The purpose of Game Room is to provide educators with a platform to play games and/or review materials with their students.
 
 This Spring Boot website uses MySQL to store host and room data. Players are not saved to the database. User and player login is handled with HttpSession. Scores are also stored using HttpSession.

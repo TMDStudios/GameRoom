@@ -17,7 +17,7 @@
 <meta name="twitter:site" content="@TMD__Studios" />
 <meta name="twitter:title" content="Game Room" />
 <meta name="twitter:description" content="A platform for educators to play games and/or review materials with their students." />
-<meta name="twitter:image" content="https://github.com/TMDStudios/GameRoom/blob/master/src/main/resources/static/images/GameRoom.png" />
+<meta name="twitter:image" content="https://tmdstudios.files.wordpress.com/2022/12/gameroom.png" />
 </head>
 <body>
 

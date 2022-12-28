@@ -59,9 +59,11 @@
 	</div>
 </div>
 
-<div>
-	<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/rooms/join')"/>
-</div>
+<c:if test="${empty userId}">
+	<div>
+		<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/rooms/join')"/>
+	</div>
+</c:if>
 
 <c:if test="${not empty userId}">
 	<p class="center-text">Logged in as: ${host.username} (Host)</p>

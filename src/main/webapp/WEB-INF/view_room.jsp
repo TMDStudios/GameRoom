@@ -118,7 +118,7 @@
 			<c:if test="${room.gameType=='Review'}">
 				<form id="reviewQuestionForm">
 				    <div>
-				    	<span>
+				    	<span class="hostInputContainer">
 				    		<input class="hostInput" type="text" id="reviewQuestion" placeholder="Enter Question">
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>
@@ -129,7 +129,7 @@
 				<form id="flagForm">
 				    <div>
 				    	<p class="currentFlag">Current Flag: <span id="currentFlag"></span></p>
-				    	<span>
+				    	<span class="hostInputContainer">
 				    		<input class="hostInput" type="text" id="flagSearch" placeholder="Search Country">
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>

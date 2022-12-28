@@ -349,6 +349,7 @@ function showCountries(search) {
 		}else{
 			countries.forEach(c => $("#countries").append('<button class="flagBtn" onclick="sendFlag(\''+c[0]+'\', \''+c[1]+'\')" type="button">'+c[1].slice(0,32)+'</button>'));
 		}
+		document.getElementById("flagSearch").value = "";
 	}
 }
 

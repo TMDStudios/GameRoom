@@ -154,6 +154,7 @@ h1 {
 	font-size: 48px;
 }
 .hostInput {
+	padding-left: 8px;
 	width: 728px;
 	box-sizing:border-box;
 	border: solid 1px rgba(212, 212, 212, 0.1);
@@ -346,6 +347,7 @@ hr {
 .backLink {
 	text-align: center;
 	font-size: 0.8em;
+	padding: 8px;
 }
 .login-block {
 	padding: 24px;
@@ -462,10 +464,12 @@ hr {
 	    font-size: 12px; 
 	}
 	.welcomeBlock {
-		height: 48px;
+		height: 36px;
 	}
 	.gameOptions {
 		flex-direction: column;
+		margin-top: 2%;
+		margin-bottom: 2%;
 	}
 	.gameCard {
 		width: 80%;
@@ -498,6 +502,36 @@ hr {
 	}
 	.row {
 		flex-direction: column-reverse;
+	}
+	#messages, #guesses, #emojiGroup, #countries {
+		height: 100px;
+	}
+	.hostInputContainer {
+		display: flex;
+	    justify-content: space-evenly;
+	}
+	.hostInput {
+		width: 48%;
+	}
+	.multiplierBtn {
+		width: 48%;
+	}
+	#countries {
+		text-align: center;
+	}
+	.currentFlag {
+		padding-left: 6px;
+	}
+	.flagBtn {
+		width: 90%;
+		margin: 4px;
+		padding: 4px;
+	}
+	.messagesTitle {
+		padding: 4px;
+	}
+	.playersTitle {
+		padding: 8px;
 	}
 	.helpRow {
 		flex-direction: column;

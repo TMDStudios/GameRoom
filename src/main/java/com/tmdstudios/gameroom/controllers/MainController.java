@@ -308,6 +308,7 @@ public class MainController {
 			return "redirect:/rooms/join";
 		}
 		
+		roomLink = roomLink.toLowerCase();
 		Room room = roomService.findByLink(roomLink);
 		if(room!=null) {
 			if(room.getPrivateRoom()) {

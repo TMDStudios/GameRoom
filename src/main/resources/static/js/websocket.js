@@ -174,7 +174,7 @@ function showGuess(guess) {
 			$("#guesses").append("<p style='color: red;'>" + guess + "</p>");
 		}
 	}else{
-		$("#guesses").append("<p><input type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
+		$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
 	}
 
 	if(document.getElementById("guesses")!=null){

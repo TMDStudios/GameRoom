@@ -8,7 +8,7 @@ public class EmojiService {
 			{"👽☎️🏠", "ET"},{"🔍🐠", "Finding Nemo"},{"👸💤💤", "Sleeping Beauty"},{"🔪🏃‍♂", "Blade Runner"},{"🦂👑", "Scorpion King"},{"🐉🏀", "Dragon Ball"},
 			{"💪🦆", "The Mighty Ducks"},{"🚗💨😠", "Fast and Furious"},{"🕴️🕴️👽", "Men in Black"},{"🏃‍♂️😨", "Running Scared"},{"🦑🎮", "Squid Game"},
 			{"💥🤔📖", "Big Bang Theory"},{"♠️♥️♦️♣️", "Suits"},{"👸♟", "Queen's Gambit"},{"👊👩🏻‍🦲", "One Punch Man"},{"🏠🃏", "House of Cards"},
-			{"👨‍💼🤖", "Mr. Robot"},{"👨‍👩‍👦👨", "Family Guy"},{"👨‍👩‍👧‍👧👨‍👨‍👧👨‍👩‍👦", "Modern Family"},{"👨‍👩‍👧‍👧👨‍👨‍👧👨‍👩‍👦", "Modern Family"},{"🎲👑", "Game of Thrones"}};
+			{"👨‍💼🤖", "Mr. Robot"},{"👨‍👩‍👦👨", "Family Guy"},{"👨‍👩‍👧‍👧👨‍👨‍👧👨‍👩‍👦", "Modern Family"},{"🎲👑", "Game of Thrones"}};
 	
 	public String[][] preset() {
 		return preset;

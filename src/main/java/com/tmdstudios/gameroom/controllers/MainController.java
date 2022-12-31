@@ -229,7 +229,7 @@ public class MainController {
 				roomService.newRoom(room);
 			}
 		}
-		return "redirect:/";
+		return "redirect:/rooms/"+room.getLink();
 	}
 	
 	@GetMapping("/rooms/{roomLink}")

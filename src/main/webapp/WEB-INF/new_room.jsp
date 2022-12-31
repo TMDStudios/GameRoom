@@ -50,7 +50,12 @@
 			<label>Game Type:</label>
 			<form:select path="gameType">
                 <c:forEach var="gameType" items="${gameTypes}">
-                    <option value="${gameType}">${gameType}</option>
+                    <c:if test="${type==gameType}">
+						<option value="${gameType}" selected>${gameType}</option>
+					</c:if>
+					<c:if test="${isHosting}">
+						<option value="${gameType}">${gameType}</option>
+					</c:if>
                 </c:forEach>
             </form:select>
 		</div>

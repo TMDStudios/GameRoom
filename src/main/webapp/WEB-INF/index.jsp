@@ -45,12 +45,12 @@
 				<p class="gameSymbol">🤩</p>
 				<p class="gameStart">Start</p>
 			</div>
-			<div class="gameCard" onclick="openPage('/rooms/new')">
+			<div class="gameCard" onclick="openPage('/rooms/new?type=review')">
 				<p class="gameTitle">New Review Game</p>
 				<p class="gameSymbol">📖</p>
 				<p class="gameStart">Start</p>
 			</div>
-			<div class="gameCard" onclick="openPage('/rooms/new')">
+			<div class="gameCard" onclick="openPage('/rooms/new?type=flag')">
 				<p class="gameTitle">New Flag Game</p>
 				<p class="gameSymbol">🏳️</p>
 				<p class="gameStart">Start</p>

@@ -156,7 +156,11 @@ public class MainController {
 	}
 	
 	@GetMapping("/rooms/new")
-	public String newRoom(@ModelAttribute("room") Room room, Model model, HttpSession session) {
+	public String newRoom(
+			@ModelAttribute("room") Room room, 
+			Model model, 
+			HttpSession session,
+			@RequestParam(value="type", required=false) String type) {
 		
 		if(session.getAttribute("userId") == null) {
 			return "redirect:/login";
@@ -167,6 +171,21 @@ public class MainController {
 		Boolean isHosting = user.getRooms().isEmpty() ? false : true;
 		model.addAttribute("isHosting", isHosting);
 		model.addAttribute("gameTypes", gameTypes);
+		
+		if(type==null) {
+			type = "emoji";
+		}
+		
+		switch(type) {
+			case "review":
+				model.addAttribute("type", "Review");
+				break;
+			case "flag":
+				model.addAttribute("type", "Guess the Flag");
+				break;
+			default:
+				model.addAttribute("type", "Emoji Game");
+		}
 		
 		setBanner(session);
 		

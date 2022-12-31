@@ -22,9 +22,9 @@ function handleColors(){
 }
 
 function showWarning(){
-	if(confirm("WARNING\nCreating a new room will delete all scores from other rooms!\nProceed?")){
+	if(confirm("WARNING\nCreating a new room will delete any existing rooms!\nProceed?")){
 		let xhttp = new XMLHttpRequest();
-	  	xhttp.open("POST", "/reset-scores");
+	  	xhttp.open("POST", "/delete-last-room");
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send();
 	}else{

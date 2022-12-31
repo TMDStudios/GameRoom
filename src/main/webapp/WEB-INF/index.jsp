@@ -74,7 +74,7 @@
 
 <c:if test="${not empty userId}">
 	<p class="roomCardContainer">
-		<span>My Rooms:</span>
+		<span>Last Room:</span>
 		<c:forEach var="room" items="${rooms}">
 		    <span class="roomCard"><a class="roomCardLink" href="/rooms/${room.link}">${room.name}</a></span>
 		</c:forEach>

@@ -48,7 +48,7 @@ public class MainController {
 			"https://tmdstudios.files.wordpress.com/2022/03/nfts.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2021/04/galagames.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc.png?h=120"
+			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc-2.png?h=120"
 			};
 	
 	private String[] links = {

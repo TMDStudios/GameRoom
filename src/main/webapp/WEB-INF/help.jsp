@@ -99,6 +99,7 @@
 				<p class="helpText">The host has the ability to modify scores by clicking on the player name and entering the desired score.</p>
 				<p class="helpText">The host and the players can communicate in the chat. A message will be displayed when a new player joins.</p>
 				<p class="helpText">If a player logs out, they can only rejoin with a new name.</p>
+				<p class="helpText">The host has the ability to kick players from the room by clicking on their name in the chat.</p>
 	        </div>
 		</div>
 	</div>

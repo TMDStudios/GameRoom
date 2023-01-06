@@ -53,6 +53,9 @@ function connect() {
 			    case "allScores"+link:
 			    	updateScores(JSON.parse(message.body).content);
 			        break;
+			    case "blockPlayer"+link:
+			    	blockPlayer(JSON.parse(message.body).content);
+			        break;
 			    default:
 			    	console.log("Unknown message type: "+JSON.parse(message.body).type)
 			    	break;
@@ -95,13 +98,28 @@ function showMessage(message) {
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'+link}))
 		}
 	}else{
-		$("#messages").append("<p>" + message + "</p>");
+		end = message.indexOf(":");
+		playerName = message.substring(0,end);
+		$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + message + "</p>");
 	}
 
 	document.getElementById("messages").scroll({
 		top: document.getElementById("messages").scrollHeight,
 		behavior: 'smooth'
 	});
+}
+
+function blockPlayerMessage(player){
+	if(confirm("Kick "+player+" from the room?")){
+		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player, 'messageType': 'blockPlayer'+link}))
+	}
+}
+
+function blockPlayer(blockedPlayer){
+	if(blockedPlayer==document.getElementById("sender").innerHTML){
+		window.location.replace("/logout");
+		alert("You have been kicked from the room!");
+	}
 }
 
 function updateScores(allScores){

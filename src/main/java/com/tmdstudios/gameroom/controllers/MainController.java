@@ -302,6 +302,7 @@ public class MainController {
 	
 	@GetMapping("/rooms/join")
 	public String joinRoom(HttpSession session) {
+		setBanner(session);
 		String playerName = (String) session.getAttribute("playerName");
 		Long roomId = (Long) session.getAttribute("roomId");
 		Room room = roomService.findById(roomId);
@@ -311,8 +312,6 @@ public class MainController {
 				return "redirect:/rooms/"+room.getLink();
 			}
 		}
-		
-		setBanner(session);
 		
 		return "join_room.jsp";
 	}

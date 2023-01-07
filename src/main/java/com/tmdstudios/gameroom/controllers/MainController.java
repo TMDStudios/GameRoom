@@ -245,6 +245,7 @@ public class MainController {
 //		String scores = (String) session.getAttribute("scores");
 //		System.out.println(scores);
 		
+		setBanner(session);
 		Room room = roomService.findByLink(roomLink);
 		if(session.getAttribute("userId")==null&&session.getAttribute("playerName")==null) {
 			model.addAttribute("roomLink", roomLink);

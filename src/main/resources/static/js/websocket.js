@@ -98,9 +98,14 @@ function showMessage(message) {
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'+link}))
 		}
 	}else{
-		end = message.indexOf(":");
-		playerName = message.substring(0,end);
-		$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + message + "</p>");
+		let req = new XMLHttpRequest();
+		req.open('GET', "https://www.purgomalum.com/service/xml?text="+message);
+	  	req.onload = function() {
+			end = message.indexOf(":");
+			playerName = message.substring(0,end);
+			$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + this.responseText + "</p>");
+	  	}
+	  	req.send();
 	}
 
 	document.getElementById("messages").scroll({

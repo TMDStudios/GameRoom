@@ -32,6 +32,18 @@ function showWarning(){
 	}
 }
 
+function checkLanguage(playerName){
+	let req = new XMLHttpRequest();
+	req.open('GET', "https://www.purgomalum.com/service/xml?text="+playerName);
+  	req.onload = function() {
+		if(this.responseText.includes('*')){
+			alert("Please refrain from using offensive language")
+			window.location.replace("/rooms/join");
+		}
+  	}
+  	req.send();
+}
+
 function openPage(page){
 	window.location.replace(page);
 }

@@ -47,7 +47,7 @@
 		</div>
 
 		<div>
-			<input class="btn" type="submit" value="Submit"/>
+			<input class="btn" onclick="checkLanguage(document.getElementById('playerName').value)" type="submit" value="Submit"/>
 		</div>
 	</div>
 </form>
@@ -61,6 +61,9 @@
 		/>
 	</a>
 </div>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
 
 </body>
 </html>

@@ -80,6 +80,11 @@
 		</c:forEach>
 	</p>
 </c:if>
+<c:if test="${not empty playerName}">
+	<p class="roomCardContainer">
+		<span>My Room:</span><span class="roomCard"><a class="roomCardLink" href="/rooms/${myRoom}">${myRoomName}</a></span>
+	</p>
+</c:if>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>

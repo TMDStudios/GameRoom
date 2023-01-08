@@ -355,6 +355,8 @@ public class MainController {
 			player = new Player(playerName, room);
 			playerService.newPlayer(player);
 			session.setAttribute("playerName", player.getName());
+			session.setAttribute("myRoom", room.getLink());
+			session.setAttribute("myRoomName", room.getName());
 			model.addAttribute("room", room);
 			return "redirect:/rooms/"+roomLink;
 		}else {
@@ -389,6 +391,8 @@ public class MainController {
 				player = new Player(playerName, room);
 				playerService.newPlayer(player);
 				session.setAttribute("playerName", player.getName());
+				session.setAttribute("myRoom", room.getLink());
+				session.setAttribute("myRoomName", room.getName());
 				model.addAttribute("room", room);
 				return "redirect:/rooms/"+room.getLink();
 			}

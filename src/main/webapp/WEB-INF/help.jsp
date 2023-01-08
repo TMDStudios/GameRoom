@@ -46,6 +46,7 @@
 				<p class="helpLinkContainer"><a class="helpLink" href="#reviewGame">Review</a></p>
 				<p class="helpLinkContainer"><a class="helpLink" href="#flagGame">Guess the Flag</a></p>
 				<p class="helpLinkContainer"><a class="helpLink" href="#general">General</a></p>
+				<p class="helpLinkContainer"><a class="helpLink" href="#credits">Credits</a></p>
 			</div>
 	    </div>
 	    <div class="flex-3-help">
@@ -100,6 +101,11 @@
 				<p class="helpText">The host and the players can communicate in the chat. A message will be displayed when a new player joins.</p>
 				<p class="helpText">If a player logs out, they can only rejoin with a new name.</p>
 				<p class="helpText">The host has the ability to kick players from the room by clicking on their name in the chat.</p>
+	        </div>
+	        <div>
+	        	<h3 id="credits" class="helpHeader">Credits</h3>
+	        	<p class="helpText">Profanity Filter courtesy of <a class="helpLink" href="https://www.purgomalum.com/">PurgoMalum</a></p>
+	        	<p class="helpText">Flags courtesy of <a class="helpLink" href="https://flagpedia.net">flagpedia.net</a></p>
 	        </div>
 		</div>
 	</div>

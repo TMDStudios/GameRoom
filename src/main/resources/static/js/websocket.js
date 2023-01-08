@@ -197,7 +197,12 @@ function showGuess(guess) {
 			$("#guesses").append("<p style='color: red;'>" + guess + "</p>");
 		}
 	}else{
-		$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
+		let req = new XMLHttpRequest();
+		req.open('GET', "https://www.purgomalum.com/service/xml?text="+guess);
+	  	req.onload = function() {
+			$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + this.responseText + "</p>");
+	  	}
+	  	req.send();
 	}
 
 	if(document.getElementById("guesses")!=null){

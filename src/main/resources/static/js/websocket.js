@@ -156,20 +156,26 @@ function showFlag(flagCode) {
 		$("#countryBtns").empty();
 		var correctAnswer = Math.floor(Math.random() * 4);
 		var answers = [];
+		var flagCodes = [];
 		while(answers.length<4){
 			if(answers.length==correctAnswer){
 				if(!answers.includes(countriesMap.get(flagCode))){
 					answers.push(countriesMap.get(flagCode));
+					flagCodes.push(flagCode);
 				}
 			}else{
-				if(!answers.includes(countriesMap.get(countries[getRandomIndex(countries.length-1)][0]))){
-					answers.push(countriesMap.get(countries[getRandomIndex(countries.length-1)][0]));
+				var randomIndex = getRandomIndex(countries.length-1);
+				if(!answers.includes(countriesMap.get(countries[randomIndex][0]))){
+					answers.push(countriesMap.get(countries[randomIndex][0]));
+					flagCodes.push(countries[randomIndex][0]);
 				}
 			}
 		}
-		answers.forEach(function(answer) {
-			$("#countryBtns").append('<button class="flagGuessBtn" onclick="sendCountryGuess(\''+answer+'\',\''+countriesMap.get(flagCode)+'\')" type="button">'+answer+'</button>');
-		});
+		console.log("FLAG CODES = "+flagCodes);
+		
+		for(var i = 0; i<answers.length; i++){
+			$("#countryBtns").append('<button class="flagGuessBtn" onclick="sendCountryGuess(\''+flagCodes[i]+'\',\''+flagCode+'\')" type="button">'+answers[i]+'</button>');
+		}
 	}
 }
 
@@ -188,7 +194,12 @@ function enableGuesses() {
 function showGuess(guess) {
 	end = guess.indexOf(":");
 	player = guess.substring(0,end);
-	playerGuess = guess.substring(end+2,guess.length);
+	
+	if(document.getElementById("flagForm")!=null){
+		var flagCode = guess.substring(end+2,guess.length);
+		var playerGuess = countriesMap.get(flagCode);
+	}
+	
 	if(document.getElementById("flagForm")!=null){
 		autoScore(player, playerGuess);
 		if(playerGuess==correctFlag){
@@ -339,17 +350,17 @@ $("#guessForm").submit(function() {
 function sendCountryGuess(country, correctAnswer) {
 	$("#countryBtns").empty();
 	document.getElementById("guess").style.display = "block";
-	document.getElementById("countryAnswer").innerHTML = "The correct answer was "+correctAnswer;
+	document.getElementById("countryAnswer").innerHTML = "The correct answer was "+countriesMap.get(correctAnswer);
 	console.log("sending guess");
 	sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+country, 'messageType': 'guess'+link}));
     
     document.getElementById("guess").disabled = true;
     if(country==correctAnswer){
-		document.getElementById("guess").value = "Correct! It is "+country+"!";
+		document.getElementById("guess").value = "Correct! It is "+countriesMap.get(country)+"!";
 		document.getElementById("guess").style.color = "lime";
 	}else{
-		document.getElementById("guess").value = "Your guess was: "+country;
+		document.getElementById("guess").value = "Your guess was: "+countriesMap.get(country);
 		document.getElementById("guess").style.color = "lightblue";
 	}
     return false;

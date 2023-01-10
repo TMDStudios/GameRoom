@@ -395,7 +395,7 @@ function showCountries(search) {
 function sendFlag(flagId, country) {
 	$('#guesses').empty();
 	round++;
-	console.log("sending flags");
+	console.log("SENDING FLAG -- "+flagId+" - "+country);
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': flagId, 'messageType': 'flag'+link}));
     if(document.getElementById("currentFlag")!=null){
 		document.getElementById("currentFlag").innerHTML = country;
@@ -449,8 +449,13 @@ function getFlagsList() {
 			const jsonData = JSON.parse(this.responseText);
 			for(var countryCode in jsonData){
 				if(countryCode.length==2){
-					countries.push([countryCode, jsonData[countryCode]]);
-					countriesMap.set(countryCode, jsonData[countryCode]);
+					if(countryCode=="ci"){
+						countries.push([countryCode, "Ivory Coast"]);
+						countriesMap.set(countryCode, "Ivory Coast");
+					}else{
+						countries.push([countryCode, jsonData[countryCode]]);
+						countriesMap.set(countryCode, jsonData[countryCode]);
+					}
 				}
 				if(countryCode.length>3 && countryCode[0]=='u'){
 					states.push([countryCode, jsonData[countryCode]])

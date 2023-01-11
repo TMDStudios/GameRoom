@@ -61,7 +61,7 @@ function connect() {
 			    	break;
 			}
         });
-        sender = document.getElementById("sender").innerHTML;
+        var sender = document.getElementById("sender").innerHTML;
 		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+" has joined", 'messageType': 'message'+link}));
 		if(document.getElementById("guesses")==null){
 			addPlayer(sender);
@@ -98,12 +98,16 @@ function showMessage(message) {
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'+link}))
 		}
 	}else{
+		var end = message.indexOf(":");
+		var playerName = message.substring(0,end);
 		let req = new XMLHttpRequest();
-		req.open('GET', "https://www.purgomalum.com/service/xml?text="+message);
+		req.open('GET', "https://www.purgomalum.com/service/containsprofanity?text="+message);
 	  	req.onload = function() {
-			end = message.indexOf(":");
-			playerName = message.substring(0,end);
-			$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + this.responseText + "</p>");
+			if(this.responseText.includes("true")){
+				$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + playerName + ": *****</p>");
+			}else{
+				$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + message + "</p>");
+			}
 	  	}
 	  	req.send();
 	}
@@ -115,8 +119,10 @@ function showMessage(message) {
 }
 
 function blockPlayerMessage(player){
-	if(confirm("Kick "+player+" from the room?")){
-		stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player, 'messageType': 'blockPlayer'+link}))
+	if(document.getElementById("guesses")!=null){
+		if(confirm("Kick "+player+" from the room?")){
+			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player, 'messageType': 'blockPlayer'+link}))
+		}
 	}
 }
 
@@ -192,8 +198,8 @@ function enableGuesses() {
 }
 
 function showGuess(guess) {
-	end = guess.indexOf(":");
-	player = guess.substring(0,end);
+	var end = guess.indexOf(":");
+	var player = guess.substring(0,end);
 	
 	if(document.getElementById("flagForm")!=null){
 		var flagCode = guess.substring(end+2,guess.length);
@@ -203,15 +209,19 @@ function showGuess(guess) {
 	if(document.getElementById("flagForm")!=null){
 		autoScore(player, playerGuess);
 		if(playerGuess==correctFlag){
-			$("#guesses").append("<p style='color: green;'>" + guess + "</p>");
+			$("#guesses").append("<p style='color: green;'>" + player + ": " + playerGuess + "</p>");
 		}else{
-			$("#guesses").append("<p style='color: red;'>" + guess + "</p>");
+			$("#guesses").append("<p style='color: red;'>" + player + ": " + playerGuess + "</p>");
 		}
 	}else{
 		let req = new XMLHttpRequest();
-		req.open('GET', "https://www.purgomalum.com/service/xml?text="+guess);
+		req.open('GET', "https://www.purgomalum.com/service/containsprofanity?text="+guess);
 	  	req.onload = function() {
-			$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + this.responseText + "</p>");
+			if(this.responseText.includes("true")){
+				$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + player + ": *****</p>");
+			}else{
+				$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
+			}
 	  	}
 	  	req.send();
 	}
@@ -225,9 +235,9 @@ function showGuess(guess) {
 }
 
 function autoScore(player, guess) {
-	playerScore = playerMap.get(player);
+	var playerScore = playerMap.get(player);
 	if(playerScore===undefined){playerScore=0;}
-	convertedScore = parseInt(playerScore);
+	var convertedScore = parseInt(playerScore);
 	if(guess==correctFlag){
 		playerMap.set(player, convertedScore+1*multiplier);
 	}
@@ -247,7 +257,7 @@ function handleMultiplier() {
 function showPlayers() {
 	var scoresString="";
 	$("#playerDiv").empty();
-	sortedPlayers = [];
+	var sortedPlayers = [];
 	playerMap.forEach(function(value, key) {
 		sortedPlayers.push([key,value]);
 	});
@@ -285,18 +295,18 @@ function overrideScore(player) {
 }
 
 function updatePlayers(message) {
-	end = message.indexOf(":");
-	playerName = message.substring(0,end);
-	playerScore = message.substring(end+1,message.length);
+	var end = message.indexOf(":");
+	var playerName = message.substring(0,end);
+	var playerScore = message.substring(end+1,message.length);
 	playerMap.set(playerName, playerScore);
 	showPlayers();
 }
 
 function handleCheck(player) {
 	var checkBox = document.getElementById(player);
-	playerScore = playerMap.get(player);
+	var playerScore = playerMap.get(player);
 	if(playerScore===undefined){playerScore=0;}
-	convertedScore = parseInt(playerScore);
+	var convertedScore = parseInt(playerScore);
 	if(checkBox.checked){
 		playerMap.set(player, convertedScore+1*multiplier);
 	}else{
@@ -306,14 +316,14 @@ function handleCheck(player) {
 }
 
 function addPlayer(player) {
-	playerScore = playerMap.get(player);
+	var playerScore = playerMap.get(player);
 	if(playerScore===undefined){playerScore=0; playerMap.set(player, 0);}
 	stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': player+":"+playerMap.get(player), 'messageType': 'score'+link}))
 }
 
 $("#messageForm").submit(function() {
 	console.log("sending message");
-	sender = document.getElementById("sender").innerHTML;
+	var sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+document.getElementById("message").value, 'messageType': 'message'+link}));
     document.getElementById("message").value = "";
     return false;
@@ -338,8 +348,8 @@ $("#flagForm").submit(function() {
 
 $("#guessForm").submit(function() {
 	console.log("sending guess");
-	sender = document.getElementById("sender").innerHTML;
-	guess = document.getElementById("guess").value;
+	var sender = document.getElementById("sender").innerHTML;
+	var guess = document.getElementById("guess").value;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+guess, 'messageType': 'guess'+link}));
     document.getElementById("guess").value = "Your guess was: "+guess;
     document.getElementById("guess").disabled = true;
@@ -352,7 +362,7 @@ function sendCountryGuess(country, correctAnswer) {
 	document.getElementById("guess").style.display = "block";
 	document.getElementById("countryAnswer").innerHTML = "The correct answer was "+countriesMap.get(correctAnswer);
 	console.log("sending guess");
-	sender = document.getElementById("sender").innerHTML;
+	var sender = document.getElementById("sender").innerHTML;
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': ""+sender+": "+country, 'messageType': 'guess'+link}));
     
     document.getElementById("guess").disabled = true;
@@ -369,7 +379,7 @@ function sendCountryGuess(country, correctAnswer) {
 function showGroup(emojis) {
 	document.getElementById("emojiGroup").innerHTML = "";
 	if(emojis.length>0){
-		emojiList = emojis.split(",");
+		var emojiList = emojis.split(",");
 		emojiList.forEach(e => $("#emojiGroup").append('<button class="emoji" onclick="addEmoji(\''+e+'\')" type="button">'+e+'</button>'));
 	}
 }
@@ -428,7 +438,7 @@ function sendEmojis(){
 }
 
 function populateMap(sessionData) {
-	scoresArray = sessionData.split(",");
+	var scoresArray = sessionData.split(",");
 	if(scoresArray.length>1){
 		scoresArray.forEach(player => updatePlayers(player));
 	}else if(scoresArray.length===1){

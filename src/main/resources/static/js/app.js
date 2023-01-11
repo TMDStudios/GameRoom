@@ -33,11 +33,16 @@ function showWarning(){
 }
 
 function checkLanguage(playerName){
-	let req = new XMLHttpRequest();
-	req.open('GET', "https://www.purgomalum.com/service/xml?text="+playerName);
+  	let req = new XMLHttpRequest();
+	req.open('GET', "https://www.purgomalum.com/service/containsprofanity?text="+playerName);
   	req.onload = function() {
-		if(this.responseText.includes('*')){
+		if(this.responseText.includes("true")){
 			alert("Please refrain from using offensive language")
+			
+			req.open("GET", "/log-out");
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			req.send();
+			
 			window.location.replace("/rooms/join");
 		}
   	}

@@ -42,4 +42,10 @@ public class GameController {
 		session.setAttribute("scores", null);
 		return "ROOMS DELETED";
 	}
+	
+	@RequestMapping("/log-out")
+	public String logOut(HttpSession session) {
+		session.setAttribute("playerName", null);
+		return "LOGGED OUT";
+	}
 }

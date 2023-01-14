@@ -19,6 +19,8 @@ The rooms are meant to be used once. Hosts can only have one active room at any 
 - A local chat is included in every game room
 - Hosts can override scores at any time
 - The scores table is automatically updated and displayed to the host and all players
+- A profanity filter ensures that no inappropriate language is used in player names, player guesses, as well as the chat
+- Hosts have the ability to kick users from the room
 
 
 ## You may also like...

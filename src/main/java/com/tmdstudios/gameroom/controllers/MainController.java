@@ -46,18 +46,12 @@ public class MainController {
 	
 	private String[] banners = {
 			"https://tmdstudios.files.wordpress.com/2021/02/plclogolight.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2022/03/tmdlogowide.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2022/03/nfts.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2021/04/galagames.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc-2.png?h=120"
 			};
 	
 	private String[] links = {
 			"https://play.google.com/store/apps/details?id=com.tmdstudios.python",
-			"https://tmdstudios.wordpress.com",
-			"https://tmdstudios.wordpress.com/nfts/",
-			"https://tmdstudios.wordpress.com/2021/04/06/gala-games/",
 			"https://freebitco.in/?r=15749838",
 			"https://www.redbubble.com/people/shirtsetcetera/shop"
 			};

@@ -409,6 +409,7 @@ function sendFlag(flagId, country) {
     stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': flagId, 'messageType': 'flag'+link}));
     if(document.getElementById("currentFlag")!=null){
 		document.getElementById("currentFlag").innerHTML = country;
+		showCountries("");
 	}
 }
 

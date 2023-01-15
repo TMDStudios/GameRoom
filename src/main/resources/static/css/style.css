@@ -45,6 +45,9 @@ h1 {
 .welcomeBlock {
 	height: 100px;
 }
+.getStarted {
+	color: magenta;
+}
 .gameOptions {
 	display: flex;
     justify-content: space-evenly;

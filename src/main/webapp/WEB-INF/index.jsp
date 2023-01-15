@@ -37,6 +37,12 @@
 
 <div class="welcomeBlock"><h1 class="center-text-title" id="welcome"></h1></div>
 
+<c:if test="${empty playerName && empty userId}">
+	<p class="roomCardContainer">
+		<span class="getStarted">Need help getting started? Watch the </span><span class="roomCard"><a class="roomCardLink" href="/help">Game Room Demo</a></span>
+	</p>
+</c:if>
+
 <div class="row">
 	<div class="flex-3">
 		<div class="gameOptions">

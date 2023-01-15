@@ -31,7 +31,7 @@
 	</div>
 	<div>
 		<p align="center">
-		    <iframe style="width: 56vw; height: 32vw; margin: auto;"
+		    <iframe style="width: 100%; height: 32vw; margin: auto;"
 		    src="https://www.youtube.com/embed/pyZVtlxG0-4" 
 		    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 		</p>

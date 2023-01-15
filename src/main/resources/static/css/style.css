@@ -226,6 +226,11 @@ h1 {
 .helpRow {
 	display: flex; 
 }
+.demoIframe {
+	width: 100%; 
+	aspect-ratio: 16 / 9;
+	margin: auto;
+}
 .flex-1 { 
     flex: 1; 
 }

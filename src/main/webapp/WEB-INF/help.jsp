@@ -29,6 +29,13 @@
 			<li class="nav_item"><a class="nav_link" href="/help">Help</a></li>
 		</ul>
 	</div>
+	<div>
+		<p align="center">
+		    <iframe style="width: 56vw; height: 32vw; margin: auto;"
+		    src="https://www.youtube.com/embed/pyZVtlxG0-4" 
+		    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		</p>
+	</div>
 	<div class="helpBlock">
 		<p>Thank you for trying Game Room. The purpose of this website is to provide 
 		educators with a platform to play games and/or review materials with their students. 

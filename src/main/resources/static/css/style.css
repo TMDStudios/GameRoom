@@ -158,15 +158,18 @@ h1 {
 }
 .hostInput {
 	padding-left: 8px;
-	width: 728px;
+	font-size: 1.2em;
+	width: 708px;
 	box-sizing:border-box;
 	border: solid 1px rgba(212, 212, 212, 0.1);
 }
 .multiplierBtn {
-	width: 76px;
+	font-size: 1.2em;
+	width: 96px;
 }
 .messageInput {
 	width: 100%;
+	font-size: 1.2em;
 	padding-left: 8px;
 	box-sizing:border-box;
 	border: solid 1px rgba(212, 212, 212, 0.1);
@@ -285,6 +288,7 @@ h1 {
     background-color: rgba(8, 97, 201, .1);
 }
 .flagBtn {
+	font-size: 1.1em;
 	width: 256px;
 	margin: 2px;
 }

@@ -119,7 +119,7 @@
 				<form id="reviewQuestionForm">
 				    <div>
 				    	<span class="hostInputContainer">
-				    		<input class="hostInput" type="text" id="reviewQuestion" placeholder="Enter Question">
+				    		<input maxlength="100" class="hostInput" type="text" id="reviewQuestion" placeholder="Enter Question">
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>
 				    </div>

@@ -5,7 +5,6 @@ target/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 !*target/GameRoom-0.0.1-SNAPSHOT.war
-src/main/resources/application.properties
 
 ### STS ###
 .apt_generated

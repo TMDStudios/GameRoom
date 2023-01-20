@@ -107,7 +107,7 @@ function showMessage(message) {
 		req.open('GET', "https://www.purgomalum.com/service/containsprofanity?text="+message);
 	  	req.onload = function() {
 			if(this.responseText.includes("true")){
-				$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + playerName + ": *****</p>");
+				$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + playerName + ": Puppies, Kittens, United Nations</p>");
 			}else{
 				$("#messages").append("<p onclick=\"blockPlayerMessage('"+playerName+"')\">" + message + "</p>");
 			}
@@ -221,7 +221,7 @@ function showGuess(guess) {
 		req.open('GET', "https://www.purgomalum.com/service/containsprofanity?text="+guess);
 	  	req.onload = function() {
 			if(this.responseText.includes("true")){
-				$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + player + ": *****</p>");
+				$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + player + ": Puppies, Kittens, United Nations</p>");
 			}else{
 				$("#guesses").append("<p><input class=\"checkbox\" type=\"checkbox\" id='"+player+"' onclick=\"handleCheck('"+player+"')\"/>" + guess + "</p>");
 			}

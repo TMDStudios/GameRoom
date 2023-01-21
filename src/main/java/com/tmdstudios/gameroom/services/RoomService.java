@@ -8,7 +8,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.tmdstudios.gameroom.models.Player;
@@ -25,7 +24,7 @@ public class RoomService {
 	private RoomLogService roomLogService;
 	
 	@PostConstruct
-	@Scheduled(cron = "0 0 0 * * *")
+//	@Scheduled(cron = "0 0 0 * * *")
 	// Each day at midnight, all rooms older than 24 hours are deleted
 	private void deleteOldRooms() {
 		for(Room room:allRooms()) {

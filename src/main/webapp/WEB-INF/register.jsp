@@ -71,7 +71,7 @@
 			<form:input path="confirm" type="password"/>
 		</div>
 
-		<div>
+		<div class="center-text">
 			<input class="btn" type="submit" value="Register"/>
 		</div>
 

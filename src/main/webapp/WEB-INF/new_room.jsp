@@ -71,7 +71,7 @@
 		</div>
 		
 		<div>
-			<label>Private Room: <form:checkbox path="privateRoom"/></label>
+			<label>Private Room: <form:checkbox class="checkbox" path="privateRoom"/></label>
 		</div>
 		
 		<div>
@@ -84,7 +84,7 @@
 			<form:input class="input" path="password"/>
 		</div>
 
-		<div>
+		<div class="center-text">
 			<input class="btn" type="submit" value="Submit"/>
 		</div>
 	</div>

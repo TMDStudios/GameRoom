@@ -47,26 +47,23 @@
 	<div class="flex-3">
 		<div class="gameOptions">
 			<div class="gameCard" onclick="openPage('/rooms/new')">
-				<p class="gameTitle">New Emoji Game</p>
 				<p class="gameSymbol">🤩</p>
-				<p class="gameStart">Start</p>
+				<p class="gameTitle">New Emoji Game</p>
 			</div>
 			<div class="gameCard" onclick="openPage('/rooms/new?type=review')">
-				<p class="gameTitle">New Review Game</p>
 				<p class="gameSymbol">📖</p>
-				<p class="gameStart">Start</p>
+				<p class="gameTitle">New Review Game</p>
 			</div>
 			<div class="gameCard" onclick="openPage('/rooms/new?type=flag')">
-				<p class="gameTitle">New Flag Game</p>
 				<p class="gameSymbol">🏳️</p>
-				<p class="gameStart">Start</p>
+				<p class="gameTitle">New Flag Game</p>
 			</div>
 		</div>
 	</div>
 </div>
 
 <c:if test="${empty userId}">
-	<div>
+	<div class="center-text">
 		<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/rooms/join')"/>
 	</div>
 </c:if>

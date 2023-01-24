@@ -53,11 +53,11 @@
 			<form:input path="password" type="password"/>
 		</div>
 
-		<div>
+		<div class="loginBtnsDiv">
 			<input class="btn" type="submit" value="Log In"/>
 		</div>
 
-		<div>
+		<div class="loginBtnsDiv">
 			<p><a class="danger-link" href="#" onclick="resetPassword()">Reset Password</a></p>
 			<p class="center-text"><small>You can only reset your password if you entered an email when you created your account.</small></p>
 		</div>

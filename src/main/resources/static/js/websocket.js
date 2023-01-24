@@ -96,7 +96,7 @@ function connect() {
 
 function showMessage(message) {
     if(message.includes(" has joined")){
-		$("#messages").append("<p style='color: teal;'>" + message + "</p>");
+		$("#messages").append("<p style='color: lime;'>" + message + "</p>");
 		if(document.getElementById("guesses")!=null){
 			stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': showPlayers(), 'messageType': 'allScores'+link}))
 		}

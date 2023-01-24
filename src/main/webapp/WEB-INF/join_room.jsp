@@ -28,7 +28,7 @@
 </ul>
 
 <h3 class="center-text-title">Join Game Room</h3>
-<p class="center-text">${error}</p>
+<p class="center-text text-danger">${error}</p>
 
 <form action="/rooms/join" method="post">
 	<div class="login-block">
@@ -46,7 +46,7 @@
 			<input class="input" name="playerName" id="playerName"/>
 		</div>
 
-		<div>
+		<div class="center-text">
 			<input class="btn" onclick="checkLanguage(document.getElementById('playerName').value)" type="submit" value="Submit"/>
 		</div>
 	</div>

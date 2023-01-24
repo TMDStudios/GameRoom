@@ -519,6 +519,9 @@ hr {
 		padding: 4px;
 		margin: 10%;
 	}
+	.danger-link {
+		width: 100%;
+	}
 	.container {
 		width: 100%;
 	}

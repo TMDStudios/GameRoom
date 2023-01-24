@@ -260,8 +260,6 @@ h1 {
 	-ms-overflow-style: none;
 	background-image: url("../images/bg.png");
 	background-size: cover;
-	background-repeat: repeat;
-	background-position: center;
 }
 #messages::-webkit-scrollbar { width: 0 !important }
 #guesses::-webkit-scrollbar { width: 0 !important }

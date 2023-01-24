@@ -134,6 +134,7 @@
 				    		<button class='multiplierBtn' onclick="handleMultiplier()" type="button">Multiplier</button>
 				    	</span>
 				    </div>
+				    <hr>
 				    <div id="countries"></div>
 				</form>
 			</c:if>
@@ -142,7 +143,7 @@
 		<hr>
 		<h3 class="messagesTitle">${room.name} Chat</h3>
 		<form id="messageForm">
-		    <div>
+		    <div class="center-text">
 		        <input class="messageInput" type="text" id="message" placeholder="Enter your message here...">
 		    </div>
 		</form>

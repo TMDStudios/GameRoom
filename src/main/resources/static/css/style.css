@@ -154,23 +154,65 @@ h1 {
 	text-align: center;
 	font-size: 48px;
 }
+select {
+	text-align: center;
+	border-radius: 6px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(0,0,0,0);
+	transition: 0.2s;
+	padding: 3px;
+}
+select option {
+  	color: white;
+	background-color: rgba(0,0,0,1);
+  	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+button {
+	text-align: center;
+	border-radius: 6px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(0,0,0,0);
+	transition: 0.2s;
+	padding: 4px;
+}
+button:hover {
+	cursor:pointer;
+    color: #007fff;
+	border: 1px solid rgba(0, 127, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
+    transition: background-color .25s, color .25s;
+}
 .hostInput {
-	padding-left: 8px;
+	padding: 4px 0px 4px 8px;
 	font-size: 1.2em;
-	width: 708px;
+	width: 706px;
 	box-sizing:border-box;
-	border: solid 1px rgba(212, 212, 212, 0.1);
+	font-size: 1.2em;
+	box-sizing:border-box;
+	border-radius: 6px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(0,0,0,0);
+	margin-left: 2px;
 }
 .multiplierBtn {
 	font-size: 1.2em;
 	width: 96px;
 }
 .messageInput {
-	width: 100%;
+	width: 99%;
 	font-size: 1.2em;
-	padding-left: 8px;
+	padding: 4px 0px 4px 8px;
 	box-sizing:border-box;
-	border: solid 1px rgba(212, 212, 212, 0.1);
+	border-radius: 6px;
+	border: 1px solid rgba(255, 255, 255, .5);
+	color: white;
+	background-color: rgba(0,0,0,0);
+	transition: 0.2s;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 .guessInput {
 	margin: auto;

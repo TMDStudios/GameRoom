@@ -258,6 +258,11 @@ button:hover {
 }
 #emojiBtn {
 	width: 100%;
+	background-color: #0080ff;
+}
+#emojiBtn:hover {
+	width: 100%;
+	background-color: white;
 }
 .container {
 	width: 1080px;
@@ -333,6 +338,7 @@ button:hover {
 	font-size: 1.1em;
 	width: 256px;
 	margin: 2px;
+	background-color: rgba(0,0,0,.5);
 }
 .currentFlag {
 	color: #b2d9ff;
@@ -589,6 +595,9 @@ hr {
 	}
 	.currentFlag {
 		padding-left: 6px;
+	}
+	.guessInput {
+		font-size: 18px;
 	}
 	.flagBtn {
 		width: 90%;

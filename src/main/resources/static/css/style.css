@@ -312,6 +312,10 @@ button:hover {
 #guesses::-webkit-scrollbar { width: 0 !important }
 #emojiGroup::-webkit-scrollbar { width: 0 !important }
 #countries::-webkit-scrollbar { width: 0 !important }
+#messages p:hover {
+	color: #0080ff;
+	cursor: pointer;
+}
 .flag {
 	width: 100px;
 	border: solid 2px rgba(212, 212, 212, 0.5);

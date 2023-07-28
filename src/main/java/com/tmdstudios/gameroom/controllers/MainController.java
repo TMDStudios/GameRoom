@@ -47,13 +47,15 @@ public class MainController {
 	private String[] banners = {
 //			"https://tmdstudios.files.wordpress.com/2021/02/plclogolight.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc-2.png?h=120"
+			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc-2.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2023/07/railwaybanner.png?h=120"
 			};
 	
 	private String[] links = {
 //			"https://play.google.com/store/apps/details?id=com.tmdstudios.python",
 			"https://freebitco.in/?r=15749838",
-			"https://www.redbubble.com/people/shirtsetcetera/shop"
+			"https://www.redbubble.com/people/shirtsetcetera/shop",
+			"https://railway.app?referralCode=JE6szB"
 			};
 	
 	private void setBanner(HttpSession session) {

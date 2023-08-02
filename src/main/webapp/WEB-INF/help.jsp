@@ -18,10 +18,10 @@
 		<ul class="navbar">
 		    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
 		    <c:if test="${empty userId && empty playerName}">
-				<li class="nav_item"><a class="nav_link" href="/rooms/join">Join Room</a></li>
+				<li class="nav_item"><a class="nav_link" href="/join">Join Room</a></li>
 			</c:if>
 			<c:if test="${empty playerName}">
-				<li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>
+				<li class="nav_item"><a class="nav_link" href="/new">Create Room</a></li>
 			</c:if>
 		    <c:if test="${not empty userId || not empty playerName}">
 				<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>

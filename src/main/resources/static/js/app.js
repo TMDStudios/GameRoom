@@ -43,7 +43,7 @@ function checkLanguage(playerName){
 			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			req.send();
 			
-			window.location.replace("/rooms/join");
+			window.location.replace("/join");
 		}
   	}
   	req.send();

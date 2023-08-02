@@ -14,10 +14,12 @@ public class RoomLogService {
 	RoomLogRepo roomLogRepo;
 	
 	public RoomLog addRoomLog(RoomLog roomLog) {
+		System.out.println("ADD ROOM LOG");
 		return roomLogRepo.save(roomLog);
 	}
 	
 	public List<RoomLog> getRoomLog() {
+		System.out.println("GET ROOM LOG");
 		return roomLogRepo.findAll();
 	}
 }

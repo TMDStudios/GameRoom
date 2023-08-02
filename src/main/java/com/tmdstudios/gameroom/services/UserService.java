@@ -24,6 +24,7 @@ public class UserService {
 	UserRepo userRepo;
 	
 	public User register(User newUser, BindingResult result) {
+		System.out.println("REGISTER USER");
     	Optional<User> potentialUser = userRepo.findByUsername(newUser.getUsername());
 
     	if(potentialUser.isPresent()) {
@@ -45,6 +46,7 @@ public class UserService {
 	}
 	
 	public User login(LoginUser newLogin, BindingResult result) {
+		System.out.println("LOG IN USER");
     	Optional<User> potentialUser = userRepo.findByUsername(newLogin.getUsername());
         
     	if(!potentialUser.isPresent()) {
@@ -61,6 +63,7 @@ public class UserService {
     }
 	
 	public String forgotPassword(String email) {
+		System.out.println("PW RESET USER");
 		Optional<User> optionalUser = userRepo.findByEmail(email);
 		if(!optionalUser.isPresent()) {
 			return "Invalid email";
@@ -76,6 +79,7 @@ public class UserService {
 	}
 	
 	public String resetPassword(String token, String password) {
+		System.out.println("PW RESET USER");
 		Optional<User> optionalUser = userRepo.findByToken(token);
 		if(!optionalUser.isPresent()) {
 			return "Invalid token";
@@ -101,34 +105,40 @@ public class UserService {
 	}
 	
 	private String generateToken() {
+		System.out.println("GEN TOKEN USER");
 		StringBuilder token = new StringBuilder();
 		return token.append(UUID.randomUUID().toString()).append(UUID.randomUUID().toString()).toString();
 	}
 	
 	private boolean isTokenExpired(final LocalDateTime tokenCreationTime) {
+		System.out.println("EXPIRED TOKEN USER");
 		LocalDateTime now = LocalDateTime.now();
 		Duration diff = Duration.between(tokenCreationTime, now);
 		return diff.toMinutes() >= EXPIRE_TOKEN_AFTER_MINUTES;
 	}
 	
 	public List<User> allUsers(){
+		System.out.println("ALL USERS");
 		return userRepo.findAll();
 	}
 	
 	public User updateUser(User user) {
+		System.out.println("UPDATE USER");
 		return userRepo.save(user);
 	}
 	
 	public User findById(Long id) {
-		Optional<User> optionalUser = userRepo.findById(id);
-		if(optionalUser.isPresent()) {
-			return optionalUser.get();
-		}else {
+		System.out.println("FIND BY ID USER");
+		User optionalUser = userRepo.findUserById(id);
+		if(optionalUser==null) {
 			return null;
+		}else {
+			return optionalUser;
 		}
 	}
 	
 	public User findByToken(String token) {
+		System.out.println("FIND BY TOKEN USER");
 		Optional<User> optionalUser = userRepo.findByToken(token);
 		if(optionalUser.isPresent()) {
 			return optionalUser.get();

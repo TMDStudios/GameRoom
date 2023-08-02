@@ -46,7 +46,7 @@ public class MainController {
 	
 	private String[] banners = {
 //			"https://tmdstudios.files.wordpress.com/2021/02/plclogolight.png?h=120",
-			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120",
+//			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2022/12/shirtsetc-2.png?h=120",
 			"https://tmdstudios.files.wordpress.com/2023/07/railwaybanner.png?h=120"
 			};
@@ -153,7 +153,7 @@ public class MainController {
 	    return "redirect:/";
 	}
 	
-	@GetMapping("/rooms/new")
+	@GetMapping("/new")
 	public String newRoom(
 			@ModelAttribute("room") Room room, 
 			Model model, 
@@ -190,7 +190,7 @@ public class MainController {
 		return "new_room.jsp";
 	}
 	
-	@PostMapping("/rooms/new")
+	@PostMapping("/new")
 	public String createRoom(
 			@Valid @ModelAttribute("room") Room room, 
 			BindingResult result, 
@@ -212,14 +212,14 @@ public class MainController {
 			for(int i = 0; i<room.getName().length(); i++) {
 				if(!Character.isLetter(room.getName().charAt(i))&&room.getName().charAt(i)!=' ') {
 					redirectAttributes.addFlashAttribute("error", "Room Name can only contain letters.");
-					return "redirect:/rooms/new";
+					return "redirect:/new";
 				}
 			}
 			room.setHost(user);
 			if(room.getPrivateRoom()) {
 				if(room.getPassword().length()<6||room.getPassword().length()>12) {
 					redirectAttributes.addFlashAttribute("error", "Private rooms must have a password of 6 to 12 characters.");
-					return "redirect:/rooms/new";
+					return "redirect:/new";
 				}else {
 					roomService.newRoom(room);
 				}
@@ -241,14 +241,19 @@ public class MainController {
 //		String scores = (String) session.getAttribute("scores");
 //		System.out.println(scores);
 		
+		System.out.println("JOIN ROOM");
+		
 		setBanner(session);
 		Room room = roomService.findByLink(roomLink);
 		if(session.getAttribute("userId")==null&&session.getAttribute("playerName")==null) {
+			System.out.println("NO USER OR PLAYER");
 			model.addAttribute("roomLink", roomLink);
 			return "join_room.jsp";
 		}
 		if(room!=null) {
+			System.out.println("ROOM NOT NULL");
 			if(session.getAttribute("playerName")!=null) {
+				System.out.println("PLAYER NOT NULL");
 				String playerName = (String) session.getAttribute("playerName");
 				Player player = playerService.findByName(playerName, room);
 				if(player==null) {
@@ -259,6 +264,7 @@ public class MainController {
 			model.addAttribute("room", room);
 			model.addAttribute("link", request.getRequestURL().toString());
 			if(session.getAttribute("userId") != null) {
+				System.out.println("USER NOT NULL");
 				Long userId = (Long) session.getAttribute("userId");		
 				model.addAttribute("host", userService.findById(userId).getUsername());
 			}
@@ -282,8 +288,9 @@ public class MainController {
 			
 			return "view_room.jsp";
 		}else {
+			System.out.println("ROOM IS NULL");
 			redirectAttributes.addFlashAttribute("error", "Room not found!");
-			return "redirect:/rooms/join";
+			return "redirect:/join";
 		}
 	}
 	
@@ -297,23 +304,27 @@ public class MainController {
 		return "room_messages.jsp";
 	}
 	
-	@GetMapping("/rooms/join")
+	@GetMapping("/join")
 	public String joinRoom(HttpSession session) {
 		setBanner(session);
 		String playerName = (String) session.getAttribute("playerName");
+		
 		Long roomId = (Long) session.getAttribute("roomId");
-		Room room = roomService.findById(roomId);
-		if(room!=null) {
-			Player player = playerService.findByName(playerName, room);
-			if(player!=null) {
-				return "redirect:/rooms/"+room.getLink();
+		if(roomId!=null){
+			Room room = roomService.findById(roomId);
+			
+			if(room!=null) {
+				Player player = playerService.findByName(playerName, room);
+				if(player!=null) {
+					return "redirect:/rooms/"+room.getLink();
+				}
 			}
 		}
 		
 		return "join_room.jsp";
 	}
 	
-	@PostMapping("/rooms/join")
+	@PostMapping("/join")
 	public String joinRoom(
 			@RequestParam(value="roomLink", required=false) String roomLink, 
 			RedirectAttributes redirectAttributes, 
@@ -322,7 +333,7 @@ public class MainController {
 			HttpSession session) {
 		if(playerName.length()<3||playerName.length()>24) {
 			redirectAttributes.addFlashAttribute("error", "Player Name must be between 3 and 24 characters long.");
-			return "redirect:/rooms/join";
+			return "redirect:/join";
 		}
 		
 		roomLink = roomLink.toLowerCase();
@@ -339,13 +350,13 @@ public class MainController {
 					redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
 					// Find better solution?
 					redirectAttributes.addFlashAttribute("roomLink", roomLink);
-					return "redirect:/rooms/join";
+					return "redirect:/join";
 				}
 			}
 			for(int i = 0; i<playerName.length(); i++) {
 				if(!Character.isLetter(playerName.charAt(i))) {
 					redirectAttributes.addFlashAttribute("error", "Player Name can only contain letters.");
-					return "redirect:/rooms/join";
+					return "redirect:/join";
 				}
 			}
 			player = new Player(playerName, room);
@@ -357,16 +368,16 @@ public class MainController {
 			return "redirect:/rooms/"+roomLink;
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Room not found!");
-			return "redirect:/rooms/join";
+			return "redirect:/join";
 		}
 	}
 	
-	@GetMapping("/rooms/join-private")
+	@GetMapping("/join-private")
 	public String joinPrivateRoom() {
 		return "join_private_room";
 	}
 	
-	@PostMapping("/rooms/join-private")
+	@PostMapping("/join-private")
 	public String joinPrivateRoom(
 			@RequestParam(value="roomPassword") String roomPassword, 
 			RedirectAttributes redirectAttributes, 
@@ -381,7 +392,7 @@ public class MainController {
 				if(player!=null) {
 					if(room.getPlayers().contains(player)) {
 						redirectAttributes.addFlashAttribute("error", "Please choose a different Player Name.");
-						return "redirect:/rooms/join";
+						return "redirect:/join";
 					}
 				}
 				player = new Player(playerName, room);
@@ -393,10 +404,10 @@ public class MainController {
 				return "redirect:/rooms/"+room.getLink();
 			}
 			redirectAttributes.addFlashAttribute("error", "Wrong password");
-			return "redirect:/rooms/join";
+			return "redirect:/join";
 		}
 		redirectAttributes.addFlashAttribute("error", "Password must be 6 to 12 characters");
-		return "redirect:/rooms/join";
+		return "redirect:/join";
 	}
 	
 	@GetMapping(value="/.well-known/brave-rewards-verification.txt", produces = MediaType.TEXT_PLAIN_VALUE)

@@ -24,10 +24,10 @@
 <ul class="navbar">
     <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
     <c:if test="${empty userId && empty playerName}">
-		<li class="nav_item"><a class="nav_link" href="/rooms/join">Join Room</a></li>
+		<li class="nav_item"><a class="nav_link" href="/join">Join Room</a></li>
 	</c:if>
 	<c:if test="${empty playerName}">
-		<li class="nav_item"><a class="nav_link" href="/rooms/new">Create Room</a></li>
+		<li class="nav_item"><a class="nav_link" href="/new">Create Room</a></li>
 	</c:if>
     <c:if test="${not empty userId || not empty playerName}">
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
@@ -46,15 +46,15 @@
 <div class="row">
 	<div class="flex-3">
 		<div class="gameOptions">
-			<div class="gameCard" onclick="openPage('/rooms/new')">
+			<div class="gameCard" onclick="openPage('/new')">
 				<p class="gameSymbol">🤩</p>
 				<p class="gameTitle">New Emoji Game</p>
 			</div>
-			<div class="gameCard" onclick="openPage('/rooms/new?type=review')">
+			<div class="gameCard" onclick="openPage('/new?type=review')">
 				<p class="gameSymbol">📖</p>
 				<p class="gameTitle">New Review Game</p>
 			</div>
-			<div class="gameCard" onclick="openPage('/rooms/new?type=flag')">
+			<div class="gameCard" onclick="openPage('/new?type=flag')">
 				<p class="gameSymbol">🏳️</p>
 				<p class="gameTitle">New Flag Game</p>
 			</div>
@@ -64,7 +64,7 @@
 
 <c:if test="${empty userId}">
 	<div class="center-text">
-		<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/rooms/join')"/>
+		<input class="joinRoomBtn" type="button" value="Join Existing Room" onclick="openPage('/join')"/>
 	</div>
 </c:if>
 

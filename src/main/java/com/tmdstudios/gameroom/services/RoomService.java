@@ -41,30 +41,37 @@ public class RoomService {
 //	}
 	
 	public Room newRoom(Room room) {
+		System.out.println("NEW ROOM");
 		return roomRepo.save(room);
 	}
 	
 	public Room updateRoom(Room room) {
+		System.out.println("UPDATE ROOM");
 		return roomRepo.save(room);
 	}
 	
 	public Room findById(Long id) {
+		System.out.println("FIND ROOM");
 		return roomRepo.findByIdIs(id);
 	}
 	
 	public Room findByLink(String link) {
+		System.out.println("FIND (BY LINK) ROOM");
 		return roomRepo.findByLinkIs(link);
 	}
 	
 	public List<Room> allRooms(){
+		System.out.println("ALL ROOMS");
 		return roomRepo.findAll();
 	}
 	
 	public Player findByName(String name) {
+		System.out.println("FIND (BY NAME) ROOM");
 		return roomRepo.findByName(name);
 	}
 	
 	public void deleteRoom(Room room) {
+		System.out.println("DELETE ROOM");
 		roomLogService.addRoomLog(new RoomLog(
 				room.getName(), 
 				room.getHost().getUsername(), 
